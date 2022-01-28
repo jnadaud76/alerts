@@ -7,11 +7,12 @@ import com.safetynet.alerts.repository.FireStationFromJsonDao;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Set;
 
 public class FireStationFromJsonTest {
     @Test
-    public void getFireStationsTest(){
+    public void getFireStationsTest() {
         //Given
         FireStationFromJsonDao fireStationFromJsonDao = new FireStationFromJsonDao();
 
