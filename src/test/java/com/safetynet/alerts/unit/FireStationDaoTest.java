@@ -6,6 +6,7 @@ import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.FireStationDao;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Set;
 

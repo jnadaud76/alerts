@@ -72,27 +72,25 @@ public class PersonDao {
        public Person findById (final String firstname, final String lastName){
            Person person = null;
            for (Person p : persons) {
-               if (Objects.equals(p.getFirstName(), firstname) && Objects.equals(p.getLastName(), lastName)) {
+               if (p.getFirstName().equals(firstname) && p.getLastName().equals(lastName)) {
                    person = p;
-               } else {
-                   person = null;
+                   break;
                }
            }
            return person;
        }
 
-       public void update(final Person personParam) {
-           Person person = findById(personParam.getFirstName(), personParam.getLastName());
+       public void update(final Person personParam) throws Exception {
            deleteById(personParam.getFirstName(), personParam.getLastName());
-           Person person2 = new Person();
-           person2.setFirstName(personParam.getFirstName());
-           person2.setLastName(personParam.getLastName());
-           person2.setEmail(personParam.getEmail());
-           person2.setPhone(personParam.getPhone());
-           person2.setZip(personParam.getZip());
-           person2.setCity(personParam.getCity());
-           person2.setAddress(personParam.getAddress());
-           persons.add(person2);
+           Person person = new Person();
+           person.setFirstName(personParam.getFirstName());
+           person.setLastName(personParam.getLastName());
+           person.setEmail(personParam.getEmail());
+           person.setPhone(personParam.getPhone());
+           person.setZip(personParam.getZip());
+           person.setCity(personParam.getCity());
+           person.setAddress(personParam.getAddress());
+           persons.add(person);
 
        }
 
@@ -105,9 +103,15 @@ public class PersonDao {
 
        }
 
-       public void deleteById (final String firstname, final String lastName) {
-           persons.removeIf(person -> Objects.equals(person.getFirstName(), firstname) && Objects.equals(person.getLastName(), lastName));
-       }
+       public void deleteById (final String firstname, final String lastName) throws Exception {
+           Person person = findById(firstname, lastName);
+           if (person !=null) {
+               persons.remove(person);
+           } else {
+               throw new Exception();
+           }
+           //persons.removeIf(person -> Objects.equals(person.getFirstName(), firstname) && Objects.equals(person.getLastName(), lastName));
+        }
 
 }
 

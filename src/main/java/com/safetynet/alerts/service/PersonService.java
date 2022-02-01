@@ -31,11 +31,11 @@ public class PersonService {
         personDao.save(person);
     }
 
-    public void updatePerson (final Person person) {
+    public void updatePerson (final Person person) throws Exception {
         personDao.update(person);
     }
 
-    public void deletePerson(final String firstname, final String lastName) {
+    public void deletePerson(final String firstname, final String lastName) throws Exception {
         personDao.deleteById(firstname, lastName);
     }
 
