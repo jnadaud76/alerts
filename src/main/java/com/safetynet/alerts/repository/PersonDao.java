@@ -1,0 +1,114 @@
+package com.safetynet.alerts.repository;
+
+import com.safetynet.alerts.model.Person;
+
+import org.springframework.stereotype.Repository;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import lombok.Data;
+
+@Data
+@Repository
+public class PersonDao {
+
+    private Set<Person> persons = new HashSet<>();
+
+    /*public void getPersonsFromJson() {
+       JSONParser jsonparser = new JSONParser();
+
+       try {
+           JSONObject jsonObject = (JSONObject) jsonparser
+                   .parse(new FileReader("src/main/resources/data.json"));
+           JSONArray jsonArray = (JSONArray) jsonObject.get("persons");
+           for (Object c : jsonArray) {
+               JSONObject ObjectPerson = (JSONObject) c;
+               String firstName = (String) ObjectPerson.get("firstName");
+               String lastName = (String) ObjectPerson.get("lastName");
+               String address = (String) ObjectPerson.get("address");
+               String city = (String) ObjectPerson.get("city");
+               String zip = (String) ObjectPerson.get("zip");
+               String phone = (String) ObjectPerson.get("phone");
+               String email = (String) ObjectPerson.get("email");
+               Person person = new Person();
+               person.setFirstName(firstName);
+               person.setLastName(lastName);
+               person.setAddress(address);
+               person.setCity(city);
+               person.setZip(Integer.parseInt(zip));
+               person.setPhone(phone);
+               person.setEmail(email);
+               persons.add(person);
+           }
+
+       } catch (IOException | ParseException e) {
+           e.printStackTrace();
+       }
+   }*/
+       /* ObjectMapper objectMapper = new ObjectMapper();
+
+
+        try {
+            InputStream input = new FileInputStream("src/main/resources/data.json");
+
+            JsonNode jsonNode = objectMapper.readValue(input, JsonNode.class);
+            JsonNode personsNode = jsonNode.get("persons");
+            String personsAsString = personsNode.toString();
+            persons = objectMapper.readValue(personsAsString, new TypeReference<HashSet<Person>>(){});
+            //System.out.println("persons :" + persons);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
+       public Set<Person> findAll() {
+           return this.persons;
+       }
+
+       public Person findById (final String firstname, final String lastName){
+           Person person = null;
+           for (Person p : persons) {
+               if (Objects.equals(p.getFirstName(), firstname) && Objects.equals(p.getLastName(), lastName)) {
+                   person = p;
+               } else {
+                   person = null;
+               }
+           }
+           return person;
+       }
+
+       public void update(final Person personParam) {
+           Person person = findById(personParam.getFirstName(), personParam.getLastName());
+           deleteById(personParam.getFirstName(), personParam.getLastName());
+           Person person2 = new Person();
+           person2.setFirstName(personParam.getFirstName());
+           person2.setLastName(personParam.getLastName());
+           person2.setEmail(personParam.getEmail());
+           person2.setPhone(personParam.getPhone());
+           person2.setZip(personParam.getZip());
+           person2.setCity(personParam.getCity());
+           person2.setAddress(personParam.getAddress());
+           persons.add(person2);
+
+       }
+
+       public void save (final Person personParam){
+        //if (!persons.contains(personParam)){
+            persons.add(personParam);
+        //} else {
+        //    System.out.println("La personne existe déjà.");
+        //}
+
+       }
+
+       public void deleteById (final String firstname, final String lastName) {
+           persons.removeIf(person -> Objects.equals(person.getFirstName(), firstname) && Objects.equals(person.getLastName(), lastName));
+       }
+
+}
+
+

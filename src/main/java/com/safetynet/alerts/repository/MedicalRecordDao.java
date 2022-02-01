@@ -1,24 +1,28 @@
 package com.safetynet.alerts.repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.MedicalRecord;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-@Repository
-public class MedicalRecordFromJsonDao implements IMedicalRecordDao {
+import lombok.Data;
 
-    @Override
-    public Set<MedicalRecord> getMedicalRecords() {
-        Set<MedicalRecord> medicalRecords = new HashSet<>();
+@Data
+@Repository
+public class MedicalRecordDao {
+
+    Set<MedicalRecord> medicalRecords = new HashSet<>();
+
+     /*public void getMedicalRecordsFromJson() {
+
         JSONParser jsonparser = new JSONParser();
 
         try {
@@ -60,6 +64,23 @@ public class MedicalRecordFromJsonDao implements IMedicalRecordDao {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        return medicalRecords;
+
     }
+        ObjectMapper objectMapper = new ObjectMapper();
+
+
+        try {
+            InputStream input = new FileInputStream("src/main/resources/data.json");
+
+            JsonNode jsonNode = objectMapper.readValue(input, JsonNode.class);
+            JsonNode medicalRecordsNode = jsonNode.get("medicalRecords");
+            String medicalRecordsAsString = medicalRecordsNode.toString();
+            medicalRecords = objectMapper.readValue(medicalRecordsAsString, new TypeReference<HashSet<MedicalRecord>>() {
+            });
+            System.out.println("persons :" + medicalRecords);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

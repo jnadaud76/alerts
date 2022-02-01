@@ -3,10 +3,6 @@ package com.safetynet.alerts.repository;
 import com.safetynet.alerts.model.FireStation;
 
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
 import java.io.FileReader;
@@ -15,12 +11,15 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-@Repository
-public class FireStationFromJsonDao implements IFireStationDao {
+import lombok.Data;
 
-    @Override
-    public Set<FireStation> getFireStations() {
-        Set<FireStation> fireStations = new HashSet<>();
+@Data
+@Repository
+public class FireStationDao {
+
+    Set<FireStation> fireStations = new HashSet<>();
+    /*public Set<FireStation> getFireStations() {
+
         JSONParser jsonparser = new JSONParser();
 
         try {
@@ -41,5 +40,5 @@ public class FireStationFromJsonDao implements IFireStationDao {
             e.printStackTrace();
         }
         return fireStations;
-    }
+    }*/
 }
