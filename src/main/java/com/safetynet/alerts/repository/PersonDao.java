@@ -95,11 +95,12 @@ public class PersonDao {
        }
 
        public void save (final Person personParam){
-        //if (!persons.contains(personParam)){
+           Person person = findById(personParam.getFirstName(), personParam.getLastName());
+        if (person==null) {
             persons.add(personParam);
-        //} else {
-        //    System.out.println("La personne existe déjà.");
-        //}
+        } else {
+            throw new IllegalArgumentException();
+            }
 
        }
 

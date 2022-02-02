@@ -42,9 +42,13 @@ public class PersonController {
     }
 
     @PostMapping(value="/person")
-    public ResponseEntity<String> createPerson (@RequestBody Person person){
-        personService.createPerson(person);
-        return new ResponseEntity<>("Person created", HttpStatus.CREATED);
+    public ResponseEntity<?> createPerson (@RequestBody Person person){
+        try {
+            personService.createPerson(person);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Person created");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Person can't be create. May already exist");
+        }
     }
 
     @PutMapping(value="/person")
