@@ -12,7 +12,9 @@ import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
 import com.safetynet.alerts.repository.PersonDao;
+import com.safetynet.alerts.service.ReadDataFromJson;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -32,6 +34,11 @@ public class PersonControllerTest {
 
     @MockBean
     private PersonDao personDao;
+
+    /* @BeforeEach
+    public void setupTest() {
+
+    }*/
 
     @Test
     public void testGetPersons() throws Exception {
@@ -100,11 +107,11 @@ public class PersonControllerTest {
                 .andExpect(status().isNotFound());
     }*/
 
-    @Test
+    /*@Test
     public void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
-        mockMvc.perform(get("/person/Briun/Stelzor"))
+        mockMvc.perform(delete("/person/Briun/Stelzor"))
                 .andExpect(status().isNotFound());
-    }
+    }*/
 
 
 

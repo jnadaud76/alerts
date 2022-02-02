@@ -56,19 +56,41 @@ public class FireStationDao {
         return fireStationsResult;
     }
 
-    public FireStation findByAddress (final String address){
-        FireStation fireStationResult = null;
+    public Set<FireStation> findByAddress (final String address){
+        Set<FireStation> fireStationsResult = new HashSet<>();
         for (FireStation f : fireStations) {
             if (f.getAddress().equals(address)) {
-                fireStationResult = f;
-                break;
+                fireStationsResult.add(f);
             }
         }
-        return fireStationResult;
+        return fireStationsResult;
     }
-    /*public void updateFirestation (final int station){
+    public void updateFirestation (final FireStation fireStationParam) throws Exception {
+        deleteByAddress(fireStationParam.getAddress());
+        FireStation firestation = new FireStation();
+        firestation.setStation(fireStationParam.getStation());
+        firestation.setAddress(fireStationParam.getAddress());
+        fireStations.add(firestation);
 
-    }*/
+    }
+
+    public void save (final FireStation fireStationParam) {
+        FireStation fireStation = null;
+        for (FireStation f : fireStations) {
+            if (f.getAddress().equals(fireStationParam.getAddress())
+                    && (f.getStation() == fireStationParam.getStation())) {
+                fireStation=f;
+                break;
+            }
+
+        }
+        if (fireStation==null) {
+            fireStations.add(fireStationParam);
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+    }
 
     public void deleteByStation (final int station) throws Exception {
         Set<FireStation> firestationsResult = findByStation(station);
@@ -80,14 +102,14 @@ public class FireStationDao {
         }
     }
 
-    /*public void deleteByAddress (final String address) {
-        Person person = findById(firstname, lastName);
-        if (person !=null) {
-            persons.remove(person);
+    public void deleteByAddress (final String address) throws Exception {
+        Set<FireStation> firestationsResult = findByAddress(address);
+        if (!firestationsResult.isEmpty()) {
+            fireStations.removeAll(firestationsResult);
         } else {
             throw new Exception();
         }
-    }*/
+    }
     }
 
 

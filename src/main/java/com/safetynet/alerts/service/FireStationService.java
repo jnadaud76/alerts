@@ -26,15 +26,24 @@ public class FireStationService {
         return fireStationDao.findByStation(station);
    }
 
-    public FireStation getFireStationsByAddress(final String address){
+    public Set<FireStation> getFireStationsByAddress(final String address){
         return fireStationDao.findByAddress(address);
     }
 
-    /*public void updateFirestation (final int station){
+    public void updateFirestation (final FireStation fireStation) throws Exception {
+        fireStationDao.updateFirestation(fireStation);
 
-    }*/
+    }
+
+    public void createFireStation (final FireStation fireStation) {
+        fireStationDao.save(fireStation);
+    }
 
     public void deleteFireStationByStation (final int station) throws Exception {
         fireStationDao.deleteByStation(station);
+    }
+
+    public void deleteFireStationByAddress (final String address) throws Exception {
+        fireStationDao.deleteByAddress(address);
     }
 }

@@ -80,6 +80,25 @@ public class PersonControllerIT {
     }
 
     @Test
+    public void testCreatePersonWhichAlreadyExist() throws Exception {
+        Person person = new Person();
+        person.setFirstName("Lily");
+        person.setLastName("Cooper");
+        person.setAddress("489 Manchester St");
+        person.setCity("Culver");
+        person.setZip(97451);
+        person.setPhone("841-874-9845");
+        person.setEmail("lily@email.com");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String personAsString = objectMapper.writeValueAsString(person);
+
+        mockMvc.perform(post("/person")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(personAsString))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     public void testDeletePerson() throws Exception {
         mockMvc.perform(delete("/person/Brian/Stelzer"))
                 .andExpect(status().isOk());
@@ -121,6 +140,26 @@ public class PersonControllerIT {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(personAsString))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testUpdatePersonGivingBadLastName() throws Exception {
+        Person person = new Person();
+        person.setFirstName("Lily");
+        person.setLastName("Crooper");
+        person.setAddress("adresse modifiée");
+        person.setCity("Culver");
+        person.setZip(97451);
+        person.setPhone("841-874-9845");
+        person.setEmail("lily@email.com");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String personAsString = objectMapper.writeValueAsString(person);
+
+        mockMvc.perform(put("/person")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(personAsString))
+                .andExpect(status().isNotFound());
     }
 }
 

@@ -52,8 +52,14 @@ public class PersonController {
     }
 
     @PutMapping(value="/person")
-    public void updatePerson (@RequestBody Person person) throws Exception {
+    public ResponseEntity<?> updatePerson (@RequestBody Person person) {
+        try{
         personService.updatePerson(person);
+            return ResponseEntity.status(HttpStatus.OK).body("Successfully Updated");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cant Update! Entity not exist");
+        }
     }
 
     @DeleteMapping(value = "person/{firstName}/{lastName}")
