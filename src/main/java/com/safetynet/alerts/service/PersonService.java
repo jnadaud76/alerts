@@ -1,14 +1,17 @@
 package com.safetynet.alerts.service;
 
+
+import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.PersonDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
-import lombok.Data;
 
 @Service
 public class PersonService {
@@ -16,8 +19,23 @@ public class PersonService {
     @Autowired
     PersonDao personDao;
 
-    public Set<Person> getPersons() {
-        return personDao.findAll();
+    public Set<PersonFullDto> getPersons() {
+        Set<Person> persons = personDao.findAll();
+        Set<PersonFullDto> personDtoSet = new HashSet<>();
+        Iterator<Person> i = persons.iterator();
+        while (i.hasNext()) {
+            Person person = i.next();
+            PersonFullDto personFullDto = new PersonFullDto();
+            personFullDto.setFirstName(person.getFirstName());
+            personFullDto.setLastName(person.getLastName());
+            personFullDto.setAddress(person.getAddress());
+            personFullDto.setCity(person.getCity());
+            personFullDto.setZip(person.getZip());
+            personFullDto.setPhone(person.getPhone());
+            personFullDto.setEmail(person.getEmail());
+            personDtoSet.add(personFullDto);
+        }
+        return personDtoSet;
 
     }
 

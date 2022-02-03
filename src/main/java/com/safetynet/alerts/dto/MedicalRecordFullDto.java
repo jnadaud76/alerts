@@ -1,17 +1,14 @@
-package com.safetynet.alerts.model;
+package com.safetynet.alerts.dto;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 import lombok.Data;
 
 @Data
-public class MedicalRecord {
-
+public class MedicalRecordFullDto {
     private String firstName;
     private String lastName;
     private String birthdate;
     private Set<String> medications;
     private Set<String> allergies;
-
 }

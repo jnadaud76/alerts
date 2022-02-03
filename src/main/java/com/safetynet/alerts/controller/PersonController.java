@@ -1,5 +1,6 @@
 package com.safetynet.alerts.controller;
 
+import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
 
@@ -27,7 +28,7 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("/person")
-    public Set<Person> getPersons() {
+    public Set<PersonFullDto> getPersons() {
         return personService.getPersons();
     }
 
