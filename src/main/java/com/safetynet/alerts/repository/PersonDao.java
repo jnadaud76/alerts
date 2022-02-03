@@ -104,12 +104,12 @@ public class PersonDao {
 
        }
 
-       public void deleteById (final String firstname, final String lastName) throws Exception {
+       public void deleteById (final String firstname, final String lastName) {
            Person person = findById(firstname, lastName);
            if (person !=null) {
                persons.remove(person);
            } else {
-               throw new Exception();
+               throw new IllegalArgumentException();
            }
            //persons.removeIf(person -> Objects.equals(person.getFirstName(), firstname) && Objects.equals(person.getLastName(), lastName));
         }

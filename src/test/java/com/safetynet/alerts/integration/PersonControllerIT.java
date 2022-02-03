@@ -107,19 +107,19 @@ public class PersonControllerIT {
     @Test
     public void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
         mockMvc.perform(delete("/person/Brian/Stelzor"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
         mockMvc.perform(delete("/person/Briun/Stelzer"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
-        mockMvc.perform(get("/person/Briun/Stelzor"))
-                .andExpect(status().isNotFound());
+        mockMvc.perform(delete("/person/Briun/Stelzor"))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class PersonControllerIT {
         mockMvc.perform(put("/person")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(personAsString))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 }
 

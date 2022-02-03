@@ -1,13 +1,9 @@
 package com.safetynet.alerts.repository;
 
 import com.safetynet.alerts.model.FireStation;
-import com.safetynet.alerts.model.Person;
 
 
 import org.springframework.stereotype.Repository;
-
-import java.io.FileReader;
-import java.io.IOException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -65,7 +61,7 @@ public class FireStationDao {
         }
         return fireStationsResult;
     }
-    public void updateFirestation (final FireStation fireStationParam) throws Exception {
+    public void update(final FireStation fireStationParam) {
         deleteByAddress(fireStationParam.getAddress());
         FireStation firestation = new FireStation();
         firestation.setStation(fireStationParam.getStation());
@@ -92,22 +88,22 @@ public class FireStationDao {
 
     }
 
-    public void deleteByStation (final int station) throws Exception {
+    public void deleteByStation (final int station) {
         Set<FireStation> firestationsResult = findByStation(station);
 
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
         } else {
-            throw new Exception();
+            throw new IllegalArgumentException();
         }
     }
 
-    public void deleteByAddress (final String address) throws Exception {
+    public void deleteByAddress (final String address) {
         Set<FireStation> firestationsResult = findByAddress(address);
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
         } else {
-            throw new Exception();
+            throw new IllegalArgumentException();
         }
     }
     }

@@ -10,7 +10,6 @@ import java.util.Set;
 
 import lombok.Data;
 
-@Data
 @Service
 public class PersonService {
 
@@ -27,15 +26,15 @@ public class PersonService {
 
     }
 
-    public void createPerson (final Person person){
-        personDao.save(person);
+    public void createPerson (final Person personParam){
+        personDao.save(personParam);
     }
 
-    public void updatePerson (final Person person) throws Exception {
-        personDao.update(person);
+    public void updatePerson (final Person personParam) throws Exception {
+        personDao.update(personParam);
     }
 
-    public void deletePerson(final String firstname, final String lastName) throws Exception {
+    public void deletePerson(final String firstname, final String lastName) {
         personDao.deleteById(firstname, lastName);
     }
 

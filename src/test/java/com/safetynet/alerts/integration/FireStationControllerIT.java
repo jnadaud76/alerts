@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.FireStation;
-import com.safetynet.alerts.model.Person;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FireStationIT {
+public class FireStationControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -77,13 +76,13 @@ public class FireStationIT {
     @Test
     public void testDeleteFireStationWithBadStationNumber() throws Exception {
         mockMvc.perform(delete("/firestation/station/12"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeleteFireStationWithBadAddress() throws Exception {
         mockMvc.perform(delete("/firestation/address/47 rue du pommier"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -139,7 +138,7 @@ public class FireStationIT {
         mockMvc.perform(put("/firestation")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(fireStationAsString))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
 }

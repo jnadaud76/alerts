@@ -1,7 +1,6 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.FireStation;
-import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.FireStationDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import lombok.Data;
 
-@Data
 @Service
 public class FireStationService {
 
@@ -30,8 +27,8 @@ public class FireStationService {
         return fireStationDao.findByAddress(address);
     }
 
-    public void updateFirestation (final FireStation fireStation) throws Exception {
-        fireStationDao.updateFirestation(fireStation);
+    public void updateFirestation (final FireStation fireStation) {
+        fireStationDao.update(fireStation);
 
     }
 
@@ -39,11 +36,11 @@ public class FireStationService {
         fireStationDao.save(fireStation);
     }
 
-    public void deleteFireStationByStation (final int station) throws Exception {
+    public void deleteFireStationByStation (final int station) {
         fireStationDao.deleteByStation(station);
     }
 
-    public void deleteFireStationByAddress (final String address) throws Exception {
+    public void deleteFireStationByAddress (final String address) {
         fireStationDao.deleteByAddress(address);
     }
 }

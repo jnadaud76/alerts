@@ -58,7 +58,7 @@ public class PersonController {
             return ResponseEntity.status(HttpStatus.OK).body("Successfully Updated");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cant Update! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant Update! Entity not exist");
         }
     }
 
@@ -69,7 +69,7 @@ public class PersonController {
             return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cant delete! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant delete! Entity not exist");
         }
 
     }
