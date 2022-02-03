@@ -121,12 +121,12 @@ public class MedicalRecordDao {
 
     }
 
-    public void deleteById (final String firstname, final String lastName) throws Exception {
+    public void deleteById (final String firstname, final String lastName) {
         MedicalRecord medicalRecord = findById(firstname, lastName);
         if (medicalRecord != null) {
             medicalRecords.remove(medicalRecord);
         } else {
-            throw new Exception();
+            throw new IllegalArgumentException();
         }
     }
 }

@@ -38,11 +38,6 @@ public class PersonControllerTest {
     @MockBean
     private PersonDao personDao;
 
-    /* @BeforeEach
-    public void setupTest() {
-
-    }*/
-
     @Test
     public void testGetPersons() throws Exception {
         mockMvc.perform(get("/person"))

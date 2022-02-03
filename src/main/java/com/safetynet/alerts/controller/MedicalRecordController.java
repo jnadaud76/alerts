@@ -28,6 +28,16 @@ public class MedicalRecordController {
         return medicalRecordService.getMedicalRecords();
     }
 
+    @GetMapping(value = "medicalrecord/{firstName}/{lastName}")
+    public ResponseEntity<MedicalRecord> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+        if (medicalRecordService.getMedicalRecord(firstName, lastName)!=null) {
+            return ResponseEntity.status(HttpStatus.OK).body(medicalRecordService.getMedicalRecord(firstName, lastName));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+    }
+
     @PostMapping(value="/medicalrecord")
     public ResponseEntity<?> createPerson (@RequestBody MedicalRecord medicalRecord){
         try {
@@ -45,7 +55,7 @@ public class MedicalRecordController {
             return ResponseEntity.status(HttpStatus.OK).body("Successfully Updated");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cant Update! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant Update! Entity not exist");
         }
     }
 
@@ -56,7 +66,7 @@ public class MedicalRecordController {
             return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cant delete! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant delete! Entity not exist");
         }
     }
 }

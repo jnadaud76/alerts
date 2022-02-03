@@ -19,6 +19,10 @@ public class MedicalRecordService {
         return medicalRecordDao.findAll();
     }
 
+    public MedicalRecord getMedicalRecord(final String firstname, final String lastName) {
+        return medicalRecordDao.findById(firstname, lastName);
+    }
+
     public void createMedicalRecord(final MedicalRecord medicalRecordParam) {
         medicalRecordDao.save(medicalRecordParam);
     }
@@ -27,7 +31,7 @@ public class MedicalRecordService {
         medicalRecordDao.update(medicalRecordParam);
     }
 
-    public void deleteMedicalRecord(final String firstname, final String lastName) throws Exception {
+    public void deleteMedicalRecord(final String firstname, final String lastName) {
         medicalRecordDao.deleteById(firstname, lastName);
     }
 }
