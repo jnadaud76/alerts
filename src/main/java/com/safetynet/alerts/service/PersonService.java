@@ -21,10 +21,9 @@ public class PersonService {
 
     public Set<PersonFullDto> getPersons() {
         Set<Person> persons = personDao.findAll();
-        Set<PersonFullDto> personDtoSet = new HashSet<>();
-        Iterator<Person> i = persons.iterator();
-        while (i.hasNext()) {
-            Person person = i.next();
+        Set<PersonFullDto> personFullDtoSet = new HashSet<>();
+
+        for (Person person : persons) {
             PersonFullDto personFullDto = new PersonFullDto();
             personFullDto.setFirstName(person.getFirstName());
             personFullDto.setLastName(person.getLastName());
@@ -33,14 +32,28 @@ public class PersonService {
             personFullDto.setZip(person.getZip());
             personFullDto.setPhone(person.getPhone());
             personFullDto.setEmail(person.getEmail());
-            personDtoSet.add(personFullDto);
+            personFullDtoSet.add(personFullDto);
         }
-        return personDtoSet;
+        return personFullDtoSet;
 
     }
 
-    public Person getPerson(final String firstname, final String lastName) {
-        return personDao.findById(firstname, lastName);
+    public PersonFullDto getPerson(final String firstname, final String lastName) {
+        Person person = personDao.findById(firstname, lastName);
+        PersonFullDto personFullDto = new PersonFullDto();
+        if (person != null) {
+            personFullDto.setFirstName(person.getFirstName());
+            personFullDto.setLastName(person.getLastName());
+            personFullDto.setAddress(person.getAddress());
+            personFullDto.setCity(person.getCity());
+            personFullDto.setZip(person.getZip());
+            personFullDto.setPhone(person.getPhone());
+            personFullDto.setEmail(person.getEmail());
+
+        } else {
+            personFullDto = null;
+        }
+       return personFullDto;
 
     }
 

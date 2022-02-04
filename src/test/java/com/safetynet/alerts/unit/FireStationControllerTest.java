@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.FireStationController;
+import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.FireStationDao;
 import com.safetynet.alerts.service.FireStationService;
@@ -52,8 +53,13 @@ public class FireStationControllerTest {
         fireStation.setStation(4);
         fireStation.setAddress("489 Manchester St");
         fireStations.add(fireStation);
+        Set <FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
+        FireStationFullDto fireStationFullDto =new FireStationFullDto();
+        fireStationFullDto.setStation(4);
+        fireStationFullDto.setAddress("489 Manchester St");
+        fireStationFullDtoSet.add(fireStationFullDto);
         when(fireStationDao.findByStation(4)).thenReturn(fireStations);
-        when(fireStationService.getFireStationsByStation(4)).thenReturn(fireStations);
+        when(fireStationService.getFireStationsByStation(4)).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/station/4"))
                 .andExpect(status().isOk());
 
@@ -66,8 +72,13 @@ public class FireStationControllerTest {
         fireStation.setStation(4);
         fireStation.setAddress("489 Manchester St");
         fireStations.add(fireStation);
+        Set <FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
+        FireStationFullDto fireStationFullDto =new FireStationFullDto();
+        fireStationFullDto.setStation(4);
+        fireStationFullDto.setAddress("489 Manchester St");
+        fireStationFullDtoSet.add(fireStationFullDto);
         when(fireStationDao.findByAddress("489 Manchester St")).thenReturn(fireStations);
-        when(fireStationService.getFireStationsByAddress("489 Manchester St")).thenReturn(fireStations);
+        when(fireStationService.getFireStationsByAddress("489 Manchester St")).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/address/489 Manchester St"))
                 .andExpect(status().isOk());
 
@@ -76,8 +87,9 @@ public class FireStationControllerTest {
     @Test
     public void testGetFireStationByStationWithBadStation() throws Exception {
         Set<FireStation> fireStations = new HashSet<>();
+        Set <FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
         when(fireStationDao.findByStation(15)).thenReturn(fireStations);
-        when(fireStationService.getFireStationsByStation(15)).thenReturn(fireStations);
+        when(fireStationService.getFireStationsByStation(15)).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/station/15"))
                 .andExpect(status().isNotFound());
 
@@ -86,8 +98,9 @@ public class FireStationControllerTest {
     @Test
     public void testGetFireStationByAddressWithBadAddress() throws Exception {
         Set<FireStation> fireStations = new HashSet<>();
+        Set <FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
         when(fireStationDao.findByAddress("47 rue du pommier")).thenReturn(fireStations);
-        when(fireStationService.getFireStationsByAddress("47 rue du pommier")).thenReturn(fireStations);
+        when(fireStationService.getFireStationsByAddress("47 rue du pommier")).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/address/47 rue du pommier"))
                 .andExpect(status().isNotFound());
 

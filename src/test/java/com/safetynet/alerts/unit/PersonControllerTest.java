@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.PersonController;
+import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
 import com.safetynet.alerts.repository.PersonDao;
@@ -49,8 +50,11 @@ public class PersonControllerTest {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Cooper");
+        PersonFullDto personFullDto = new PersonFullDto();
+        personFullDto.setFirstName("Lily");
+        personFullDto.setLastName("Cooper");
         when(personDao.findById("Lily","Cooper")).thenReturn(person);
-        when(personService.getPerson("Lily","Cooper")).thenReturn(person);
+        when(personService.getPerson("Lily","Cooper")).thenReturn(personFullDto);
         mockMvc.perform(get("/person/Lily/Cooper"))
                 .andExpect(status().isOk());
     }

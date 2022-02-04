@@ -1,5 +1,6 @@
 package com.safetynet.alerts.controller;
 
+import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.MedicalRecordService;
@@ -24,12 +25,12 @@ public class MedicalRecordController {
     MedicalRecordService medicalRecordService;
 
     @GetMapping("/medicalrecord")
-    public Set<MedicalRecord> getMedicalRecords() {
+    public Set<MedicalRecordFullDto> getMedicalRecords() {
         return medicalRecordService.getMedicalRecords();
     }
 
     @GetMapping(value = "medicalrecord/{firstName}/{lastName}")
-    public ResponseEntity<MedicalRecord> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+    public ResponseEntity<MedicalRecordFullDto> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
         if (medicalRecordService.getMedicalRecord(firstName, lastName)!=null) {
             return ResponseEntity.status(HttpStatus.OK).body(medicalRecordService.getMedicalRecord(firstName, lastName));
         } else {

@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.MedicalRecordController;
+import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.MedicalRecordDao;
@@ -48,8 +49,11 @@ public class MedicalRecordControllerTest {
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setFirstName("Lily");
         medicalRecord.setLastName("Cooper");
+        MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
+        medicalRecordFullDto.setFirstName("Lily");
+        medicalRecordFullDto.setLastName("Cooper");
         when(medicalRecordDao.findById("Lily","Cooper")).thenReturn(medicalRecord);
-        when(medicalRecordService.getMedicalRecord("Lily","Cooper")).thenReturn(medicalRecord);
+        when(medicalRecordService.getMedicalRecord("Lily","Cooper")).thenReturn(medicalRecordFullDto);
         mockMvc.perform(get("/medicalrecord/Lily/Cooper"))
                 .andExpect(status().isOk());
     }
@@ -129,8 +133,11 @@ public class MedicalRecordControllerTest {
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setFirstName("Brian");
         medicalRecord.setLastName("Stelzer");
+        MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
+        medicalRecordFullDto.setFirstName("Brian");
+        medicalRecordFullDto.setLastName("Stelzer");
         when(medicalRecordDao.findById("Brian","Stelzer")).thenReturn(medicalRecord);
-        when(medicalRecordService.getMedicalRecord("Brian","Stelzer")).thenReturn(medicalRecord);
+        when(medicalRecordService.getMedicalRecord("Brian","Stelzer")).thenReturn(medicalRecordFullDto);
         mockMvc.perform(delete("/medicalrecord/Brian/Stelzer"))
                 .andExpect(status().isOk());
     }

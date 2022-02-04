@@ -33,7 +33,7 @@ public class PersonController {
     }
 
     @GetMapping(value = "person/{firstName}/{lastName}")
-    public ResponseEntity<Person> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+    public ResponseEntity<PersonFullDto> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
         if (personService.getPerson(firstName, lastName)!=null) {
             return ResponseEntity.status(HttpStatus.OK).body(personService.getPerson(firstName, lastName));
         } else {

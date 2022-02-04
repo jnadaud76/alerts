@@ -1,5 +1,6 @@
 package com.safetynet.alerts.controller;
 
+import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.FireStationService;
@@ -24,12 +25,12 @@ public class FireStationController {
     FireStationService fireStationService;
 
     @GetMapping("/firestation")
-    public Set<FireStation> getFireStations(){
+    public Set<FireStationFullDto> getFireStations(){
         return fireStationService.getFireStations();
     }
 
     @GetMapping("/firestation/station/{station}")
-    public ResponseEntity<Set<FireStation>> getFireStationsByStation(@PathVariable ("station") int station){
+    public ResponseEntity<Set<FireStationFullDto>> getFireStationsByStation(@PathVariable ("station") int station){
         if (!fireStationService.getFireStationsByStation(station).isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(fireStationService.getFireStationsByStation(station));
         } else {
@@ -38,7 +39,7 @@ public class FireStationController {
      }
 
     @GetMapping("/firestation/address/{address}")
-    public ResponseEntity<Set<FireStation>> getFireStationByAddress(@PathVariable ("address") String address){
+    public ResponseEntity<Set<FireStationFullDto>> getFireStationByAddress(@PathVariable ("address") String address){
         if (!fireStationService.getFireStationsByAddress(address).isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(fireStationService.getFireStationsByAddress(address));
         } else {
