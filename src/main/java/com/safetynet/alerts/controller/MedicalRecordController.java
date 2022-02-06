@@ -24,7 +24,7 @@ public class MedicalRecordController {
     @Autowired
     MedicalRecordService medicalRecordService;
 
-    @GetMapping("/medicalrecord")
+    @GetMapping("/medicalrecords")
     public Set<MedicalRecordFullDto> getMedicalRecords() {
         return medicalRecordService.getMedicalRecords();
     }

@@ -30,7 +30,7 @@ public class PersonControllerIT {
 
     @Test
     public void testGetPersons() throws Exception {
-        mockMvc.perform(get("/person"))
+        mockMvc.perform(get("/persons"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].firstName", is("Lily")));
     }

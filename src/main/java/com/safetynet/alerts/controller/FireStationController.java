@@ -24,7 +24,7 @@ public class FireStationController {
     @Autowired
     FireStationService fireStationService;
 
-    @GetMapping("/firestation")
+    @GetMapping("/firestations")
     public Set<FireStationFullDto> getFireStations(){
         return fireStationService.getFireStations();
     }

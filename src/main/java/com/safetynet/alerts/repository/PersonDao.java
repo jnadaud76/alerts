@@ -80,6 +80,16 @@ public class PersonDao {
            return person;
        }
 
+       public Set<Person> findByAddress(final String address) {
+           Set<Person> personSet = new HashSet<>();
+           for (Person p : persons) {
+               if (p.getAddress().equals(address)) {
+                   personSet.add(p);
+               }
+           }
+           return personSet;
+       }
+
        public void update(final Person personParam) throws Exception {
            deleteById(personParam.getFirstName(), personParam.getLastName());
            Person person = new Person();
