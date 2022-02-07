@@ -10,62 +10,20 @@ import java.util.Set;
 
 import lombok.Data;
 
-@Data
 @Repository
 public class PersonDao {
 
     private Set<Person> persons = new HashSet<>();
 
-    /*public void getPersonsFromJson() {
-       JSONParser jsonparser = new JSONParser();
+    public Set<Person> getPersons() {
+        return persons;
+    }
 
-       try {
-           JSONObject jsonObject = (JSONObject) jsonparser
-                   .parse(new FileReader("src/main/resources/data.json"));
-           JSONArray jsonArray = (JSONArray) jsonObject.get("persons");
-           for (Object c : jsonArray) {
-               JSONObject ObjectPerson = (JSONObject) c;
-               String firstName = (String) ObjectPerson.get("firstName");
-               String lastName = (String) ObjectPerson.get("lastName");
-               String address = (String) ObjectPerson.get("address");
-               String city = (String) ObjectPerson.get("city");
-               String zip = (String) ObjectPerson.get("zip");
-               String phone = (String) ObjectPerson.get("phone");
-               String email = (String) ObjectPerson.get("email");
-               Person person = new Person();
-               person.setFirstName(firstName);
-               person.setLastName(lastName);
-               person.setAddress(address);
-               person.setCity(city);
-               person.setZip(Integer.parseInt(zip));
-               person.setPhone(phone);
-               person.setEmail(email);
-               persons.add(person);
-           }
+    public void setPersons(Set<Person> personsParam) {
+        this.persons = personsParam;
+    }
 
-       } catch (IOException | ParseException e) {
-           e.printStackTrace();
-       }
-   }*/
-       /* ObjectMapper objectMapper = new ObjectMapper();
-
-
-        try {
-            InputStream input = new FileInputStream("src/main/resources/data.json");
-
-            JsonNode jsonNode = objectMapper.readValue(input, JsonNode.class);
-            JsonNode personsNode = jsonNode.get("persons");
-            String personsAsString = personsNode.toString();
-            persons = objectMapper.readValue(personsAsString, new TypeReference<HashSet<Person>>(){});
-            //System.out.println("persons :" + persons);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-       public Set<Person> findAll() {
+    public Set<Person> findAll() {
            return this.persons;
        }
 

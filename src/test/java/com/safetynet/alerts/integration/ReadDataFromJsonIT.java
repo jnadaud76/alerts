@@ -65,7 +65,7 @@ public class ReadDataFromJsonIT {
         fireStation.setAddress("908 73rd St");
 
         //When
-        readDataFromJson.loadPerson();
+        readDataFromJson.loadFireStation();
 
         //Then
         assertTrue (fireStationDao.getFireStations().contains(fireStation));

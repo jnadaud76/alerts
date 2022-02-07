@@ -1,5 +1,6 @@
 package com.safetynet.alerts.integration;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -12,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.FireStation;
 
+import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -36,8 +38,8 @@ public class FireStationControllerIT {
     @Test
     public void testGetFireStationByStation() throws Exception {
         mockMvc.perform(get("/firestation/station/4"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].address", is("489 Manchester St")));
+                .andExpect(status().isOk());
+
     }
 
     @Test
@@ -88,7 +90,7 @@ public class FireStationControllerIT {
     @Test
     public void testCreateFireStation() throws Exception {
         FireStation fireStation = new FireStation();
-        fireStation.setStation(4);
+        fireStation.setStation(2);
         fireStation.setAddress("Test");
         ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
@@ -116,7 +118,7 @@ public class FireStationControllerIT {
     @Test
     public void testUpdateFireStation() throws Exception {
         FireStation fireStation = new FireStation();
-        fireStation.setStation(4);
+        fireStation.setStation(1);
         fireStation.setAddress("1509 Culver St");
         ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);

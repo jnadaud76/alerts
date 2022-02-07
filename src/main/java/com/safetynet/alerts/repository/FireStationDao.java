@@ -7,37 +7,22 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import lombok.Data;
 
-@Data
 @Repository
 public class FireStationDao {
 
     Set<FireStation> fireStations = new HashSet<>();
-    /*public Set<FireStation> getFireStations() {
 
-        JSONParser jsonparser = new JSONParser();
-
-        try {
-            JSONObject jsonObject = (JSONObject) jsonparser
-                    .parse(new FileReader("src/main/resources/data.json"));
-            JSONArray jsonArray = (JSONArray) jsonObject.get("firestations");
-            for (Object c : jsonArray) {
-                JSONObject ObjectFireStation = (JSONObject) c;
-                String address = (String) ObjectFireStation.get("address");
-                String station = (String) ObjectFireStation.get("station");
-                FireStation fireStation = new FireStation();
-                fireStation.setAddress(address);
-                fireStation.setStation(Integer.parseInt(station));
-                fireStations.add(fireStation);
-            }
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
+    public Set<FireStation> getFireStations() {
         return fireStations;
-    }*/
+    }
+
+    public void setFireStations(Set<FireStation> fireStationsParam) {
+        this.fireStations = fireStationsParam;
+    }
+
     public Set<FireStation> findAll() {
         return this.fireStations;
     }
@@ -53,13 +38,15 @@ public class FireStationDao {
     }
 
     public Set<FireStation> findByAddress (final String address){
-        Set<FireStation> fireStationsResult = new HashSet<>();
-        for (FireStation f : fireStations) {
+        //Set<FireStation> fireStationsResult = new HashSet<>();
+        return fireStations.stream().filter(fireStation -> fireStation.getAddress().equals(address)).collect(Collectors.toSet());
+
+        /*for (FireStation f : fireStations) {
             if (f.getAddress().equals(address)) {
                 fireStationsResult.add(f);
             }
-        }
-        return fireStationsResult;
+        }*/
+        //return fireStationsResult;
     }
     public void update(final FireStation fireStationParam) {
         deleteByAddress(fireStationParam.getAddress());
@@ -70,18 +57,18 @@ public class FireStationDao {
 
     }
 
-    public void save (final FireStation fireStationParam) {
-        FireStation fireStation = null;
+    public void save (final FireStation fireStation) {
+        FireStation fireStationResult = null;
         for (FireStation f : fireStations) {
-            if (f.getAddress().equals(fireStationParam.getAddress())
-                    && (f.getStation() == fireStationParam.getStation())) {
-                fireStation=f;
+            if (f.getAddress().equals(fireStation.getAddress())
+                    && (f.getStation() == fireStation.getStation())) {
+                fireStationResult=f;
                 break;
             }
 
         }
-        if (fireStation==null) {
-            fireStations.add(fireStationParam);
+        if (fireStationResult==null) {
+            fireStations.add(fireStation);
         } else {
             throw new IllegalArgumentException();
         }

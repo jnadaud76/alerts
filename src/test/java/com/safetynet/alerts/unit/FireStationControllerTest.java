@@ -36,8 +36,8 @@ public class FireStationControllerTest {
     @MockBean
     private FireStationService fireStationService;
 
-    @MockBean
-    private FireStationDao fireStationDao;
+   /* @MockBean
+    private FireStationDao fireStationDao;*/
 
     @Test
     public void testGetFireStations() throws Exception {
@@ -58,7 +58,7 @@ public class FireStationControllerTest {
         fireStationFullDto.setStation(4);
         fireStationFullDto.setAddress("489 Manchester St");
         fireStationFullDtoSet.add(fireStationFullDto);
-        when(fireStationDao.findByStation(4)).thenReturn(fireStations);
+       // when(fireStationDao.findByStation(4)).thenReturn(fireStations);
         when(fireStationService.getFireStationsByStation(4)).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/station/4"))
                 .andExpect(status().isOk());
@@ -77,7 +77,7 @@ public class FireStationControllerTest {
         fireStationFullDto.setStation(4);
         fireStationFullDto.setAddress("489 Manchester St");
         fireStationFullDtoSet.add(fireStationFullDto);
-        when(fireStationDao.findByAddress("489 Manchester St")).thenReturn(fireStations);
+        //when(fireStationDao.findByAddress("489 Manchester St")).thenReturn(fireStations);
         when(fireStationService.getFireStationsByAddress("489 Manchester St")).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/address/489 Manchester St"))
                 .andExpect(status().isOk());
@@ -88,7 +88,7 @@ public class FireStationControllerTest {
     public void testGetFireStationByStationWithBadStation() throws Exception {
         Set<FireStation> fireStations = new HashSet<>();
         Set <FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
-        when(fireStationDao.findByStation(15)).thenReturn(fireStations);
+        //when(fireStationDao.findByStation(15)).thenReturn(fireStations);
         when(fireStationService.getFireStationsByStation(15)).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/station/15"))
                 .andExpect(status().isNotFound());
@@ -99,7 +99,7 @@ public class FireStationControllerTest {
     public void testGetFireStationByAddressWithBadAddress() throws Exception {
         Set<FireStation> fireStations = new HashSet<>();
         Set <FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
-        when(fireStationDao.findByAddress("47 rue du pommier")).thenReturn(fireStations);
+        //when(fireStationDao.findByAddress("47 rue du pommier")).thenReturn(fireStations);
         when(fireStationService.getFireStationsByAddress("47 rue du pommier")).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/address/47 rue du pommier"))
                 .andExpect(status().isNotFound());
@@ -117,7 +117,7 @@ public class FireStationControllerTest {
         fireStation2.setAddress("947 E. Rose Dr");
         fireStations.add(fireStation);
         fireStations.add(fireStation2);
-        when(fireStationDao.findByStation(1)).thenReturn(fireStations);
+        //when(fireStationDao.findByStation(1)).thenReturn(fireStations);
         mockMvc.perform(delete("/firestation/station/1"))
                 .andExpect(status().isOk());
     }
@@ -125,17 +125,17 @@ public class FireStationControllerTest {
     @Test
     public void testDeleteFireStationByAddress() throws Exception {
         Set <FireStation> fireStations = new HashSet<>();
-        FireStation fireStation =new FireStation();
+        FireStation fireStation = new FireStation();
         fireStation.setStation(2);
         fireStation.setAddress("892 Downing Ct");
-        when(fireStationDao.findByAddress("892 Downing Ct")).thenReturn(fireStations);
+        //when(fireStationDao.findByAddress("892 Downing Ct")).thenReturn(fireStations);
         mockMvc.perform(delete("/firestation/address/892 Downing Ct"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeleteFireStationWithBadStationNumber() throws Exception {
-        doThrow(new IllegalArgumentException()).when(fireStationDao).deleteByStation(12);
+        //doThrow(new IllegalArgumentException()).when(fireStationDao).deleteByStation(12);
         doThrow(new IllegalArgumentException()).when(fireStationService).deleteFireStationByStation(12);
         mockMvc.perform(delete("/firestation/station/12"))
                 .andExpect(status().isBadRequest());
@@ -143,7 +143,7 @@ public class FireStationControllerTest {
 
     @Test
     public void testDeleteFireStationWithBadAddress() throws Exception {
-        doThrow(new IllegalArgumentException()).when(fireStationDao).deleteByAddress("47 rue du pommier");
+        //doThrow(new IllegalArgumentException()).when(fireStationDao).deleteByAddress("47 rue du pommier");
         doThrow(new IllegalArgumentException()).when(fireStationService).deleteFireStationByAddress("47 rue du pommier");
         mockMvc.perform(delete("/firestation/address/47 rue du pommier"))
                 .andExpect(status().isBadRequest());
@@ -170,7 +170,7 @@ public class FireStationControllerTest {
         fireStation.setAddress("908 73rd St");
         ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
-        doThrow(new IllegalArgumentException()).when(fireStationDao).save(fireStation);
+        //doThrow(new IllegalArgumentException()).when(fireStationDao).save(fireStation);
         doThrow(new IllegalArgumentException()).when(fireStationService).createFireStation(fireStation);
 
         mockMvc.perform(post("/firestation")
@@ -200,7 +200,7 @@ public class FireStationControllerTest {
         fireStation.setAddress("47 rue du pommier");
         ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
-        doThrow(new IllegalArgumentException()).when(fireStationDao).update(fireStation);
+       // doThrow(new IllegalArgumentException()).when(fireStationDao).update(fireStation);
         doThrow(new IllegalArgumentException()).when(fireStationService).updateFirestation(fireStation);
 
         mockMvc.perform(put("/firestation")

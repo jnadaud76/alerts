@@ -42,25 +42,9 @@ public class PersonController {
 
     }
 
-    @GetMapping("communityEmail")
-    public Set<String> getEmailFromCity(@RequestParam String city) {
-        return personService.getEmailFromCity(city);
-    }
 
-    @GetMapping("personInfo")
-    public PersonInfoDto getAddressByCity(@RequestParam String firstName, String lastName) {
-        return personService.getPersonInfo(firstName, lastName);
-    }
 
-    @GetMapping("firestation")
-    public PersonFireStationDto getPersonFromFireStation (@RequestParam int stationNumber) {
-        return personService.getPersonFromFireStation(stationNumber);
-    }
 
-    @GetMapping("childAlert")
-    public PersonChildAlertDto getPersonFromAddress (@RequestParam String address) {
-        return personService.getPersonFromAddress(address);
-    }
 
     @PostMapping(value="/person")
     public ResponseEntity<?> createPerson (@RequestBody Person person){

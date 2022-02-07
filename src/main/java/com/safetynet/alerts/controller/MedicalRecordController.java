@@ -66,7 +66,7 @@ public class MedicalRecordController {
             medicalRecordService.deleteMedicalRecord(firstName, lastName);
             return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
 
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant delete! Entity not exist");
         }
     }
