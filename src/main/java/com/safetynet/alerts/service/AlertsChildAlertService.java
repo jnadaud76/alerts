@@ -24,7 +24,7 @@ public class AlertsChildAlertService {
     Calculator calculator = new Calculator();
 
     public PersonChildAlertDto getPersonFromAddress (final String address) {
-        Set<PersonFullDto> persons = personService.getPersons();
+        Set<PersonFullDto> persons = personService.getPersonByAddress(address);
         Set<MedicalRecordFullDto> medicalRecordSet = medicalRecordService.getMedicalRecords();
         PersonChildAlertDto personChildAlertDto = new PersonChildAlertDto();
         Set<PersonLightChildAlertDto> children = new HashSet<>();

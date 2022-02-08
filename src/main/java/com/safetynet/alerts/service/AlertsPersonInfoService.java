@@ -26,10 +26,11 @@ public class AlertsPersonInfoService {
         PersonFullDto person = personService.getPerson(firstname, lastName);
         MedicalRecordFullDto medicalRecord = medicalRecordService.getMedicalRecord(firstname, lastName);
 
-        personInfoDto.setFirstName(person.getFirstName());
-        personInfoDto.setAddress(person.getLastName());
+
+        personInfoDto.setLastName(person.getLastName());
         personInfoDto.setAddress(person.getAddress());
         personInfoDto.setAge(calculator.calculateAge(medicalRecord.getBirthdate()));
+        personInfoDto.setEmail(person.getEmail());
         personInfoDto.setMedications(medicalRecord.getMedications());
         personInfoDto.setAllergies(medicalRecord.getAllergies());
 

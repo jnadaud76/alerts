@@ -21,6 +21,8 @@ public class PersonService {
     @Autowired
     PersonDao personDao;
 
+    //Set <PersonFullDto> personFullDtoSet = new HashSet<>();
+
      public Set<PersonFullDto> getPersons() {
         Set<Person> persons = personDao.findAll();
         Set<PersonFullDto> personFullDtoSet = new HashSet<>();
@@ -59,6 +61,24 @@ public class PersonService {
 
     }
 
+    public Set<PersonFullDto> getPersonByAddress (String address) {
+        Set<Person> persons = personDao.findByAddress(address);
+        Set <PersonFullDto> personFullDtoSet = new HashSet<>();
+        for (Person p : persons) {
+            PersonFullDto personFullDto = new PersonFullDto();
+            personFullDto.setFirstName(p.getFirstName());
+            personFullDto.setLastName(p.getLastName());
+            personFullDto.setAddress(p.getAddress());
+            personFullDto.setCity(p.getCity());
+            personFullDto.setZip(p.getZip());
+            personFullDto.setPhone(p.getPhone());
+            personFullDto.setEmail(p.getEmail());
+            personFullDtoSet.add(personFullDto);
+
+        }
+        return personFullDtoSet;
+
+     }
 
     public void createPerson (final Person personParam){
         personDao.save(personParam);

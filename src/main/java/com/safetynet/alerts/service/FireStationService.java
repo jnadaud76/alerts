@@ -18,6 +18,8 @@ public class FireStationService {
     @Autowired
     FireStationDao fireStationDao;
 
+    //Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
+
     public Set<FireStationFullDto> getFireStations () {
     Set <FireStation> fireStations = fireStationDao.findAll();
     Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
@@ -30,6 +32,20 @@ public class FireStationService {
         }
     return fireStationFullDtoSet;
     }
+
+    /*public Set<FireStationFullDto> findByStationSet (final Set<Integer> stations) {
+        Set <FireStation> fireStations = fireStationDao.findByStationSet(stations);
+        Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
+
+        for (FireStation fireStation : fireStations) {
+            FireStationFullDto firestationFullDto = new FireStationFullDto();
+            firestationFullDto.setStation(fireStation.getStation());
+            firestationFullDto.setAddress(fireStation.getAddress());
+            fireStationFullDtoSet.add(firestationFullDto);
+        }
+        return fireStationFullDtoSet;
+
+    }*/
 
    public Set<FireStationFullDto> getFireStationsByStation(final int station){
        Set <FireStation> fireStations = fireStationDao.findByStation(station);

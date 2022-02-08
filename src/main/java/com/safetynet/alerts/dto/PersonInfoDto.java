@@ -4,9 +4,10 @@ import java.util.Set;
 
 
 public class PersonInfoDto {
-    private String firstName;
+    private String lastName;
     private String address;
     private long age;
+    private String email;
     private Set<String> medications;
     private Set<String> allergies;
 
@@ -21,12 +22,8 @@ public class PersonInfoDto {
         this.allergies = allergies;
     }*/
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstNameParam) {
-        this.firstName = firstNameParam;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getAddress() {
@@ -59,5 +56,17 @@ public class PersonInfoDto {
 
     public void setAllergies(Set<String> allergiesParam) {
         this.allergies = allergiesParam;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

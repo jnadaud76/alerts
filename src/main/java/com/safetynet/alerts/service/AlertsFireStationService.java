@@ -52,9 +52,9 @@ public class AlertsFireStationService {
             }
         }
         for (PersonLightFireStationDto p : personLightFireStationDtoSet)
-            for (MedicalRecordFullDto medicalRecord : medicalRecordSet) {
-                if (medicalRecord.getFirstName().equals(p.getFirstName())&&medicalRecord.getLastName().equals(p.getLastName())){
-                    long age = calculator.calculateAge(medicalRecord.getBirthdate());
+            for (MedicalRecordFullDto m : medicalRecordSet) {
+                if (m.getFirstName().equals(p.getFirstName())&&m.getLastName().equals(p.getLastName())){
+                    long age = calculator.calculateAge(m.getBirthdate());
                     if (age>=18) {
                         numberAdult++;
                     }else {

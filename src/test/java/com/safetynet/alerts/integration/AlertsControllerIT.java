@@ -1,16 +1,24 @@
 package com.safetynet.alerts.integration;
 
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
+import com.safetynet.alerts.dto.PersonFireDto;
+import com.safetynet.alerts.dto.PersonFloodDto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @SpringBootTest
@@ -47,6 +55,25 @@ public class AlertsControllerIT {
     public void testGetAddressByCity() throws Exception {
 
         mockMvc.perform(get("/personInfo").queryParam("firstName","Lily").queryParam("lastName","Cooper"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPhoneNumberFromStation() throws Exception {
+        mockMvc.perform(get("/phoneAlert").queryParam("firestation", "1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPersonFromAddressWithStation() throws Exception {
+        mockMvc.perform(get("/fire").queryParam("address", "908 73rd St"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.station", is(1)));
+    }
+
+    @Test
+    public void getFamilyByListOfStation() throws Exception {
+        mockMvc.perform(get("/flood/stations").queryParam("stations", "1,2"))
                 .andExpect(status().isOk());
     }
 

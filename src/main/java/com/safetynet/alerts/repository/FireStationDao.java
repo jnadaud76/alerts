@@ -6,6 +6,7 @@ import com.safetynet.alerts.model.FireStation;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,22 @@ public class FireStationDao {
         }
         return fireStationsResult;
     }
+
+  /*  public Set<FireStation> findByStationSet (final Set<Integer> stations) {
+        Set<FireStation> fireStationsResult = new HashSet<>();
+        Iterator<Integer> i = stations.iterator();
+
+            while (i.hasNext()) {
+                int stationNumber = i.next();
+                for (FireStation f : fireStations) {
+                if (f.getStation() == stationNumber) {
+                    fireStationsResult.add(f);
+                }
+            }
+
+        }
+        return fireStationsResult;
+    }*/
 
     public Set<FireStation> findByAddress (final String address){
         //Set<FireStation> fireStationsResult = new HashSet<>();

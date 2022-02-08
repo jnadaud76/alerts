@@ -6,16 +6,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.safetynet.alerts.controller.AlertsController;
-import com.safetynet.alerts.controller.FireStationController;
 import com.safetynet.alerts.dto.PersonChildAlertDto;
+import com.safetynet.alerts.dto.PersonFireDto;
 import com.safetynet.alerts.dto.PersonFireStationDto;
+import com.safetynet.alerts.dto.PersonFloodDto;
 import com.safetynet.alerts.dto.PersonInfoDto;
-import com.safetynet.alerts.repository.MedicalRecordDao;
+import com.safetynet.alerts.service.AlertsFireService;
+import com.safetynet.alerts.service.AlertsFloodService;
+import com.safetynet.alerts.service.AlertsPhoneAlertService;
 import com.safetynet.alerts.service.AlertsChildAlertService;
 import com.safetynet.alerts.service.AlertsCommunityEmailService;
 import com.safetynet.alerts.service.AlertsFireStationService;
 import com.safetynet.alerts.service.AlertsPersonInfoService;
-import com.safetynet.alerts.service.MedicalRecordService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,15 @@ public class AlertsControllerTest {
 
     @MockBean
     AlertsPersonInfoService alertsPersonInfoService;
+
+    @MockBean
+    AlertsPhoneAlertService alertPhoneAlertService;
+
+    @MockBean
+    AlertsFireService alertsFireService;
+
+    @MockBean
+    AlertsFloodService alertsFloodService;
 
     @Test
     public void testGetEmailsFromCity() throws Exception {
@@ -82,5 +93,35 @@ public class AlertsControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void getPhoneNumberFromStation() throws Exception {
+        Set<String> phoneNumbers = new HashSet<>();
+        String phoneNumber1 = "841-874-9888";
+        String phoneNumber2 = "841-874-9887";
+        phoneNumbers.add(phoneNumber1);
+        phoneNumbers.add(phoneNumber2);
+        when(alertPhoneAlertService.getPhoneNumberFromStation(1)).thenReturn(phoneNumbers);
+        mockMvc.perform(get("/phoneAlert").queryParam("firestation", "1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPersonFromAddressWithStation() throws Exception {
+        PersonFireDto personFireDto = new PersonFireDto();
+        when(alertsFireService.getPersonFromAddressWithStation("908 73rd St")).thenReturn(personFireDto);
+        mockMvc.perform(get("/fire").queryParam("address", "908 73rd St"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getFamilyByListOfStation() throws Exception {
+        PersonFloodDto personFloodDto = new PersonFloodDto();
+        Set<Integer> stationsNumber = new HashSet<>();
+        stationsNumber.add(1);
+        stationsNumber.add(2);
+        when(alertsFloodService.getFamilyByListOfStation(stationsNumber)).thenReturn(personFloodDto);
+        mockMvc.perform(get("/flood/stations").queryParam("stations", "1,2"))
+                .andExpect(status().isOk());
+    }
 
 }
