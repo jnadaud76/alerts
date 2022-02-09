@@ -3,36 +3,35 @@ package com.safetynet.alerts.service;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.dto.PersonInfoDto;
-import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.util.Calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AlertsPersonInfoService {
+public class AlertsPersonInfoService implements IAlertsPersonInfoService {
 
+    private final Calculator calculator = new Calculator();
     @Autowired
-    PersonService personService;
-
+    private IPersonService personService;
     @Autowired
-    MedicalRecordService medicalRecordService;
+    private IMedicalRecordService medicalRecordService;
 
-    Calculator calculator = new Calculator();
-
-    public PersonInfoDto getPersonInfo (final String firstname, final String lastName) {
+    public PersonInfoDto
+    getPersonInfo(final String firstname, final String lastName) {
         PersonInfoDto personInfoDto = new PersonInfoDto();
         PersonFullDto person = personService.getPerson(firstname, lastName);
-        MedicalRecordFullDto medicalRecord = medicalRecordService.getMedicalRecord(firstname, lastName);
-
-
-        personInfoDto.setLastName(person.getLastName());
-        personInfoDto.setAddress(person.getAddress());
-        personInfoDto.setAge(calculator.calculateAge(medicalRecord.getBirthdate()));
-        personInfoDto.setEmail(person.getEmail());
-        personInfoDto.setMedications(medicalRecord.getMedications());
-        personInfoDto.setAllergies(medicalRecord.getAllergies());
+        MedicalRecordFullDto medicalRecord
+                = medicalRecordService.getMedicalRecord(firstname, lastName);
+        if (person != null) {
+            personInfoDto.setLastName(person.getLastName());
+            personInfoDto.setAddress(person.getAddress());
+            personInfoDto
+                    .setAge(calculator.calculateAge(medicalRecord.getBirthdate()));
+            personInfoDto.setEmail(person.getEmail());
+            personInfoDto.setMedications(medicalRecord.getMedications());
+            personInfoDto.setAllergies(medicalRecord.getAllergies());
+        }
 
         return personInfoDto;
 

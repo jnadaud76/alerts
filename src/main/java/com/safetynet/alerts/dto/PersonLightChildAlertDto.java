@@ -6,15 +6,6 @@ public class PersonLightChildAlertDto {
     private String lastName;
     private long age;
 
-   /* public PersonLightChildAlertDto() {
-    }
-
-    public PersonLightChildAlertDto(String firstName, String lastName, long age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }*/
-
     public String getFirstName() {
         return firstName;
     }

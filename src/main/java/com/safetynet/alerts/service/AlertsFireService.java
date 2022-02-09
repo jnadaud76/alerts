@@ -14,26 +14,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class AlertsFireService {
+public class AlertsFireService implements IAlertsFireService {
 
+
+    private final Calculator calculator = new Calculator();
     @Autowired
-    FireStationService fireStationService;
-
+    private IFireStationService fireStationService;
     @Autowired
-    PersonService personService;
-
+    private IPersonService personService;
     @Autowired
-    MedicalRecordService medicalRecordService;
+    private IMedicalRecordService medicalRecordService;
 
-    Calculator calculator = new Calculator();
-
-    public PersonFireDto getPersonFromAddressWithStation (String address) {
-        Set<FireStationFullDto> fireStationFullDtoSet = fireStationService.getFireStationsByAddress(address);
-        Set<PersonFullDto> personFullDtoSet = personService.getPersonByAddress(address);
-        Set<MedicalRecordFullDto> medicalRecordFullDtoSet = medicalRecordService.getMedicalRecords();
+    public PersonFireDto getPersonFromAddressWithStation(final String address) {
+        Set<FireStationFullDto> fireStationFullDtoSet
+                = fireStationService.getFireStationsByAddress(address);
+        Set<PersonFullDto> personFullDtoSet
+                = personService.getPersonByAddress(address);
+        Set<MedicalRecordFullDto> medicalRecordFullDtoSet
+                = medicalRecordService.getMedicalRecords();
         PersonFireDto personFireDto = new PersonFireDto();
         Set<PersonLightFireDto> personLightFireDtoSet = new HashSet<>();
-        int station=0;
+        int station = 0;
         for (FireStationFullDto f : fireStationFullDtoSet) {
             station = f.getStation();
             break;
@@ -44,8 +45,10 @@ public class AlertsFireService {
             personLightFireDto.setPhone(p.getPhone());
 
             for (MedicalRecordFullDto m : medicalRecordFullDtoSet) {
-                if (m.getFirstName().equals(p.getFirstName())&&m.getLastName().equals(p.getLastName())){
-                    personLightFireDto.setAge(calculator.calculateAge(m.getBirthdate()));
+                if (m.getFirstName().equals(p.getFirstName())
+                        && m.getLastName().equals(p.getLastName())) {
+                    personLightFireDto
+                            .setAge(calculator.calculateAge(m.getBirthdate()));
                     personLightFireDto.setMedications(m.getMedications());
                     personLightFireDto.setAllergies(m.getAllergies());
                 }

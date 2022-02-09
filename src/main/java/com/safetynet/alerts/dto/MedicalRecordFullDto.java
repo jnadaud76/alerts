@@ -10,16 +10,6 @@ public class MedicalRecordFullDto {
     private Set<String> medications;
     private Set<String> allergies;
 
-   /* public MedicalRecordFullDto() {
-    }
-
-    public MedicalRecordFullDto(String firstName, String lastName, String birthdate, Set<String> medications, Set<String> allergies) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.medications = medications;
-        this.allergies = allergies;
-    }*/
 
     public String getFirstName() {
         return firstName;

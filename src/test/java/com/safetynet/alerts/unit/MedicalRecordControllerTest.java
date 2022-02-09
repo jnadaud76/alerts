@@ -12,8 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.MedicalRecordController;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.repository.MedicalRecordDao;
 import com.safetynet.alerts.service.MedicalRecordService;
 
 import org.junit.jupiter.api.Test;
@@ -35,9 +33,6 @@ public class MedicalRecordControllerTest {
     @MockBean
     private MedicalRecordService medicalRecordService;
 
-    /*@MockBean
-    private MedicalRecordDao medicalRecordDao;*/
-
     @Test
     public void testGetMedicalRecords() throws Exception {
         mockMvc.perform(get("/medicalrecords"))
@@ -49,33 +44,37 @@ public class MedicalRecordControllerTest {
         MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
         medicalRecordFullDto.setFirstName("Lily");
         medicalRecordFullDto.setLastName("Cooper");
-        //when(medicalRecordDao.findById("Lily","Cooper")).thenReturn(medicalRecord);
-        when(medicalRecordService.getMedicalRecord("Lily","Cooper")).thenReturn(medicalRecordFullDto);
-        mockMvc.perform(get("/medicalrecord/Lily/Cooper"))
+        when(medicalRecordService.getMedicalRecord("Lily", "Cooper")).thenReturn(medicalRecordFullDto);
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testGetMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
-       // when(medicalRecordDao.findById("Lily","Crooper")).thenReturn(null);
-        when(medicalRecordService.getMedicalRecord("Lily","Crooper")).thenReturn(null);
-        mockMvc.perform(get("/medicalrecord/Lily/Crooper"))
+        when(medicalRecordService.getMedicalRecord("Lily", "Crooper")).thenReturn(null);
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
-        //when(medicalRecordDao.findById("Lilo","Cooper")).thenReturn(null);
-        when(medicalRecordService.getMedicalRecord("Lilo","Cooper")).thenReturn(null);
-        mockMvc.perform(get("/medicalrecord/Lilo/Cooper"))
+        when(medicalRecordService.getMedicalRecord("Lilo", "Cooper")).thenReturn(null);
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
-       // when(medicalRecordDao.findById("Lilo","Crooper")).thenReturn(null);
-        when(medicalRecordService.getMedicalRecord("Lilo","Crooper")).thenReturn(null);
-        mockMvc.perform(get("/medicalrecord/Lilo/Crooper"))
+        when(medicalRecordService.getMedicalRecord("Lilo", "Crooper")).thenReturn(null);
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
@@ -113,7 +112,6 @@ public class MedicalRecordControllerTest {
         medicalRecord.setBirthdate("03/06/1994");
         medicalRecord.setMedications(medications);
         medicalRecord.setAllergies(allergies);
-        //doThrow(new IllegalArgumentException()).when(medicalRecordDao).save(medicalRecord);
         doThrow(new IllegalArgumentException()).when(medicalRecordService).createMedicalRecord(medicalRecord);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -130,33 +128,37 @@ public class MedicalRecordControllerTest {
         MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
         medicalRecordFullDto.setFirstName("Brian");
         medicalRecordFullDto.setLastName("Stelzer");
-        //when(medicalRecordDao.findById("Brian","Stelzer")).thenReturn(medicalRecord);
-        when(medicalRecordService.getMedicalRecord("Brian","Stelzer")).thenReturn(medicalRecordFullDto);
-        mockMvc.perform(delete("/medicalrecord/Brian/Stelzer"))
+        when(medicalRecordService.getMedicalRecord("Brian", "Stelzer")).thenReturn(medicalRecordFullDto);
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeleteMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
-        //doThrow(new IllegalArgumentException()).when(medicalRecordDao).deleteById("Brian","Stelzor");
-        doThrow(new IllegalArgumentException()).when(medicalRecordService).deleteMedicalRecord("Brian","Stelzor");
-        mockMvc.perform(delete("/medicalrecord/Brian/Stelzor"))
+        doThrow(new IllegalArgumentException()).when(medicalRecordService).deleteMedicalRecord("Brian", "Stelzor");
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeleteMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
-       // doThrow(new IllegalArgumentException()).when(medicalRecordDao).deleteById("Briun","Stelzer");
-        doThrow(new IllegalArgumentException()).when(medicalRecordService).deleteMedicalRecord("Briun","Stelzer");
-        mockMvc.perform(delete("/medicalrecord/Briun/Stelzer"))
+        doThrow(new IllegalArgumentException()).when(medicalRecordService).deleteMedicalRecord("Briun", "Stelzer");
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeleteMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
-       // doThrow(new IllegalArgumentException()).when(medicalRecordDao).deleteById("Briun","Stelzor");
-        doThrow(new IllegalArgumentException()).when(medicalRecordService).deleteMedicalRecord("Briun","Stelzor");
-        mockMvc.perform(delete("/medicalrecord/Briun/Stelzor"))
+        doThrow(new IllegalArgumentException()).when(medicalRecordService).deleteMedicalRecord("Briun", "Stelzor");
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 
@@ -180,7 +182,7 @@ public class MedicalRecordControllerTest {
                 .andExpect(status().isOk());
     }
 
-   @Test
+    @Test
     public void testUpdateMedicalRecordGivingBadLastName() throws Exception {
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();
@@ -190,7 +192,6 @@ public class MedicalRecordControllerTest {
         medicalRecord.setBirthdate("03/06/2008");
         medicalRecord.setMedications(medications);
         medicalRecord.setAllergies(allergies);
-       // doThrow(new IllegalArgumentException()).when(medicalRecordDao).update(medicalRecord);
         doThrow(new IllegalArgumentException()).when(medicalRecordService).updateMedicalRecord(medicalRecord);
 
         ObjectMapper objectMapper = new ObjectMapper();

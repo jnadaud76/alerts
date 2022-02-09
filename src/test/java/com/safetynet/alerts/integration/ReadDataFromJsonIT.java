@@ -5,14 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.safetynet.alerts.model.FireStation;
+import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.FireStationDao;
+import com.safetynet.alerts.repository.MedicalRecordDao;
 import com.safetynet.alerts.repository.PersonDao;
 import com.safetynet.alerts.service.IReadData;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootTest
 public class ReadDataFromJsonIT {
@@ -26,9 +31,12 @@ public class ReadDataFromJsonIT {
     @Autowired
     private FireStationDao fireStationDao;
 
+    @Autowired
+    private MedicalRecordDao medicalRecordDao;
+
 
     @Test
-    public void loadDataTest(){
+    public void loadDataTest() {
         //Given
 
         //When
@@ -54,7 +62,7 @@ public class ReadDataFromJsonIT {
         readDataFromJson.loadPerson();
 
         //Then
-        assertTrue (personDao.getPersons().contains(person));
+        assertTrue(personDao.getPersons().contains(person));
     }
 
     @Test
@@ -68,9 +76,30 @@ public class ReadDataFromJsonIT {
         readDataFromJson.loadFireStation();
 
         //Then
-        assertTrue (fireStationDao.getFireStations().contains(fireStation));
+        assertTrue(fireStationDao.getFireStations().contains(fireStation));
     }
 
+    @Test
+    public void loadMedicalRecordTest() {
+        //Given
+        MedicalRecord medicalRecord = new MedicalRecord();
+        Set<String> medications = new HashSet<>();
+        medications.add("aznol:350mg");
+        medications.add("hydrapermazol:100mg");
+        Set<String> allergies = new HashSet<>();
+        allergies.add("nillacilan");
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        medicalRecord.setBirthdate("03/06/1984");
+        medicalRecord.setMedications(medications);
+        medicalRecord.setAllergies(allergies);
+
+        //when
+        readDataFromJson.loadMedicalRecord();
+
+        //Then
+        assertTrue(medicalRecordDao.getMedicalRecords().contains(medicalRecord));
+    }
 
 
 }

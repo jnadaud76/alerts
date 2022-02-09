@@ -6,7 +6,7 @@ import com.safetynet.alerts.model.FireStation;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
-import java.util.Iterator;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,33 +28,17 @@ public class FireStationDao {
         return this.fireStations;
     }
 
-    public Set<FireStation> findByStation (final int station){
-       Set<FireStation> fireStationsResult = new HashSet<>();
+    public Set<FireStation> findByStation(final int station) {
+        Set<FireStation> fireStationsResult = new HashSet<>();
         for (FireStation f : fireStations) {
-            if (f.getStation()==station) {
+            if (f.getStation() == station) {
                 fireStationsResult.add(f);
             }
         }
         return fireStationsResult;
     }
 
-  /*  public Set<FireStation> findByStationSet (final Set<Integer> stations) {
-        Set<FireStation> fireStationsResult = new HashSet<>();
-        Iterator<Integer> i = stations.iterator();
-
-            while (i.hasNext()) {
-                int stationNumber = i.next();
-                for (FireStation f : fireStations) {
-                if (f.getStation() == stationNumber) {
-                    fireStationsResult.add(f);
-                }
-            }
-
-        }
-        return fireStationsResult;
-    }*/
-
-    public Set<FireStation> findByAddress (final String address){
+    public Set<FireStation> findByAddress(final String address) {
         //Set<FireStation> fireStationsResult = new HashSet<>();
         return fireStations.stream().filter(fireStation -> fireStation.getAddress().equals(address)).collect(Collectors.toSet());
 
@@ -65,6 +49,7 @@ public class FireStationDao {
         }*/
         //return fireStationsResult;
     }
+
     public void update(final FireStation fireStationParam) {
         deleteByAddress(fireStationParam.getAddress());
         FireStation firestation = new FireStation();
@@ -74,17 +59,17 @@ public class FireStationDao {
 
     }
 
-    public void save (final FireStation fireStation) {
+    public void save(final FireStation fireStation) {
         FireStation fireStationResult = null;
         for (FireStation f : fireStations) {
             if (f.getAddress().equals(fireStation.getAddress())
                     && (f.getStation() == fireStation.getStation())) {
-                fireStationResult=f;
+                fireStationResult = f;
                 break;
             }
 
         }
-        if (fireStationResult==null) {
+        if (fireStationResult == null) {
             fireStations.add(fireStation);
         } else {
             throw new IllegalArgumentException();
@@ -92,7 +77,7 @@ public class FireStationDao {
 
     }
 
-    public void deleteByStation (final int station) {
+    public void deleteByStation(final int station) {
         Set<FireStation> firestationsResult = findByStation(station);
 
         if (!firestationsResult.isEmpty()) {
@@ -102,7 +87,7 @@ public class FireStationDao {
         }
     }
 
-    public void deleteByAddress (final String address) {
+    public void deleteByAddress(final String address) {
         Set<FireStation> firestationsResult = findByAddress(address);
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
@@ -110,6 +95,6 @@ public class FireStationDao {
             throw new IllegalArgumentException();
         }
     }
-    }
+}
 
 

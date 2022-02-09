@@ -2,7 +2,7 @@ package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.model.Person;
+
 import com.safetynet.alerts.repository.MedicalRecordDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +12,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class MedicalRecordService {
+public class MedicalRecordService implements IMedicalRecordService {
 
     @Autowired
-    MedicalRecordDao medicalRecordDao;
+    private MedicalRecordDao medicalRecordDao;
 
     public Set<MedicalRecordFullDto> getMedicalRecords() {
-       Set<MedicalRecord> medicalRecords = medicalRecordDao.findAll();
-       Set<MedicalRecordFullDto> medicalRecordFullDtoSet = new HashSet<>();
+        Set<MedicalRecord> medicalRecords = medicalRecordDao.findAll();
+        Set<MedicalRecordFullDto> medicalRecordFullDtoSet = new HashSet<>();
 
-       for(MedicalRecord medicalRecord : medicalRecords) {
-           MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
-           medicalRecordFullDto.setFirstName(medicalRecord.getFirstName());
-           medicalRecordFullDto.setLastName(medicalRecord.getLastName());
-           medicalRecordFullDto.setBirthdate(medicalRecord.getBirthdate());
-           medicalRecordFullDto.setMedications(medicalRecord.getMedications());
-           medicalRecordFullDto.setAllergies(medicalRecord.getAllergies());
-           medicalRecordFullDtoSet.add(medicalRecordFullDto);
-       }
-       return medicalRecordFullDtoSet;
+        for (MedicalRecord medicalRecord : medicalRecords) {
+            MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
+            medicalRecordFullDto.setFirstName(medicalRecord.getFirstName());
+            medicalRecordFullDto.setLastName(medicalRecord.getLastName());
+            medicalRecordFullDto.setBirthdate(medicalRecord.getBirthdate());
+            medicalRecordFullDto.setMedications(medicalRecord.getMedications());
+            medicalRecordFullDto.setAllergies(medicalRecord.getAllergies());
+            medicalRecordFullDtoSet.add(medicalRecordFullDto);
+        }
+        return medicalRecordFullDtoSet;
     }
 
     public MedicalRecordFullDto getMedicalRecord(final String firstname, final String lastName) {
@@ -45,7 +45,7 @@ public class MedicalRecordService {
         } else {
             medicalRecordFullDto = null;
         }
-        return  medicalRecordFullDto;
+        return medicalRecordFullDto;
 
     }
 
@@ -53,7 +53,7 @@ public class MedicalRecordService {
         medicalRecordDao.save(medicalRecordParam);
     }
 
-    public void updateMedicalRecord(final MedicalRecord medicalRecordParam) throws Exception {
+    public void updateMedicalRecord(final MedicalRecord medicalRecordParam) {
         medicalRecordDao.update(medicalRecordParam);
     }
 

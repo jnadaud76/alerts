@@ -10,27 +10,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class AlertsPhoneAlertService {
+public class AlertsPhoneAlertService implements IAlertsPhoneAlertService {
 
-@Autowired
-FireStationService fireStationService;
+    @Autowired
+    private IFireStationService fireStationService;
 
-@Autowired
-    PersonService personService;
+    @Autowired
+    private IPersonService personService;
 
-public Set<String> getPhoneNumberFromStation (int station) {
-    Set<FireStationFullDto> fireStationFullDtoSet = fireStationService.getFireStationsByStation(station);
-    Set<PersonFullDto> personFullDtoSet = personService.getPersons();
-    Set<String> phoneNumbers = new HashSet<>();
+    public Set<String> getPhoneNumberFromStation(final int station) {
+        Set<FireStationFullDto> fireStationFullDtoSet
+                = fireStationService.getFireStationsByStation(station);
+        Set<PersonFullDto> personFullDtoSet = personService.getPersons();
+        Set<String> phoneNumbers = new HashSet<>();
 
-    for (PersonFullDto p : personFullDtoSet) {
-        for (FireStationFullDto f : fireStationFullDtoSet) {
-            if (f.getAddress().equals(p.getAddress())) {
-                phoneNumbers.add(p.getPhone());
+        for (PersonFullDto p : personFullDtoSet) {
+            for (FireStationFullDto f : fireStationFullDtoSet) {
+                if (f.getAddress().equals(p.getAddress())) {
+                    phoneNumbers.add(p.getPhone());
+                }
             }
         }
+        return phoneNumbers;
     }
-    return phoneNumbers;
-}
 
 }

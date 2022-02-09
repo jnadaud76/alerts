@@ -7,16 +7,6 @@ public class PersonLightFireStationDto {
     private String address;
     private String phone;
 
-   /* public PersonLightFireStationDto() {
-    }
-
-    public PersonLightFireStationDto(String firstName, String lastName, String address, String phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-    }*/
-
     public String getFirstName() {
         return firstName;
     }

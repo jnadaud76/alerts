@@ -1,6 +1,5 @@
 package com.safetynet.alerts.dto;
 
-import java.util.Objects;
 import java.util.Set;
 
 public class PersonFireDto {
@@ -11,19 +10,19 @@ public class PersonFireDto {
         return personLightFireDtoSet;
     }
 
-    public void setPersonLightFireDtoSet(Set<PersonLightFireDto> personLightFireDtoSet) {
-        this.personLightFireDtoSet = personLightFireDtoSet;
+    public void setPersonLightFireDtoSet(Set<PersonLightFireDto> personLightFireDtoSetParam) {
+        this.personLightFireDtoSet = personLightFireDtoSetParam;
     }
 
     public int getStation() {
         return station;
     }
 
-    public void setStation(int station) {
-        this.station = station;
+    public void setStation(int stationParam) {
+        this.station = stationParam;
     }
 
-    @Override
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -34,5 +33,5 @@ public class PersonFireDto {
     @Override
     public int hashCode() {
         return Objects.hash(personLightFireDtoSet, station);
-    }
+    }*/
 }

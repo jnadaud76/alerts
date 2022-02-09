@@ -25,16 +25,13 @@ import javax.annotation.PostConstruct;
 @Service
 public class ReadDataFromJson implements IReadData {
 
-   @Autowired
-    PersonDao personDao;
-
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
-    FireStationDao fireStationDao;
-
+    private PersonDao personDao;
     @Autowired
-    MedicalRecordDao medicalRecordDao;
-
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private FireStationDao fireStationDao;
+    @Autowired
+    private MedicalRecordDao medicalRecordDao;
 
     @PostConstruct
     public JsonNode loadData() {
@@ -54,8 +51,9 @@ public class ReadDataFromJson implements IReadData {
         try {
             JsonNode personsNode = loadData().get("persons");
             String personsAsString = personsNode.toString();
-            Set<Person>persons = objectMapper.readValue(personsAsString, new TypeReference<HashSet<Person>>() {
-            });
+            Set<Person> persons = objectMapper.readValue(personsAsString,
+                    new TypeReference<HashSet<Person>>() {
+                    });
             personDao.setPersons(persons);
 
         } catch (JsonProcessingException e) {
@@ -69,8 +67,10 @@ public class ReadDataFromJson implements IReadData {
         try {
             JsonNode fireStationsNode = loadData().get("firestations");
             String fireStationsAsString = fireStationsNode.toString();
-            Set<FireStation>fireStations = objectMapper.readValue(fireStationsAsString, new TypeReference<HashSet<FireStation>>() {
-            });
+            Set<FireStation> fireStations = objectMapper
+                    .readValue(fireStationsAsString,
+                            new TypeReference<HashSet<FireStation>>() {
+                            });
             fireStationDao.setFireStations(fireStations);
 
         } catch (JsonProcessingException e) {
@@ -82,16 +82,19 @@ public class ReadDataFromJson implements IReadData {
     @PostConstruct
     public void loadMedicalRecord() {
         try {
-        JsonNode medicalRecordsNode = loadData().get("medicalrecords");
-        String medicalRecordsAsString = medicalRecordsNode.toString();
-        Set <MedicalRecord> medicalRecords = objectMapper.readValue(medicalRecordsAsString, new TypeReference<HashSet<MedicalRecord>>() {
-        });
-        medicalRecordDao.setMedicalRecords(medicalRecords);
+            JsonNode medicalRecordsNode = loadData().get("medicalrecords");
+            String medicalRecordsAsString = medicalRecordsNode.toString();
+            Set<MedicalRecord> medicalRecords = objectMapper
+                    .readValue(medicalRecordsAsString,
+                            new TypeReference<HashSet<MedicalRecord>>() {
+                            });
+            medicalRecordDao.setMedicalRecords(medicalRecords);
 
 
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

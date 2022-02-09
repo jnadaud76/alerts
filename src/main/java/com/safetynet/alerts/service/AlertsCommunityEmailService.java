@@ -9,12 +9,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class AlertsCommunityEmailService {
+public class AlertsCommunityEmailService implements IAlertsCommunityEmailService {
 
     @Autowired
-    PersonService personService;
+    private IPersonService personService;
 
-    public Set<String> getEmailFromCity (final String city) {
+    public Set<String> getEmailFromCity(final String city) {
         Set<PersonFullDto> persons = personService.getPersons();
         Set<String> personsEmail = new HashSet<>();
 

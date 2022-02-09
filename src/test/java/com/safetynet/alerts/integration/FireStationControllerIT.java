@@ -37,53 +37,53 @@ public class FireStationControllerIT {
 
     @Test
     public void testGetFireStationByStation() throws Exception {
-        mockMvc.perform(get("/firestation/station/4"))
+        mockMvc.perform(get("/firestation/station/").queryParam("station", "4"))
                 .andExpect(status().isOk());
 
     }
 
     @Test
     public void testGetFireStationByAddress() throws Exception {
-        mockMvc.perform(get("/firestation/address/489 Manchester St"))
+        mockMvc.perform(get("/firestation/address/").queryParam("address", "489 Manchester St"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].station", is(4)));
     }
 
     @Test
     public void testGetFireStationByStationWithBadStation() throws Exception {
-        mockMvc.perform(get("/firestation/station/15"))
+        mockMvc.perform(get("/firestation/station/").queryParam("station", "15"))
                 .andExpect(status().isNotFound());
 
     }
 
     @Test
     public void testGetFireStationByAddressWithBadAddress() throws Exception {
-        mockMvc.perform(get("/firestation/address/47 rue du pommier"))
+        mockMvc.perform(get("/firestation/address/").queryParam("address", "47 rue du pommier"))
                 .andExpect(status().isNotFound());
 
     }
 
     @Test
     public void testDeleteFireStationByStation() throws Exception {
-        mockMvc.perform(delete("/firestation/station/1"))
+        mockMvc.perform(delete("/firestation/station/").queryParam("station", "1"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeleteFireStationByAddress() throws Exception {
-        mockMvc.perform(delete("/firestation/address/892 Downing Ct"))
+        mockMvc.perform(delete("/firestation/address/").queryParam("address", "892 Downing Ct"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeleteFireStationWithBadStationNumber() throws Exception {
-        mockMvc.perform(delete("/firestation/station/12"))
+        mockMvc.perform(delete("/firestation/station/").queryParam("station", "12"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeleteFireStationWithBadAddress() throws Exception {
-        mockMvc.perform(delete("/firestation/address/47 rue du pommier"))
+        mockMvc.perform(delete("/firestation/address/").queryParam("address", "47 rue du pommier"))
                 .andExpect(status().isBadRequest());
     }
 

@@ -1,10 +1,7 @@
 package com.safetynet.alerts.model;
 
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
-
-import lombok.Data;
 
 
 public class MedicalRecord {
@@ -14,18 +11,6 @@ public class MedicalRecord {
     private String birthdate;
     private Set<String> medications;
     private Set<String> allergies;
-
-   /* public MedicalRecord() {
-
-    }
-
-    public MedicalRecord(String firstName, String lastName, String birthdate, Set<String> medications, Set<String> allergies) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.medications = medications;
-        this.allergies = allergies;
-    }*/
 
     public String getFirstName() {
         return firstName;
@@ -72,11 +57,16 @@ public class MedicalRecord {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MedicalRecord that = (MedicalRecord) o;
-        return firstName.equals(that.firstName) && lastName.equals(that.lastName) && birthdate.equals(that.birthdate) && medications.equals(that.medications) && allergies.equals(that.allergies);
+        return firstName.equals(that.firstName)
+                && lastName.equals(that.lastName)
+                && birthdate.equals(that.birthdate)
+                && medications.equals(that.medications)
+                && allergies.equals(that.allergies);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, birthdate, medications, allergies);
+        return Objects
+                .hash(firstName, lastName, birthdate, medications, allergies);
     }
 }

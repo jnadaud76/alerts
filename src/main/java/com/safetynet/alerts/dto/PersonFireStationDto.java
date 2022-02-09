@@ -9,15 +9,6 @@ public class PersonFireStationDto {
     private int numberAdult;
     private int numberChild;
 
-   /* public PersonFireStationDto() {
-    }
-
-    public PersonFireStationDto(Set<PersonLightFireStationDto> personLightFireStationDtoSet, int numberAdult, int numberChild) {
-        this.personLightFireStationDtoSet = personLightFireStationDtoSet;
-        this.numberAdult = numberAdult;
-        this.numberChild = numberChild;
-    }*/
-
     public Set<PersonLightFireStationDto> getPersonLightFireStationDtoSet() {
         return personLightFireStationDtoSet;
     }

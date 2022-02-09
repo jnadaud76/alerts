@@ -1,7 +1,5 @@
 package com.safetynet.alerts.integration;
 
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -9,18 +7,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safetynet.alerts.controller.MedicalRecordController;
-import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.repository.MedicalRecordDao;
-import com.safetynet.alerts.service.MedicalRecordService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -42,30 +34,33 @@ public class MedicalRecordControllerIT {
 
     @Test
     public void testGetMedicalRecord() throws Exception {
-        MedicalRecord medicalRecord = new MedicalRecord();
-        medicalRecord.setFirstName("Lily");
-        medicalRecord.setLastName("Cooper");
-        mockMvc.perform(get("/medicalrecord/Lily/Cooper"))
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testGetMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
-      mockMvc.perform(get("/medicalrecord/Lily/Crooper"))
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
-
-        mockMvc.perform(get("/medicalrecord/Lilo/Cooper"))
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
-
-        mockMvc.perform(get("/medicalrecord/Lilo/Crooper"))
+        mockMvc.perform(get("/medicalrecord/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
@@ -116,32 +111,33 @@ public class MedicalRecordControllerIT {
 
     @Test
     public void testDeleteMedicalRecord() throws Exception {
-        MedicalRecord medicalRecord = new MedicalRecord();
-        medicalRecord.setFirstName("Brian");
-        medicalRecord.setLastName("Stelzer");
-
-        mockMvc.perform(delete("/medicalrecord/Brian/Stelzer"))
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeleteMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
-
-        mockMvc.perform(delete("/medicalrecord/Brian/Stelzor"))
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeleteMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
-
-        mockMvc.perform(delete("/medicalrecord/Briun/Stelzer"))
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeleteMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
-
-        mockMvc.perform(delete("/medicalrecord/Briun/Stelzor"))
+        mockMvc.perform(delete("/medicalrecord/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 

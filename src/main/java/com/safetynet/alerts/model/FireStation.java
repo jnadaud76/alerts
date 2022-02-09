@@ -8,15 +8,6 @@ public class FireStation {
     private String address;
     private int station;
 
-    /*public FireStation() {
-
-    }
-
-    public FireStation(String address, int station) {
-        this.address = address;
-        this.station = station;
-    }*/
-
     public String getAddress() {
         return address;
     }
@@ -34,7 +25,7 @@ public class FireStation {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FireStation that = (FireStation) o;

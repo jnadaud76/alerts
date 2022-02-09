@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Calculator {
 
-    public long calculateAge (String birthDate) {
+    public long calculateAge(final String birthDate) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate start = LocalDate.parse(birthDate, formatter);

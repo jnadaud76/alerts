@@ -2,8 +2,7 @@ package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.model.FireStation;
-import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.FireStationService;
+import com.safetynet.alerts.service.IFireStationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
@@ -22,71 +22,88 @@ import java.util.Set;
 public class FireStationController {
 
     @Autowired
-    FireStationService fireStationService;
+    private IFireStationService fireStationService;
 
     @GetMapping("/firestations")
-    public Set<FireStationFullDto> getFireStations(){
+    public Set<FireStationFullDto> getFireStations() {
         return fireStationService.getFireStations();
     }
 
-    @GetMapping("/firestation/station/{station}")
-    public ResponseEntity<Set<FireStationFullDto>> getFireStationsByStation(@PathVariable ("station") int station){
+    @GetMapping("/firestation/station/")
+    public ResponseEntity<Set<FireStationFullDto>>
+    getFireStationsByStation(@RequestParam("station") final int station) {
         if (!fireStationService.getFireStationsByStation(station).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(fireStationService.getFireStationsByStation(station));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-     }
-
-    @GetMapping("/firestation/address/{address}")
-    public ResponseEntity<Set<FireStationFullDto>> getFireStationByAddress(@PathVariable ("address") String address){
-        if (!fireStationService.getFireStationsByAddress(address).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(fireStationService.getFireStationsByAddress(address));
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(fireStationService.getFireStationsByStation(station));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
-    @PostMapping(value="/firestation")
-    public ResponseEntity<?> createFireStation (@RequestBody FireStation fireStation){
+    @GetMapping("/firestation/address/")
+    public ResponseEntity<Set<FireStationFullDto>>
+    getFireStationByAddress(@RequestParam("address") final String address) {
+        if (!fireStationService.getFireStationsByAddress(address).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(fireStationService.getFireStationsByAddress(address));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @PostMapping("/firestation")
+    public ResponseEntity<?>
+    createFireStation(@RequestBody final FireStation fireStation) {
         try {
             fireStationService.createFireStation(fireStation);
-            return ResponseEntity.status(HttpStatus.CREATED).body("FireStation created");
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("FireStation created");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("FireStation can't be create. May already exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("FireStation can't be create. May already exist");
         }
     }
 
     @PutMapping("/firestation")
-    public ResponseEntity<?> updateFireStation (@RequestBody FireStation firestation) {
+    public ResponseEntity<?>
+    updateFireStation(@RequestBody final FireStation firestation) {
         try {
             fireStationService.updateFirestation(firestation);
-            return ResponseEntity.status(HttpStatus.OK).body("Successfully Updated");
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Successfully Updated");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant Update! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Cant Update! Entity not exist");
         }
     }
 
-    @DeleteMapping(value = "/firestation/station/{station}")
-    public ResponseEntity<?> deleteFireStationByStation (@PathVariable ("station") int station) {
+    @DeleteMapping("/firestation/station/")
+    public ResponseEntity<?>
+    deleteFireStationByStation(@RequestParam("station") final int station) {
         try {
             fireStationService.deleteFireStationByStation(station);
-            return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Successfully Deleted");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant delete! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Cant delete! Entity not exist");
         }
     }
 
-    @DeleteMapping(value = "/firestation/address/{address}")
-    public ResponseEntity<?> deleteFireStationByAddress (@PathVariable ("address") String address) {
+    @DeleteMapping("/firestation/address/" +
+            "")
+    public ResponseEntity<?>
+    deleteFireStationByAddress(@RequestParam("address") final String address) {
         try {
             fireStationService.deleteFireStationByAddress(address);
-            return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Successfully Deleted");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cant delete! Entity not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Cant delete! Entity not exist");
         }
     }
 

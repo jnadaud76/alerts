@@ -16,14 +16,13 @@ import java.util.Set;
 
 
 @Service
-public class PersonService {
+public class PersonService implements IPersonService {
 
     @Autowired
-    PersonDao personDao;
+    private PersonDao personDao;
 
-    //Set <PersonFullDto> personFullDtoSet = new HashSet<>();
 
-     public Set<PersonFullDto> getPersons() {
+    public Set<PersonFullDto> getPersons() {
         Set<Person> persons = personDao.findAll();
         Set<PersonFullDto> personFullDtoSet = new HashSet<>();
 
@@ -57,13 +56,13 @@ public class PersonService {
         } else {
             personFullDto = null;
         }
-       return personFullDto;
+        return personFullDto;
 
     }
 
-    public Set<PersonFullDto> getPersonByAddress (String address) {
+    public Set<PersonFullDto> getPersonByAddress(String address) {
         Set<Person> persons = personDao.findByAddress(address);
-        Set <PersonFullDto> personFullDtoSet = new HashSet<>();
+        Set<PersonFullDto> personFullDtoSet = new HashSet<>();
         for (Person p : persons) {
             PersonFullDto personFullDto = new PersonFullDto();
             personFullDto.setFirstName(p.getFirstName());
@@ -78,13 +77,13 @@ public class PersonService {
         }
         return personFullDtoSet;
 
-     }
+    }
 
-    public void createPerson (final Person personParam){
+    public void createPerson(final Person personParam) {
         personDao.save(personParam);
     }
 
-    public void updatePerson (final Person personParam) throws Exception {
+    public void updatePerson(final Person personParam) {
         personDao.update(personParam);
     }
 

@@ -30,9 +30,15 @@ public class AlertsControllerIT {
 
     @Test
     public void testGetEmailsFromCity() throws Exception {
-
         mockMvc.perform(get("/communityEmail").queryParam("city","Culver"))
                 .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void testGetEmailsFromCityReturnEmptyList() throws Exception {
+        mockMvc.perform(get("/communityEmail").queryParam("city","Paris"))
+                .andExpect(status().isNotFound());
 
     }
 
@@ -47,7 +53,7 @@ public class AlertsControllerIT {
     @Test
     public void testGetPersonFromAddress() throws Exception {
 
-        mockMvc.perform(get("/childAlert").queryParam("address","908 73rd St"))
+        mockMvc.perform(get("/childAlert").queryParam("address","1509 Culver St"))
                 .andExpect(status().isOk());
     }
 

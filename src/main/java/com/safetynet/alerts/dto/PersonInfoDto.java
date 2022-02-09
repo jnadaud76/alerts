@@ -11,19 +11,12 @@ public class PersonInfoDto {
     private Set<String> medications;
     private Set<String> allergies;
 
-   /* public PersonInfoDto() {
-    }
-
-    public PersonInfoDto(String firstName, String address, long age, Set<String> medications, Set<String> allergies) {
-        this.firstName = firstName;
-        this.address = address;
-        this.age = age;
-        this.medications = medications;
-        this.allergies = allergies;
-    }*/
-
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastNameParam) {
+        this.lastName = lastNameParam;
     }
 
     public String getAddress() {
@@ -58,15 +51,11 @@ public class PersonInfoDto {
         this.allergies = allergiesParam;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String emailParam) {
+        this.email = emailParam;
     }
 }

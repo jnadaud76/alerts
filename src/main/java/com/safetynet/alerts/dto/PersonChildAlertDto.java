@@ -5,30 +5,23 @@ import java.util.Set;
 
 public class PersonChildAlertDto {
 
-   Set<PersonLightChildAlertDto> children;
-   Set<PersonLightChildAlertDto> familyMembers;
+    Set<PersonLightChildAlertDto> children;
+    Set<PersonLightChildAlertDto> familyMembers;
 
-  /* public PersonChildAlertDto() {
-   }
 
-   public PersonChildAlertDto(Set<PersonLightChildAlertDto> children, Set<PersonLightChildAlertDto> familyMembers) {
-      this.children = children;
-      this.familyMembers = familyMembers;
-   }*/
+    public Set<PersonLightChildAlertDto> getChildren() {
+        return children;
+    }
 
-   public Set<PersonLightChildAlertDto> getChildren() {
-      return children;
-   }
+    public void setChildren(Set<PersonLightChildAlertDto> childrenParam) {
+        this.children = childrenParam;
+    }
 
-   public void setChildren(Set<PersonLightChildAlertDto> childrenParam) {
-      this.children = childrenParam;
-   }
+    public Set<PersonLightChildAlertDto> getFamilyMembers() {
+        return familyMembers;
+    }
 
-   public Set<PersonLightChildAlertDto> getFamilyMembers() {
-      return familyMembers;
-   }
-
-   public void setFamilyMembers(Set<PersonLightChildAlertDto> familyMembersParam) {
-      this.familyMembers = familyMembersParam;
-   }
+    public void setFamilyMembers(Set<PersonLightChildAlertDto> familyMembersParam) {
+        this.familyMembers = familyMembersParam;
+    }
 }

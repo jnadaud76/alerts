@@ -1,6 +1,5 @@
 package com.safetynet.alerts.dto;
 
-import java.util.Objects;
 import java.util.Set;
 
 public class PersonLightFireDto {
@@ -15,43 +14,43 @@ public class PersonLightFireDto {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lastNameParam) {
+        this.lastName = lastNameParam;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String phoneParam) {
+        this.phone = phoneParam;
     }
 
     public long getAge() {
         return age;
     }
 
-    public void setAge(long age) {
-        this.age = age;
+    public void setAge(long ageParam) {
+        this.age = ageParam;
     }
 
     public Set<String> getMedications() {
         return medications;
     }
 
-    public void setMedications(Set<String> medications) {
-        this.medications = medications;
+    public void setMedications(Set<String> medicationsParam) {
+        this.medications = medicationsParam;
     }
 
     public Set<String> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(Set<String> allergies) {
-        this.allergies = allergies;
+    public void setAllergies(Set<String> allergiesParam) {
+        this.allergies = allergiesParam;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -62,5 +61,5 @@ public class PersonLightFireDto {
     @Override
     public int hashCode() {
         return Objects.hash(lastName, phone, age, medications, allergies);
-    }
+    }*/
 }

@@ -37,26 +37,34 @@ public class PersonControllerIT {
 
     @Test
     public void testGetPerson() throws Exception {
-        mockMvc.perform(get("/person/Allison/Boyd"))
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Allison")
+                        .queryParam("lastName", "Boyd"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", is("Allison")));
     }
 
     @Test
     public void testGetPersonWithGoodFirstNameAndBadLastName() throws Exception {
-        mockMvc.perform(get("/person/Lily/Crooper"))
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetPersonWithBadFirstNameAnGoodLastName() throws Exception {
-        mockMvc.perform(get("/person/Lilo/Cooper"))
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
-        mockMvc.perform(get("/person/Lilo/Crooper"))
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
@@ -100,25 +108,33 @@ public class PersonControllerIT {
 
     @Test
     public void testDeletePerson() throws Exception {
-        mockMvc.perform(delete("/person/Brian/Stelzer"))
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
-        mockMvc.perform(delete("/person/Brian/Stelzor"))
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
-        mockMvc.perform(delete("/person/Briun/Stelzer"))
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
-        mockMvc.perform(delete("/person/Briun/Stelzor"))
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 

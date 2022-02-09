@@ -1,6 +1,5 @@
 package com.safetynet.alerts.unit;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -15,10 +14,7 @@ import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
-import com.safetynet.alerts.repository.PersonDao;
-import com.safetynet.alerts.service.ReadDataFromJson;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,8 +23,6 @@ import org.springframework.http.MediaType;
 
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @WebMvcTest(controllers = PersonController.class)
 public class PersonControllerTest {
@@ -38,9 +32,6 @@ public class PersonControllerTest {
 
     @MockBean
     private PersonService personService;
-
-    /*@MockBean
-    private PersonDao personDao;*/
 
     @Test
     public void testGetPersons() throws Exception {
@@ -53,55 +44,38 @@ public class PersonControllerTest {
         PersonFullDto personFullDto = new PersonFullDto();
         personFullDto.setFirstName("Lily");
         personFullDto.setLastName("Cooper");
-       // when(personDao.findById("Lily","Cooper")).thenReturn(person);
-        when(personService.getPerson("Lily","Cooper")).thenReturn(personFullDto);
-        mockMvc.perform(get("/person/Lily/Cooper"))
+        when(personService.getPerson("Lily", "Cooper")).thenReturn(personFullDto);
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isOk());
     }
 
-   /*@Test
-    public void testGetEmailFromCity() throws Exception {
-        Set<String> personsEmail = new HashSet<>();
-        String email = "jojo@gmail.com";
-        personsEmail.add(email);
-        Set<Person> persons = new HashSet<>();
-       Person person = new Person();
-       person.setFirstName("Lily");
-       person.setLastName("Cooper");
-       person.setAddress("489 Manchester St");
-       person.setCity("Culver");
-       person.setZip(97451);
-       person.setPhone("841-874-9845");
-       person.setEmail("lily@email.com");
-       persons.add(person);
-        when(personDao.findAll()).thenReturn(persons);
-        when(personService.getEmailFromCity("Culver")).thenReturn(personsEmail);
-        mockMvc.perform(get ("/communityEmails").queryParam("city","Culver"))
-                .andExpect(status().isOk());
-
-    }*/
-
     @Test
     public void testGetPersonWithGoodFirstNameAndBadLastName() throws Exception {
-        //when(personDao.findById("Lily","Crooper")).thenReturn(null);
-        when(personService.getPerson("Lily","Crooper")).thenReturn(null);
-        mockMvc.perform(get("/person/Lily/Crooper"))
+        when(personService.getPerson("Lily", "Crooper")).thenReturn(null);
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lily")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
+
     }
 
     @Test
     public void testGetPersonWithBadFirstNameAnGoodLastName() throws Exception {
-        //when(personDao.findById("Lilo","Cooper")).thenReturn(null);
-        when(personService.getPerson("Lilo","Cooper")).thenReturn(null);
-        mockMvc.perform(get("/person/Lilo/Cooper"))
+        when(personService.getPerson("Lilo", "Cooper")).thenReturn(null);
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Cooper"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
-        //when(personDao.findById("Lilo","Crooper")).thenReturn(null);
-        when(personService.getPerson("Lilo","Crooper")).thenReturn(null);
-        mockMvc.perform(get("/person/Lilo/Crooper"))
+        when(personService.getPerson("Lilo", "Crooper")).thenReturn(null);
+        mockMvc.perform(get("/person/")
+                        .queryParam("firstName", "Lilo")
+                        .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
     }
 
@@ -119,12 +93,12 @@ public class PersonControllerTest {
         String personAsString = objectMapper.writeValueAsString(person);
 
         mockMvc.perform(post("/person")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(personAsString))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(personAsString))
                 .andExpect(status().isCreated());
     }
 
-   @Test
+    @Test
     public void testCreatePersonWhichAlreadyExist() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
@@ -136,7 +110,6 @@ public class PersonControllerTest {
         person.setEmail("lily@email.com");
         ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
-        //doThrow(new IllegalArgumentException()).when(personDao).save(person);
         doThrow(new IllegalArgumentException()).when(personService).createPerson(person);
 
         mockMvc.perform(post("/person")
@@ -147,38 +120,38 @@ public class PersonControllerTest {
 
     @Test
     public void testDeletePerson() throws Exception {
-        Person person = new Person();
-        person.setFirstName("Brian");
-        person.setLastName("Stelzer");
-       // when(personDao.findById("Brian","Stelzer")).thenReturn(person);
-        mockMvc.perform(delete("/person/Brian/Stelzer"))
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
-        //doThrow(new IllegalArgumentException()).when(personDao).deleteById("Brian","Stelzor");
-        doThrow(new IllegalArgumentException()).when(personService).deletePerson("Brian","Stelzor");
-        mockMvc.perform(delete("/person/Brian/Stelzor"))
+        doThrow(new IllegalArgumentException()).when(personService).deletePerson("Brian", "Stelzor");
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Brian")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
-        //doThrow(new IllegalArgumentException()).when(personDao).deleteById("Briun","Stelzer");
-        doThrow(new IllegalArgumentException()).when(personService).deletePerson("Briun","Stelzer");
-        mockMvc.perform(delete("/person/Briun/Stelzer"))
+        doThrow(new IllegalArgumentException()).when(personService).deletePerson("Briun", "Stelzer");
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzer"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
-        //doThrow(new IllegalArgumentException()).when(personDao).deleteById("Briun","Stelzor");
-        doThrow(new IllegalArgumentException()).when(personService).deletePerson("Briun","Stelzor");
-        mockMvc.perform(delete("/person/Briun/Stelzor"))
+        doThrow(new IllegalArgumentException()).when(personService).deletePerson("Briun", "Stelzor");
+        mockMvc.perform(delete("/person/")
+                        .queryParam("firstName", "Briun")
+                        .queryParam("lastName", "Stelzor"))
                 .andExpect(status().isBadRequest());
     }
-
 
 
     @Test
@@ -216,7 +189,6 @@ public class PersonControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
 
-        //doThrow(new IllegalArgumentException()).when(personDao).update(person);
         doThrow(new IllegalArgumentException()).when(personService).updatePerson(person);
 
         mockMvc.perform(put("/person")
