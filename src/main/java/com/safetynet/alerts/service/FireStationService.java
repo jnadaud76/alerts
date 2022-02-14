@@ -18,15 +18,19 @@ public class FireStationService implements IFireStationService {
     @Autowired
     private FireStationDao fireStationDao;
 
+    private FireStationFullDto fireStationToFireStationFullDto(final FireStation fireStation) {
+        FireStationFullDto firestationFullDto = new FireStationFullDto();
+        firestationFullDto.setStation(fireStation.getStation());
+        firestationFullDto.setAddress(fireStation.getAddress());
+        return firestationFullDto;
+    }
+
     public Set<FireStationFullDto> getFireStations() {
         Set<FireStation> fireStations = fireStationDao.findAll();
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
 
-        for (FireStation fireStation : fireStations) {
-            FireStationFullDto firestationFullDto = new FireStationFullDto();
-            firestationFullDto.setStation(fireStation.getStation());
-            firestationFullDto.setAddress(fireStation.getAddress());
-            fireStationFullDtoSet.add(firestationFullDto);
+        for (FireStation f : fireStations) {
+            fireStationFullDtoSet.add(fireStationToFireStationFullDto(f));
         }
         return fireStationFullDtoSet;
     }
@@ -35,11 +39,8 @@ public class FireStationService implements IFireStationService {
         Set<FireStation> fireStations = fireStationDao.findByStation(station);
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
 
-        for (FireStation fireStation : fireStations) {
-            FireStationFullDto firestationFullDto = new FireStationFullDto();
-            firestationFullDto.setStation(fireStation.getStation());
-            firestationFullDto.setAddress(fireStation.getAddress());
-            fireStationFullDtoSet.add(firestationFullDto);
+        for (FireStation f : fireStations) {
+            fireStationFullDtoSet.add(fireStationToFireStationFullDto(f));
         }
         return fireStationFullDtoSet;
     }
@@ -48,11 +49,8 @@ public class FireStationService implements IFireStationService {
         Set<FireStation> fireStations = fireStationDao.findByAddress(address);
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
 
-        for (FireStation fireStation : fireStations) {
-            FireStationFullDto firestationFullDto = new FireStationFullDto();
-            firestationFullDto.setStation(fireStation.getStation());
-            firestationFullDto.setAddress(fireStation.getAddress());
-            fireStationFullDtoSet.add(firestationFullDto);
+        for (FireStation f : fireStations) {
+            fireStationFullDtoSet.add(fireStationToFireStationFullDto(f));
         }
         return fireStationFullDtoSet;
     }

@@ -13,7 +13,7 @@ public class PersonFireStationDto {
         return personLightFireStationDtoSet;
     }
 
-    public void setPersonLightFireStationDtoSet(Set<PersonLightFireStationDto> personLightFireStationDtoSetParam) {
+    public void setPersonLightFireStationDtoSet(final Set<PersonLightFireStationDto> personLightFireStationDtoSetParam) {
         this.personLightFireStationDtoSet = personLightFireStationDtoSetParam;
     }
 
@@ -21,7 +21,7 @@ public class PersonFireStationDto {
         return numberAdult;
     }
 
-    public void setNumberAdult(int numberAdultParam) {
+    public void setNumberAdult(final int numberAdultParam) {
         this.numberAdult = numberAdultParam;
     }
 
@@ -29,7 +29,7 @@ public class PersonFireStationDto {
         return numberChild;
     }
 
-    public void setNumberChild(int numberChildParam) {
+    public void setNumberChild(final int numberChildParam) {
         this.numberChild = numberChildParam;
     }
 }

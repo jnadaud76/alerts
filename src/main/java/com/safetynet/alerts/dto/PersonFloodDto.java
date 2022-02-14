@@ -9,7 +9,7 @@ public class PersonFloodDto {
         return setPersonLightFireDtoSet;
     }
 
-    public void setSetPersonLightFireDtoSet(Set<Set<PersonLightFireDto>> setPersonLightFireDtoSetParam) {
+    public void setSetPersonLightFireDtoSet(final Set<Set<PersonLightFireDto>> setPersonLightFireDtoSetParam) {
         this.setPersonLightFireDtoSet = setPersonLightFireDtoSetParam;
     }
 

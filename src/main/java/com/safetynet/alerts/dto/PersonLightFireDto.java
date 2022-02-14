@@ -14,7 +14,7 @@ public class PersonLightFireDto {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -22,7 +22,7 @@ public class PersonLightFireDto {
         return phone;
     }
 
-    public void setPhone(String phoneParam) {
+    public void setPhone(final String phoneParam) {
         this.phone = phoneParam;
     }
 
@@ -30,7 +30,7 @@ public class PersonLightFireDto {
         return age;
     }
 
-    public void setAge(long ageParam) {
+    public void setAge(final long ageParam) {
         this.age = ageParam;
     }
 
@@ -38,7 +38,7 @@ public class PersonLightFireDto {
         return medications;
     }
 
-    public void setMedications(Set<String> medicationsParam) {
+    public void setMedications(final Set<String> medicationsParam) {
         this.medications = medicationsParam;
     }
 
@@ -46,20 +46,8 @@ public class PersonLightFireDto {
         return allergies;
     }
 
-    public void setAllergies(Set<String> allergiesParam) {
+    public void setAllergies(final Set<String> allergiesParam) {
         this.allergies = allergiesParam;
     }
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PersonLightFireDto that = (PersonLightFireDto) o;
-        return age == that.age && lastName.equals(that.lastName) && phone.equals(that.phone) && medications.equals(that.medications) && allergies.equals(that.allergies);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lastName, phone, age, medications, allergies);
-    }*/
 }

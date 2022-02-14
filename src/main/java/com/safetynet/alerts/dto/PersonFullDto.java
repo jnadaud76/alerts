@@ -13,7 +13,7 @@ public class PersonFullDto {
         return firstName;
     }
 
-    public void setFirstName(String firstNameParam) {
+    public void setFirstName(final String firstNameParam) {
         this.firstName = firstNameParam;
     }
 
@@ -21,7 +21,7 @@ public class PersonFullDto {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -29,7 +29,7 @@ public class PersonFullDto {
         return address;
     }
 
-    public void setAddress(String addressParam) {
+    public void setAddress(final String addressParam) {
         this.address = addressParam;
     }
 
@@ -37,7 +37,7 @@ public class PersonFullDto {
         return city;
     }
 
-    public void setCity(String cityParam) {
+    public void setCity(final String cityParam) {
         this.city = cityParam;
     }
 
@@ -45,7 +45,7 @@ public class PersonFullDto {
         return zip;
     }
 
-    public void setZip(int zipParam) {
+    public void setZip(final int zipParam) {
         this.zip = zipParam;
     }
 
@@ -53,7 +53,7 @@ public class PersonFullDto {
         return phone;
     }
 
-    public void setPhone(String phoneParam) {
+    public void setPhone(final String phoneParam) {
         this.phone = phoneParam;
     }
 
@@ -61,7 +61,7 @@ public class PersonFullDto {
         return email;
     }
 
-    public void setEmail(String emailParam) {
+    public void setEmail(final String emailParam) {
         this.email = emailParam;
     }
 }

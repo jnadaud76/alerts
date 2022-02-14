@@ -1,15 +1,17 @@
 package com.safetynet.alerts.controller;
 
+import com.safetynet.alerts.AlertsApplication;
 import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.service.IFireStationService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,11 +23,14 @@ import java.util.Set;
 @RestController
 public class FireStationController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FireStationController.class);
+
     @Autowired
     private IFireStationService fireStationService;
 
     @GetMapping("/firestations")
     public Set<FireStationFullDto> getFireStations() {
+        LOGGER.info("Firestations successfully found - code : {}", HttpStatus.OK);
         return fireStationService.getFireStations();
     }
 
@@ -33,9 +38,11 @@ public class FireStationController {
     public ResponseEntity<Set<FireStationFullDto>>
     getFireStationsByStation(@RequestParam("station") final int station) {
         if (!fireStationService.getFireStationsByStation(station).isEmpty()) {
+            LOGGER.info("Firestation successfully found - code : {}", HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(fireStationService.getFireStationsByStation(station));
         } else {
+            LOGGER.error("Firestation not found - code : {}", HttpStatus.NOT_FOUND);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
@@ -44,9 +51,11 @@ public class FireStationController {
     public ResponseEntity<Set<FireStationFullDto>>
     getFireStationByAddress(@RequestParam("address") final String address) {
         if (!fireStationService.getFireStationsByAddress(address).isEmpty()) {
+            LOGGER.info("Firestation successfully found - code : {}", HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(fireStationService.getFireStationsByAddress(address));
         } else {
+            LOGGER.error("Firestation not found - code : {}", HttpStatus.NOT_FOUND);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
@@ -56,9 +65,11 @@ public class FireStationController {
     createFireStation(@RequestBody final FireStation fireStation) {
         try {
             fireStationService.createFireStation(fireStation);
+            LOGGER.info("Firestation successfully created - code : {}", HttpStatus.CREATED);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("FireStation created");
         } catch (Exception e) {
+            LOGGER.error("Firestation can't be create - code : {}", HttpStatus.BAD_REQUEST, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("FireStation can't be create. May already exist");
         }
@@ -69,10 +80,12 @@ public class FireStationController {
     updateFireStation(@RequestBody final FireStation firestation) {
         try {
             fireStationService.updateFirestation(firestation);
+            LOGGER.info("Firestation successfully updated - code : {}", HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Successfully Updated");
 
         } catch (Exception e) {
+            LOGGER.error("Firestation can't be update - code : {}", HttpStatus.BAD_REQUEST, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Cant Update! Entity not exist");
         }
@@ -83,25 +96,28 @@ public class FireStationController {
     deleteFireStationByStation(@RequestParam("station") final int station) {
         try {
             fireStationService.deleteFireStationByStation(station);
+            LOGGER.info("Firestation successfully deleted - code : {}", HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Successfully Deleted");
 
         } catch (Exception e) {
+            LOGGER.error("Firestation can't be delete - code : {}", HttpStatus.BAD_REQUEST, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Cant delete! Entity not exist");
         }
     }
 
-    @DeleteMapping("/firestation/address/" +
-            "")
+    @DeleteMapping("/firestation/address/")
     public ResponseEntity<?>
     deleteFireStationByAddress(@RequestParam("address") final String address) {
         try {
             fireStationService.deleteFireStationByAddress(address);
+            LOGGER.info("Firestation successfully deleted - code : {}", HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Successfully Deleted");
 
         } catch (Exception e) {
+            LOGGER.error("Firestation can't be delete - code : {}", HttpStatus.BAD_REQUEST, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Cant delete! Entity not exist");
         }

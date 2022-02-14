@@ -16,7 +16,7 @@ public class MedicalRecord {
         return firstName;
     }
 
-    public void setFirstName(String firstNameParam) {
+    public void setFirstName(final String firstNameParam) {
         this.firstName = firstNameParam;
     }
 
@@ -24,7 +24,7 @@ public class MedicalRecord {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -32,7 +32,7 @@ public class MedicalRecord {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdateParam) {
+    public void setBirthdate(final String birthdateParam) {
         this.birthdate = birthdateParam;
     }
 
@@ -40,7 +40,7 @@ public class MedicalRecord {
         return medications;
     }
 
-    public void setMedications(Set<String> medicationsParam) {
+    public void setMedications(final Set<String> medicationsParam) {
         this.medications = medicationsParam;
     }
 
@@ -48,12 +48,12 @@ public class MedicalRecord {
         return allergies;
     }
 
-    public void setAllergies(Set<String> allergiesParam) {
+    public void setAllergies(final Set<String> allergiesParam) {
         this.allergies = allergiesParam;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MedicalRecord that = (MedicalRecord) o;

@@ -15,7 +15,7 @@ public class MedicalRecordFullDto {
         return firstName;
     }
 
-    public void setFirstName(String firstNameParam) {
+    public void setFirstName(final String firstNameParam) {
         this.firstName = firstNameParam;
     }
 
@@ -23,7 +23,7 @@ public class MedicalRecordFullDto {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -31,7 +31,7 @@ public class MedicalRecordFullDto {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdateParam) {
+    public void setBirthdate(final String birthdateParam) {
         this.birthdate = birthdateParam;
     }
 
@@ -39,7 +39,7 @@ public class MedicalRecordFullDto {
         return medications;
     }
 
-    public void setMedications(Set<String> medicationsParam) {
+    public void setMedications(final Set<String> medicationsParam) {
         this.medications = medicationsParam;
     }
 
@@ -47,7 +47,7 @@ public class MedicalRecordFullDto {
         return allergies;
     }
 
-    public void setAllergies(Set<String> allergiesParam) {
+    public void setAllergies(final Set<String> allergiesParam) {
         this.allergies = allergiesParam;
     }
 }

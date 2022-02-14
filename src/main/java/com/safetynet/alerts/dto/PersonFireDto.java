@@ -10,7 +10,7 @@ public class PersonFireDto {
         return personLightFireDtoSet;
     }
 
-    public void setPersonLightFireDtoSet(Set<PersonLightFireDto> personLightFireDtoSetParam) {
+    public void setPersonLightFireDtoSet(final Set<PersonLightFireDto> personLightFireDtoSetParam) {
         this.personLightFireDtoSet = personLightFireDtoSetParam;
     }
 
@@ -18,20 +18,8 @@ public class PersonFireDto {
         return station;
     }
 
-    public void setStation(int stationParam) {
+    public void setStation(final int stationParam) {
         this.station = stationParam;
     }
 
-   /* @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PersonFireDto that = (PersonFireDto) o;
-        return station == that.station && personLightFireDtoSet.equals(that.personLightFireDtoSet);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(personLightFireDtoSet, station);
-    }*/
 }

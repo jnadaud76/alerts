@@ -8,7 +8,7 @@ public class FireStationFullDto {
         return address;
     }
 
-    public void setAddress(String addressParam) {
+    public void setAddress(final String addressParam) {
         this.address = addressParam;
     }
 
@@ -16,7 +16,7 @@ public class FireStationFullDto {
         return station;
     }
 
-    public void setStation(int stationParam) {
+    public void setStation(final int stationParam) {
         this.station = stationParam;
     }
 }

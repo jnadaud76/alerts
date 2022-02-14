@@ -17,35 +17,33 @@ public class MedicalRecordService implements IMedicalRecordService {
     @Autowired
     private MedicalRecordDao medicalRecordDao;
 
+    private MedicalRecordFullDto medicalRecordToMedicalRecordFullDto(final MedicalRecord medicalRecord) {
+        MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
+        medicalRecordFullDto.setFirstName(medicalRecord.getFirstName());
+        medicalRecordFullDto.setLastName(medicalRecord.getLastName());
+        medicalRecordFullDto.setBirthdate(medicalRecord.getBirthdate());
+        medicalRecordFullDto.setMedications(medicalRecord.getMedications());
+        medicalRecordFullDto.setAllergies(medicalRecord.getAllergies());
+        return medicalRecordFullDto;
+    }
+
     public Set<MedicalRecordFullDto> getMedicalRecords() {
         Set<MedicalRecord> medicalRecords = medicalRecordDao.findAll();
         Set<MedicalRecordFullDto> medicalRecordFullDtoSet = new HashSet<>();
 
-        for (MedicalRecord medicalRecord : medicalRecords) {
-            MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
-            medicalRecordFullDto.setFirstName(medicalRecord.getFirstName());
-            medicalRecordFullDto.setLastName(medicalRecord.getLastName());
-            medicalRecordFullDto.setBirthdate(medicalRecord.getBirthdate());
-            medicalRecordFullDto.setMedications(medicalRecord.getMedications());
-            medicalRecordFullDto.setAllergies(medicalRecord.getAllergies());
-            medicalRecordFullDtoSet.add(medicalRecordFullDto);
+        for (MedicalRecord m : medicalRecords) {
+            medicalRecordFullDtoSet.add(medicalRecordToMedicalRecordFullDto(m));
         }
         return medicalRecordFullDtoSet;
     }
 
     public MedicalRecordFullDto getMedicalRecord(final String firstname, final String lastName) {
         MedicalRecord medicalRecord = medicalRecordDao.findById(firstname, lastName);
-        MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
         if (medicalRecord != null) {
-            medicalRecordFullDto.setFirstName(medicalRecord.getFirstName());
-            medicalRecordFullDto.setLastName(medicalRecord.getLastName());
-            medicalRecordFullDto.setBirthdate(medicalRecord.getBirthdate());
-            medicalRecordFullDto.setMedications(medicalRecord.getMedications());
-            medicalRecordFullDto.setAllergies(medicalRecord.getAllergies());
+           return medicalRecordToMedicalRecordFullDto(medicalRecord);
         } else {
-            medicalRecordFullDto = null;
+           return null;
         }
-        return medicalRecordFullDto;
 
     }
 

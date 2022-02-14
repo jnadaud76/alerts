@@ -2,11 +2,13 @@ package com.safetynet.alerts.service;
 
 import static com.safetynet.alerts.constants.Constants.MAJORITY;
 
+
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonChildAlertDto;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.dto.PersonLightChildAlertDto;
 import com.safetynet.alerts.util.Calculator;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

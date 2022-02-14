@@ -18,7 +18,7 @@ public class PersonDao {
         return persons;
     }
 
-    public void setPersons(Set<Person> personsParam) {
+    public void setPersons(final Set<Person> personsParam) {
         this.persons = personsParam;
     }
 

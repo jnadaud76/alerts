@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Person {
 
-
     private String firstName;
     private String lastName;
     private String address;
@@ -18,7 +17,7 @@ public class Person {
         return firstName;
     }
 
-    public void setFirstName(String firstNameParam) {
+    public void setFirstName(final String firstNameParam) {
         this.firstName = firstNameParam;
     }
 
@@ -26,7 +25,7 @@ public class Person {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -34,7 +33,7 @@ public class Person {
         return address;
     }
 
-    public void setAddress(String addressParam) {
+    public void setAddress(final String addressParam) {
         this.address = addressParam;
     }
 
@@ -42,7 +41,7 @@ public class Person {
         return city;
     }
 
-    public void setCity(String cityParam) {
+    public void setCity(final String cityParam) {
         this.city = cityParam;
     }
 
@@ -50,7 +49,7 @@ public class Person {
         return zip;
     }
 
-    public void setZip(int zipParam) {
+    public void setZip(final int zipParam) {
         this.zip = zipParam;
     }
 
@@ -58,7 +57,7 @@ public class Person {
         return phone;
     }
 
-    public void setPhone(String phoneParam) {
+    public void setPhone(final String phoneParam) {
         this.phone = phoneParam;
     }
 
@@ -66,16 +65,19 @@ public class Person {
         return email;
     }
 
-    public void setEmail(String emailParam) {
+    public void setEmail(final String emailParam) {
         this.email = emailParam;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return zip == person.zip && firstName.equals(person.firstName) && lastName.equals(person.lastName) && address.equals(person.address) && city.equals(person.city) && phone.equals(person.phone) && email.equals(person.email);
+        return zip == person.zip && firstName
+                .equals(person.firstName) && lastName.equals(person.lastName)
+                && address.equals(person.address) && city.equals(person.city)
+                && phone.equals(person.phone) && email.equals(person.email);
     }
 
     @Override

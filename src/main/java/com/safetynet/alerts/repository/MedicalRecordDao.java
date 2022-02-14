@@ -19,7 +19,7 @@ public class MedicalRecordDao {
         return medicalRecords;
     }
 
-    public void setMedicalRecords(Set<MedicalRecord> medicalRecordsParam) {
+    public void setMedicalRecords(final Set<MedicalRecord> medicalRecordsParam) {
         this.medicalRecords = medicalRecordsParam;
     }
 

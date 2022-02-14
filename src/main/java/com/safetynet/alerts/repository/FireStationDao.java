@@ -20,7 +20,7 @@ public class FireStationDao {
         return fireStations;
     }
 
-    public void setFireStations(Set<FireStation> fireStationsParam) {
+    public void setFireStations(final Set<FireStation> fireStationsParam) {
         this.fireStations = fireStationsParam;
     }
 
@@ -29,25 +29,14 @@ public class FireStationDao {
     }
 
     public Set<FireStation> findByStation(final int station) {
-        Set<FireStation> fireStationsResult = new HashSet<>();
-        for (FireStation f : fireStations) {
-            if (f.getStation() == station) {
-                fireStationsResult.add(f);
-            }
-        }
-        return fireStationsResult;
+          return fireStations.stream().filter(fireStation -> fireStation
+                .getStation() == station).collect(Collectors.toSet());
     }
 
     public Set<FireStation> findByAddress(final String address) {
-        //Set<FireStation> fireStationsResult = new HashSet<>();
-        return fireStations.stream().filter(fireStation -> fireStation.getAddress().equals(address)).collect(Collectors.toSet());
+        return fireStations.stream().filter(fireStation -> fireStation
+                .getAddress().equals(address)).collect(Collectors.toSet());
 
-        /*for (FireStation f : fireStations) {
-            if (f.getAddress().equals(address)) {
-                fireStationsResult.add(f);
-            }
-        }*/
-        //return fireStationsResult;
     }
 
     public void update(final FireStation fireStationParam) {

@@ -11,7 +11,7 @@ public class PersonLightFireStationDto {
         return firstName;
     }
 
-    public void setFirstName(String firstNameParam) {
+    public void setFirstName(final String firstNameParam) {
         this.firstName = firstNameParam;
     }
 
@@ -19,7 +19,7 @@ public class PersonLightFireStationDto {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -27,7 +27,7 @@ public class PersonLightFireStationDto {
         return address;
     }
 
-    public void setAddress(String addressParam) {
+    public void setAddress(final String addressParam) {
         this.address = addressParam;
     }
 
@@ -35,7 +35,7 @@ public class PersonLightFireStationDto {
         return phone;
     }
 
-    public void setPhone(String phoneParam) {
+    public void setPhone(final String phoneParam) {
         this.phone = phoneParam;
     }
 }

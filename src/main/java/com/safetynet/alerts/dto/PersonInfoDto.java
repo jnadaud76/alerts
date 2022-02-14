@@ -15,7 +15,7 @@ public class PersonInfoDto {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -23,7 +23,7 @@ public class PersonInfoDto {
         return address;
     }
 
-    public void setAddress(String addressParam) {
+    public void setAddress(final String addressParam) {
         this.address = addressParam;
     }
 
@@ -31,7 +31,7 @@ public class PersonInfoDto {
         return age;
     }
 
-    public void setAge(long ageParam) {
+    public void setAge(final long ageParam) {
         this.age = ageParam;
     }
 
@@ -39,7 +39,7 @@ public class PersonInfoDto {
         return medications;
     }
 
-    public void setMedications(Set<String> medicationsParam) {
+    public void setMedications(final Set<String> medicationsParam) {
         this.medications = medicationsParam;
     }
 
@@ -47,7 +47,7 @@ public class PersonInfoDto {
         return allergies;
     }
 
-    public void setAllergies(Set<String> allergiesParam) {
+    public void setAllergies(final Set<String> allergiesParam) {
         this.allergies = allergiesParam;
     }
 
@@ -55,7 +55,7 @@ public class PersonInfoDto {
         return email;
     }
 
-    public void setEmail(String emailParam) {
+    public void setEmail(final String emailParam) {
         this.email = emailParam;
     }
 }

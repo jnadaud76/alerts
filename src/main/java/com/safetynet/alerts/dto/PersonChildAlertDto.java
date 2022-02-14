@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class PersonChildAlertDto {
 
-    Set<PersonLightChildAlertDto> children;
-    Set<PersonLightChildAlertDto> familyMembers;
+    private Set<PersonLightChildAlertDto> children;
+    private Set<PersonLightChildAlertDto> familyMembers;
 
 
     public Set<PersonLightChildAlertDto> getChildren() {
@@ -21,7 +21,7 @@ public class PersonChildAlertDto {
         return familyMembers;
     }
 
-    public void setFamilyMembers(Set<PersonLightChildAlertDto> familyMembersParam) {
+    public void setFamilyMembers(final Set<PersonLightChildAlertDto> familyMembersParam) {
         this.familyMembers = familyMembersParam;
     }
 }

@@ -1,17 +1,38 @@
 package com.safetynet.alerts.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 public class Calculator {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Calculator.class);
+
     public long calculateAge(final String birthDate) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate start = LocalDate.parse(birthDate, formatter);
-        LocalDate end = LocalDate.now(ZoneId.systemDefault());
-        return ChronoUnit.YEARS.between(start, end);
+        LocalDate start = null;
+        LocalDate end = null;
+        try {
+            start = LocalDate.parse(birthDate, formatter);
+            end = LocalDate.now(ZoneId.systemDefault());
+        } catch (DateTimeParseException e) {
+            LOGGER.error("Bad date format provided", e);
+        }
+
+        if (start != null && end != null && start.isBefore(end)) {
+            LOGGER.debug("Person age successfully calculated - value = {}",
+                    ChronoUnit.YEARS.between(start, end));
+            return ChronoUnit.YEARS.between(start, end);
+        } else {
+            LOGGER.error("Invalid start date", new IllegalArgumentException());
+            throw new IllegalArgumentException();
+
+        }
     }
 }

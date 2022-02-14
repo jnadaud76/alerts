@@ -10,7 +10,7 @@ public class PersonLightChildAlertDto {
         return firstName;
     }
 
-    public void setFirstName(String firstNameParam) {
+    public void setFirstName(final String firstNameParam) {
         this.firstName = firstNameParam;
     }
 
@@ -18,7 +18,7 @@ public class PersonLightChildAlertDto {
         return lastName;
     }
 
-    public void setLastName(String lastNameParam) {
+    public void setLastName(final String lastNameParam) {
         this.lastName = lastNameParam;
     }
 
@@ -26,7 +26,7 @@ public class PersonLightChildAlertDto {
         return age;
     }
 
-    public void setAge(long ageParam) {
+    public void setAge(final long ageParam) {
         this.age = ageParam;
     }
 }

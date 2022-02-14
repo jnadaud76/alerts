@@ -8,5 +8,5 @@ import java.util.Set;
 public interface IAlertsFloodService {
 
     Set<PersonLightFireDto> getFamilyFromAddress(String address);
-    PersonFloodDto getFamilyByListOfStation(final Set<Integer> stations);
+    PersonFloodDto getFamilyByListOfStation(Set<Integer> stations);
 }

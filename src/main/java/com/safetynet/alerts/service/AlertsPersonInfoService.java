@@ -27,7 +27,8 @@ public class AlertsPersonInfoService implements IAlertsPersonInfoService {
             personInfoDto.setLastName(person.getLastName());
             personInfoDto.setAddress(person.getAddress());
             personInfoDto
-                    .setAge(calculator.calculateAge(medicalRecord.getBirthdate()));
+                    .setAge(calculator
+                            .calculateAge(medicalRecord.getBirthdate()));
             personInfoDto.setEmail(person.getEmail());
             personInfoDto.setMedications(medicalRecord.getMedications());
             personInfoDto.setAllergies(medicalRecord.getAllergies());
