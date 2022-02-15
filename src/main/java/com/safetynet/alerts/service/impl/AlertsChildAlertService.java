@@ -1,4 +1,4 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 import static com.safetynet.alerts.constants.Constants.MAJORITY;
 
@@ -7,6 +7,9 @@ import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonChildAlertDto;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.dto.PersonLightChildAlertDto;
+import com.safetynet.alerts.service.IAlertsChildAlertService;
+import com.safetynet.alerts.service.IMedicalRecordService;
+import com.safetynet.alerts.service.IPersonService;
 import com.safetynet.alerts.util.Calculator;
 
 

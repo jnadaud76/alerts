@@ -1,4 +1,4 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -10,6 +10,7 @@ import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.FireStationDao;
 import com.safetynet.alerts.repository.MedicalRecordDao;
 import com.safetynet.alerts.repository.PersonDao;
+import com.safetynet.alerts.service.IReadData;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,31 @@ import javax.annotation.PostConstruct;
 
 @Service
 public class ReadDataFromJson implements IReadData {
-
+    /**
+     * @see ObjectMapper
+     */
     private final ObjectMapper objectMapper = new ObjectMapper();
+    /**
+     * @see PersonDao
+     */
     @Autowired
     private PersonDao personDao;
+    /**
+     * @see FireStationDao
+     */
     @Autowired
     private FireStationDao fireStationDao;
+    /**
+     * @see MedicalRecordDao
+     */
     @Autowired
     private MedicalRecordDao medicalRecordDao;
 
+    /**
+     * Load data from Json file.
+     *
+     * @return JsonNode of the file provided.
+     */
     @PostConstruct
     public JsonNode loadData() {
         JsonNode jsonNode = null;
@@ -45,6 +62,10 @@ public class ReadDataFromJson implements IReadData {
         return jsonNode;
     }
 
+    /**
+     * Load persons from JsonNode selected when application is started.
+     * Add result to Set<Person> persons in personDao.
+     */
     @PostConstruct
     public void loadPerson() {
 
@@ -62,6 +83,10 @@ public class ReadDataFromJson implements IReadData {
 
     }
 
+    /**
+     * Load fireStations from JsonNode selected when application is started.
+     * Add result to Set<FireStation> fireStations in fireStationDao.
+     */
     @PostConstruct
     public void loadFireStation() {
         try {
@@ -79,6 +104,10 @@ public class ReadDataFromJson implements IReadData {
 
     }
 
+    /**
+     * Load medicalRecords from JsonNode selected when application is started.
+     * Add result to Set<MedicalRecord> medicalRecords in medicalRecordDao.
+     */
     @PostConstruct
     public void loadMedicalRecord() {
         try {

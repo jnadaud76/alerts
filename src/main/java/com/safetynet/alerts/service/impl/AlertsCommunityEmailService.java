@@ -1,6 +1,8 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 import com.safetynet.alerts.dto.PersonFullDto;
+import com.safetynet.alerts.service.IAlertsCommunityEmailService;
+import com.safetynet.alerts.service.IPersonService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

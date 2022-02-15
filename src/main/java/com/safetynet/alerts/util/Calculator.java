@@ -10,9 +10,17 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 public class Calculator {
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(Calculator.class);
 
+    /**
+     * Calculate a person's age from their birthDate.
+     *
+     * @param birthDate the birthdate of the person.
+     * @return the age of the person.
+     */
     public long calculateAge(final String birthDate) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.PersonService;
+import com.safetynet.alerts.service.impl.PersonService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.MedicalRecordController;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.service.MedicalRecordService;
+import com.safetynet.alerts.service.impl.MedicalRecordService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

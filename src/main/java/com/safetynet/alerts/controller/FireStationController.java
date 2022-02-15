@@ -1,6 +1,5 @@
 package com.safetynet.alerts.controller;
 
-import com.safetynet.alerts.AlertsApplication;
 import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.service.IFireStationService;

@@ -7,7 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AlertsApplication {
 
-   public static void main(final String[] args) {
+    /**
+     * Main method.
+     *
+     * @param args String[].
+     */
+    public static void main(final String[] args) {
         SpringApplication.run(AlertsApplication.class, args);
-     }
+    }
 }

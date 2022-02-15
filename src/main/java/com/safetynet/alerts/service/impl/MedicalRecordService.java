@@ -1,9 +1,10 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 
 import com.safetynet.alerts.repository.MedicalRecordDao;
+import com.safetynet.alerts.service.IMedicalRecordService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

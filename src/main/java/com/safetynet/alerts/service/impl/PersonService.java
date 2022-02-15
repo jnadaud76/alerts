@@ -1,4 +1,4 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 
 
@@ -8,6 +8,7 @@ import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
 
 import com.safetynet.alerts.repository.PersonDao;
+import com.safetynet.alerts.service.IPersonService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

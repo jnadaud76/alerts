@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 
 @Repository
 public class FireStationDao {
-
+    /**
+     * Set of fireStation extract from data source.
+     */
     Set<FireStation> fireStations = new HashSet<>();
 
     public Set<FireStation> getFireStations() {
@@ -24,21 +26,48 @@ public class FireStationDao {
         this.fireStations = fireStationsParam;
     }
 
+    /**
+     * CRUD method which find all fireStation.
+     *
+     * @return all fireStation.
+     */
     public Set<FireStation> findAll() {
         return this.fireStations;
     }
 
-    public Set<FireStation> findByStation(final int station) {
-          return fireStations.stream().filter(fireStation -> fireStation
-                .getStation() == station).collect(Collectors.toSet());
-    }
-
-    public Set<FireStation> findByAddress(final String address) {
+    /**
+     * CRUD method which find a set of fireStation from a station number.
+     *
+     * @param stationParam a station number.
+     * @return a set of fireStation found. If no fireStation are found,
+     * the set is empty.
+     */
+    public Set<FireStation> findByStation(final int stationParam) {
         return fireStations.stream().filter(fireStation -> fireStation
-                .getAddress().equals(address)).collect(Collectors.toSet());
+                .getStation() == stationParam).collect(Collectors.toSet());
+    }
+
+    /**
+     * CRUD method which find a set of fireStation from an address.
+     *
+     * @param addressParam a fireStation address.
+     * @return a set of fireStation found. If no fireStation are found,
+     * the set is empty.
+     */
+    public Set<FireStation> findByAddress(final String addressParam) {
+        return fireStations.stream().filter(fireStation -> fireStation
+                .getAddress().equals(addressParam)).collect(Collectors.toSet());
 
     }
 
+    /**
+     * CRUD method which update a fireStation.
+     * Delete by address the fireStation first before create it again with
+     * parameters provided.
+     * Address can't be modified.
+     *
+     * @param fireStationParam a fireStation to modify.
+     */
     public void update(final FireStation fireStationParam) {
         deleteByAddress(fireStationParam.getAddress());
         FireStation firestation = new FireStation();
@@ -48,26 +77,40 @@ public class FireStationDao {
 
     }
 
-    public void save(final FireStation fireStation) {
+    /**
+     * CRUD method which save a fireStation.
+     * Try to find fireStation first. If already present in set,
+     * throw new IllegalArgumentException().
+     *
+     * @param fireStationParam a fireStation to add to the set.
+     */
+    public void save(final FireStation fireStationParam) {
         FireStation fireStationResult = null;
         for (FireStation f : fireStations) {
-            if (f.getAddress().equals(fireStation.getAddress())
-                    && (f.getStation() == fireStation.getStation())) {
+            if (f.getAddress().equals(fireStationParam.getAddress())
+                    && (f.getStation() == fireStationParam.getStation())) {
                 fireStationResult = f;
                 break;
             }
 
         }
         if (fireStationResult == null) {
-            fireStations.add(fireStation);
+            fireStations.add(fireStationParam);
         } else {
             throw new IllegalArgumentException();
         }
 
     }
 
-    public void deleteByStation(final int station) {
-        Set<FireStation> firestationsResult = findByStation(station);
+    /**
+     * CRUD method which delete a fireStation from a station number.
+     * Try to find by station, fireStation first. If not present in set,
+     * throw new IllegalArgumentException().
+     *
+     * @param stationParam station number to delete.
+     */
+    public void deleteByStation(final int stationParam) {
+        Set<FireStation> firestationsResult = findByStation(stationParam);
 
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
@@ -76,8 +119,15 @@ public class FireStationDao {
         }
     }
 
-    public void deleteByAddress(final String address) {
-        Set<FireStation> firestationsResult = findByAddress(address);
+    /**
+     * CRUD method which delete a fireStation from address.
+     * Try to find by address fireStation first. If not present in set,
+     * throw new IllegalArgumentException().
+     *
+     * @param addressParam fireStation address to delete.
+     */
+    public void deleteByAddress(final String addressParam) {
+        Set<FireStation> firestationsResult = findByAddress(addressParam);
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
         } else {

@@ -1,8 +1,11 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.dto.PersonInfoDto;
+import com.safetynet.alerts.service.IAlertsPersonInfoService;
+import com.safetynet.alerts.service.IMedicalRecordService;
+import com.safetynet.alerts.service.IPersonService;
 import com.safetynet.alerts.util.Calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;

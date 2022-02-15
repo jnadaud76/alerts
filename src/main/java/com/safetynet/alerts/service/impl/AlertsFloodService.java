@@ -1,10 +1,14 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.impl;
 
 import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonFloodDto;
 import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.dto.PersonLightFireDto;
+import com.safetynet.alerts.service.IAlertsFloodService;
+import com.safetynet.alerts.service.IFireStationService;
+import com.safetynet.alerts.service.IMedicalRecordService;
+import com.safetynet.alerts.service.IPersonService;
 import com.safetynet.alerts.util.Calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
