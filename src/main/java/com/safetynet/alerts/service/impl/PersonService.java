@@ -1,7 +1,6 @@
 package com.safetynet.alerts.service.impl;
 
 
-
 import com.safetynet.alerts.dto.PersonFullDto;
 
 
@@ -20,10 +19,18 @@ import java.util.Set;
 
 @Service
 public class PersonService implements IPersonService {
-
+    /**
+     * @see PersonDao
+     */
     @Autowired
     private PersonDao personDao;
 
+    /**
+     * Transform Person object in PersonFullDto.
+     *
+     * @param person a person to transform.
+     * @return a person transformed.
+     */
     private PersonFullDto personToPersonFullDto(final Person person) {
         PersonFullDto personFullDto = new PersonFullDto();
         personFullDto.setFirstName(person.getFirstName());
@@ -36,7 +43,11 @@ public class PersonService implements IPersonService {
         return personFullDto;
     }
 
-
+    /**
+     * Get all person.
+     *
+     * @return a set of person.
+     */
     public Set<PersonFullDto> getPersons() {
         Set<Person> persons = personDao.findAll();
         Set<PersonFullDto> personFullDtoSet = new HashSet<>();
@@ -48,8 +59,15 @@ public class PersonService implements IPersonService {
 
     }
 
-    public PersonFullDto getPerson(final String firstname, final String lastName) {
-        Person person = personDao.findById(firstname, lastName);
+    /**
+     * Get a person by unique id.
+     *
+     * @param firstName first part of unique id.
+     * @param lastName  second part of unique id.
+     * @return the person sought if present in the set or null otherwise.
+     */
+    public PersonFullDto getPerson(final String firstName, final String lastName) {
+        Person person = personDao.findById(firstName, lastName);
 
         if (person != null) {
             return personToPersonFullDto(person);
@@ -58,6 +76,12 @@ public class PersonService implements IPersonService {
         }
     }
 
+    /**
+     * Get a set of person by address.
+     *
+     * @param address a home address.
+     * @return a set of people found. If no people are found, the set is empty.
+     */
     public Set<PersonFullDto> getPersonByAddress(final String address) {
         Set<Person> persons = personDao.findByAddress(address);
         Set<PersonFullDto> personFullDtoSet = new HashSet<>();
@@ -68,16 +92,32 @@ public class PersonService implements IPersonService {
 
     }
 
+    /**
+     * Create a person.
+     *
+     * @param personParam a person to add to the set.
+     */
     public void createPerson(final Person personParam) {
         personDao.save(personParam);
     }
 
+    /**
+     * Update a person.
+     *
+     * @param personParam a person to modify.
+     */
     public void updatePerson(final Person personParam) {
         personDao.update(personParam);
     }
 
-    public void deletePerson(final String firstname, final String lastName) {
-        personDao.deleteById(firstname, lastName);
+    /**
+     * Delete a person by unique id.
+     *
+     * @param firstName first part of unique id to delete.
+     * @param lastName  second part of unique id to delete.
+     */
+    public void deletePerson(final String firstName, final String lastName) {
+        personDao.deleteById(firstName, lastName);
     }
 
 

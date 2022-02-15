@@ -21,18 +21,34 @@ import java.util.Set;
 
 @RestController
 public class FireStationController {
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(FireStationController.class);
-
+    /**
+     * @see IFireStationService
+     */
     @Autowired
     private IFireStationService fireStationService;
 
+    /**
+     * Get all fireStation.
+     *
+     * @return all fireStation (JSON format).
+     */
     @GetMapping("/firestations")
     public Set<FireStationFullDto> getFireStations() {
         LOGGER.info("Firestations successfully found - code : {}", HttpStatus.OK);
         return fireStationService.getFireStations();
     }
 
+    /**
+     * Get a set of fireStation by station number.
+     *
+     * @param station a station number.
+     * @return a set of fireStation if founded (JSON format) with HttpStatus ok
+     * or null with HttpStatus not found otherwise.
+     */
     @GetMapping("/firestation/station/")
     public ResponseEntity<Set<FireStationFullDto>>
     getFireStationsByStation(@RequestParam("station") final int station) {
@@ -46,6 +62,13 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Get a set of fireStation by address.
+     *
+     * @param address a fireStation address.
+     * @return a set of fireStation if founded (JSON format) with HttpStatus ok
+     * or null with HttpStatus not found otherwise.
+     */
     @GetMapping("/firestation/address/")
     public ResponseEntity<Set<FireStationFullDto>>
     getFireStationByAddress(@RequestParam("address") final String address) {
@@ -59,6 +82,13 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Create a fireStation.
+     *
+     * @param fireStation a fireStation (JSON format).
+     * @return HttpStatus created if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @PostMapping("/firestation")
     public ResponseEntity<?>
     createFireStation(@RequestBody final FireStation fireStation) {
@@ -74,11 +104,18 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Update a fireStation.
+     *
+     * @param fireStation a fireStation to modify (JSON format).
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @PutMapping("/firestation")
     public ResponseEntity<?>
-    updateFireStation(@RequestBody final FireStation firestation) {
+    updateFireStation(@RequestBody final FireStation fireStation) {
         try {
-            fireStationService.updateFirestation(firestation);
+            fireStationService.updateFirestation(fireStation);
             LOGGER.info("Firestation successfully updated - code : {}", HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Successfully Updated");
@@ -90,6 +127,13 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Delete a fireStation by station number.
+     *
+     * @param station station number to delete.
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @DeleteMapping("/firestation/station/")
     public ResponseEntity<?>
     deleteFireStationByStation(@RequestParam("station") final int station) {
@@ -106,6 +150,13 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Delete a fireStation by address.
+     *
+     * @param address fireStation address to delete.
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @DeleteMapping("/firestation/address/")
     public ResponseEntity<?>
     deleteFireStationByAddress(@RequestParam("address") final String address) {

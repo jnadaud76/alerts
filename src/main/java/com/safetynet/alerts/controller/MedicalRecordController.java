@@ -3,6 +3,7 @@ package com.safetynet.alerts.controller;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.service.IMedicalRecordService;
+import com.safetynet.alerts.service.IPersonService;
 
 
 import org.slf4j.Logger;
@@ -22,18 +23,35 @@ import java.util.Set;
 
 @RestController
 public class MedicalRecordController {
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(MedicalRecordController.class);
-
+    /**
+     * @see IMedicalRecordService
+     */
     @Autowired
     private IMedicalRecordService medicalRecordService;
 
+    /**
+     * Get all medicalRecord.
+     *
+     * @return all medicalRecord (JSON format).
+     */
     @GetMapping("/medicalrecords")
     public Set<MedicalRecordFullDto> getMedicalRecords() {
         LOGGER.info("Medicalrecords successfully found - code : {}", HttpStatus.OK);
         return medicalRecordService.getMedicalRecords();
     }
 
+    /**
+     * Get a medicalRecord by unique id.
+     *
+     * @param firstName first part of unique id.
+     * @param lastName  second part of unique id.
+     * @return the medicalRecord sought if founded with HttpStatus ok (JSON format) or
+     * null with HttpStatus not found otherwise.
+     */
     @GetMapping("medicalrecord/")
     public ResponseEntity<MedicalRecordFullDto>
     getPerson(@RequestParam("firstName") final String firstName,
@@ -50,6 +68,13 @@ public class MedicalRecordController {
 
     }
 
+    /**
+     * Create a medicalRecord.
+     *
+     * @param medicalRecord a medicalRecord (JSON format).
+     * @return HttpStatus created if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @PostMapping("/medicalrecord")
     public ResponseEntity<?>
     createPerson(@RequestBody final MedicalRecord medicalRecord) {
@@ -65,6 +90,13 @@ public class MedicalRecordController {
         }
     }
 
+    /**
+     * Update a medicalRecord.
+     *
+     * @param medicalRecord a medicalRecord to modify (JSON format).
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @PutMapping("/medicalrecord")
     public ResponseEntity<?>
     updateMedicalRecord(@RequestBody final MedicalRecord medicalRecord) {
@@ -81,6 +113,14 @@ public class MedicalRecordController {
         }
     }
 
+    /**
+     * Delete a medicalRecord by unique id.
+     *
+     * @param firstName first part of unique id to delete.
+     * @param lastName  second part of unique id to delete.
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @DeleteMapping("medicalrecord/")
     public ResponseEntity<?>
     deletePerson(@RequestParam("firstName") final String firstName,

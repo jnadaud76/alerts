@@ -23,18 +23,35 @@ import java.util.Set;
 
 @RestController
 public class PersonController {
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
-
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
 
+    /**
+     * Get all person.
+     *
+     * @return all person (JSON format).
+     */
     @GetMapping("/persons")
     public Set<PersonFullDto> getPersons() {
         LOGGER.info("Persons successfully found - code : {}", HttpStatus.OK);
         return personService.getPersons();
     }
 
+    /**
+     * Get a person by unique id.
+     *
+     * @param firstName first part of unique id.
+     * @param lastName  second part of unique id.
+     * @return the person sought if founded (JSON format) with HttpStatus ok or
+     * null with HttpStatus not found otherwise.
+     */
     @GetMapping(value = "person/")
     public ResponseEntity<PersonFullDto>
     getPerson(@RequestParam("firstName") final String firstName,
@@ -50,7 +67,13 @@ public class PersonController {
 
     }
 
-
+    /**
+     * Create a person.
+     *
+     * @param person a person (JSON format).
+     * @return HttpStatus created if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @PostMapping(value = "/person")
     public ResponseEntity<?> createPerson(@RequestBody final Person person) {
         try {
@@ -65,6 +88,13 @@ public class PersonController {
         }
     }
 
+    /**
+     * Update a person.
+     *
+     * @param person a person to modify (JSON format).
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @PutMapping(value = "/person")
     public ResponseEntity<?> updatePerson(@RequestBody final Person person) {
         try {
@@ -80,6 +110,14 @@ public class PersonController {
         }
     }
 
+    /**
+     * Delete a person by unique id.
+     *
+     * @param firstName first part of unique id to delete.
+     * @param lastName  second part of unique id to delete.
+     * @return HttpStatus ok if request is successful or HttpStatus bad
+     * request otherwise.
+     */
     @DeleteMapping(value = "person/")
     public ResponseEntity<?>
     deletePerson(@RequestParam("firstName") final String firstName,

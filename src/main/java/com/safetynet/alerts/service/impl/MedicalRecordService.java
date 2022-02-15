@@ -14,10 +14,18 @@ import java.util.Set;
 
 @Service
 public class MedicalRecordService implements IMedicalRecordService {
-
+    /**
+     * @see MedicalRecordDao
+     */
     @Autowired
     private MedicalRecordDao medicalRecordDao;
 
+    /**
+     * Transform medicalRecord object in medicalRecordFullDto.
+     *
+     * @param medicalRecord a medicalRecord to transform.
+     * @return a medicalRecord transformed.
+     */
     private MedicalRecordFullDto medicalRecordToMedicalRecordFullDto(final MedicalRecord medicalRecord) {
         MedicalRecordFullDto medicalRecordFullDto = new MedicalRecordFullDto();
         medicalRecordFullDto.setFirstName(medicalRecord.getFirstName());
@@ -28,6 +36,11 @@ public class MedicalRecordService implements IMedicalRecordService {
         return medicalRecordFullDto;
     }
 
+    /**
+     * Get all medicalRecord.
+     *
+     * @return a set of medicalRecord.
+     */
     public Set<MedicalRecordFullDto> getMedicalRecords() {
         Set<MedicalRecord> medicalRecords = medicalRecordDao.findAll();
         Set<MedicalRecordFullDto> medicalRecordFullDtoSet = new HashSet<>();
@@ -38,25 +51,48 @@ public class MedicalRecordService implements IMedicalRecordService {
         return medicalRecordFullDtoSet;
     }
 
-    public MedicalRecordFullDto getMedicalRecord(final String firstname, final String lastName) {
-        MedicalRecord medicalRecord = medicalRecordDao.findById(firstname, lastName);
+    /**
+     * Get a medicalRecord by unique id.
+     *
+     * @param firstName first part of unique id.
+     * @param lastName  second part of unique id.
+     * @return the medicalRecord sought if present in the set or null otherwise.
+     */
+    public MedicalRecordFullDto getMedicalRecord(final String firstName, final String lastName) {
+        MedicalRecord medicalRecord = medicalRecordDao.findById(firstName, lastName);
         if (medicalRecord != null) {
-           return medicalRecordToMedicalRecordFullDto(medicalRecord);
+            return medicalRecordToMedicalRecordFullDto(medicalRecord);
         } else {
-           return null;
+            return null;
         }
 
     }
 
+    /**
+     * Create a medicalRecord.
+     *
+     * @param medicalRecordParam a medicalRecord to add to the set.
+     */
     public void createMedicalRecord(final MedicalRecord medicalRecordParam) {
         medicalRecordDao.save(medicalRecordParam);
     }
 
+    /**
+     * Update a medicalRecord.
+     *
+     * @param medicalRecordParam a medicalRecord to modify.
+     */
     public void updateMedicalRecord(final MedicalRecord medicalRecordParam) {
         medicalRecordDao.update(medicalRecordParam);
     }
 
-    public void deleteMedicalRecord(final String firstname, final String lastName) {
-        medicalRecordDao.deleteById(firstname, lastName);
+    /**
+     * Delete a person by unique id.
+     *
+     * @param firstName first part of unique id to delete.
+     * @param lastName  second part of unique id to delete.
+     */
+    public void deleteMedicalRecord(final String firstName, final String lastName) {
+        medicalRecordDao.deleteById(firstName, lastName);
     }
 }
