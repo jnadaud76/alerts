@@ -12,10 +12,18 @@ import java.util.Set;
 
 @Service
 public class AlertsCommunityEmailService implements IAlertsCommunityEmailService {
-
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
 
+    /**
+     * Get all email of all person living in a city.
+     *
+     * @param city a city.
+     * @return a set of email.
+     */
     public Set<String> getEmailFromCity(final String city) {
         Set<PersonFullDto> persons = personService.getPersons();
         Set<String> personsEmail = new HashSet<>();

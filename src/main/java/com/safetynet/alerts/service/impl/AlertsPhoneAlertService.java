@@ -14,13 +14,23 @@ import java.util.Set;
 
 @Service
 public class AlertsPhoneAlertService implements IAlertsPhoneAlertService {
-
+    /**
+     * @see IFireStationService
+     */
     @Autowired
     private IFireStationService fireStationService;
-
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
 
+    /**
+     * Get all phone numbers of person served by the fire station.
+     *
+     * @param station a fire station number.
+     * @return a set of phone numbers.
+     */
     public Set<String> getPhoneNumberFromStation(final int station) {
         Set<FireStationFullDto> fireStationFullDtoSet
                 = fireStationService.getFireStationsByStation(station);

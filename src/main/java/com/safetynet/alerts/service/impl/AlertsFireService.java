@@ -20,15 +20,33 @@ import java.util.Set;
 @Service
 public class AlertsFireService implements IAlertsFireService {
 
-
+    /**
+     * @see Calculator
+     */
     private final Calculator calculator = new Calculator();
+    /**
+     * @see IFireStationService
+     */
     @Autowired
     private IFireStationService fireStationService;
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
+    /**
+     * @see IMedicalRecordService
+     */
     @Autowired
     private IMedicalRecordService medicalRecordService;
 
+    /**
+     * Get all person living at address provided and the number of the
+     * fire station on which they depend.
+     *
+     * @param address a home address
+     * @return a set of person and a station number.
+     */
     public PersonFireDto getPersonFromAddressWithStation(final String address) {
         Set<FireStationFullDto> fireStationFullDtoSet
                 = fireStationService.getFireStationsByAddress(address);

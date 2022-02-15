@@ -21,15 +21,33 @@ import java.util.Set;
 
 @Service
 public class AlertsFireStationService implements IAlertsFireStationService {
-
+    /**
+     * @see Calculator
+     */
     private final Calculator calculator = new Calculator();
+    /**
+     * @see IFireStationService
+     */
     @Autowired
     private IFireStationService fireStationService;
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
+    /**
+     * @see IMedicalRecordService
+     */
     @Autowired
     private IMedicalRecordService medicalRecordService;
 
+    /**
+     * Get all person who depend on the fire station provided.
+     * Also gives a count of the number of adults and children.
+     *
+     * @param station a station number.
+     * @return a set of person with a count of the number of adults and children.
+     */
     public PersonFireStationDto getPersonFromFireStation(final int station) {
         PersonFireStationDto personFireStationDto = new PersonFireStationDto();
         Set<FireStationFullDto> fireStationSet

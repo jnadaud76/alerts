@@ -1,4 +1,4 @@
-package com.safetynet.alerts.service.impl;
+package com.safetynet.alerts.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -7,13 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.repository.FireStationDao;
-import com.safetynet.alerts.repository.MedicalRecordDao;
-import com.safetynet.alerts.repository.PersonDao;
-import com.safetynet.alerts.service.IReadData;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,7 +19,7 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
-@Service
+@Repository
 public class ReadDataFromJson implements IReadData {
     /**
      * @see ObjectMapper

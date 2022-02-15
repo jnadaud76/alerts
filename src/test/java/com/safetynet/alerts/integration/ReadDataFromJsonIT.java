@@ -10,7 +10,7 @@ import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.FireStationDao;
 import com.safetynet.alerts.repository.MedicalRecordDao;
 import com.safetynet.alerts.repository.PersonDao;
-import com.safetynet.alerts.service.IReadData;
+import com.safetynet.alerts.repository.IReadData;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

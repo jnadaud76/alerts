@@ -19,6 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
+/**
+ * Endpoint : ApiUrl/firestation
+ * <p>
+ * This endpoint will perform the following actions via
+ * Post/Put/Delete with HTTP:
+ * <li>addition of a barracks/address mapping;</li>
+ * <li>update the fire station number of an address;</li>
+ * <li>delete the mapping of a barracks or an address.</li>
+ * </p>
+ */
 @RestController
 public class FireStationController {
     /**

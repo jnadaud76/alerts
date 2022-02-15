@@ -13,19 +13,34 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AlertsPersonInfoService implements IAlertsPersonInfoService {
-
+    /**
+     * @see Calculator
+     */
     private final Calculator calculator = new Calculator();
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
+    /**
+     * @see IMedicalRecordService
+     */
     @Autowired
     private IMedicalRecordService medicalRecordService;
 
+    /**
+     * Get person's information by id.
+     *
+     * @param firstName first part of unique id.
+     * @param lastName  second part of unique id.
+     * @return information about a person.
+     */
     public PersonInfoDto
-    getPersonInfo(final String firstname, final String lastName) {
+    getPersonInfo(final String firstName, final String lastName) {
         PersonInfoDto personInfoDto = new PersonInfoDto();
-        PersonFullDto person = personService.getPerson(firstname, lastName);
+        PersonFullDto person = personService.getPerson(firstName, lastName);
         MedicalRecordFullDto medicalRecord
-                = medicalRecordService.getMedicalRecord(firstname, lastName);
+                = medicalRecordService.getMedicalRecord(firstName, lastName);
         if (person != null) {
             personInfoDto.setLastName(person.getLastName());
             personInfoDto.setAddress(person.getAddress());

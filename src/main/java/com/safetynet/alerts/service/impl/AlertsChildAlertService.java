@@ -2,7 +2,6 @@ package com.safetynet.alerts.service.impl;
 
 import static com.safetynet.alerts.constants.Constants.MAJORITY;
 
-
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonChildAlertDto;
 import com.safetynet.alerts.dto.PersonFullDto;
@@ -21,13 +20,27 @@ import java.util.Set;
 
 @Service
 public class AlertsChildAlertService implements IAlertsChildAlertService {
-
+    /**
+     * @see Calculator
+     */
     private final Calculator calculator = new Calculator();
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
+    /**
+     * @see IMedicalRecordService
+     */
     @Autowired
     private IMedicalRecordService medicalRecordService;
 
+    /**
+     * Get children and adults living at address.
+     *
+     * @param address a home address.
+     * @return a set of children and adults living at address.
+     */
     public PersonChildAlertDto getPersonFromAddress(final String address) {
         Set<PersonFullDto> persons = personService.getPersonByAddress(address);
         Set<MedicalRecordFullDto> medicalRecordSet = medicalRecordService

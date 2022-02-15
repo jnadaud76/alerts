@@ -27,30 +27,61 @@ import java.util.Set;
 
 @RestController
 public class AlertsController {
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(AlertsController.class);
-
+    /**
+     * @see IAlertsFireStationService
+     */
     @Autowired
     private IAlertsFireStationService alertsFireStationService;
-
+    /**
+     * @see IAlertsCommunityEmailService
+     */
     @Autowired
     private IAlertsCommunityEmailService alertsCommunityEmailService;
-
+    /**
+     * @see IAlertsChildAlertService
+     */
     @Autowired
     private IAlertsChildAlertService alertsChildAlertService;
-
+    /**
+     * @see IAlertsPersonInfoService
+     */
     @Autowired
     private IAlertsPersonInfoService alertsPersonInfoService;
-
+    /**
+     * @see IAlertsPhoneAlertService
+     */
     @Autowired
     private IAlertsPhoneAlertService alertPhoneAlertService;
-
+    /**
+     * @see IAlertsFireService
+     */
     @Autowired
     private IAlertsFireService alertsFireService;
-
+    /**
+     * @see IAlertsFloodService
+     */
     @Autowired
     private IAlertsFloodService alertsFloodService;
 
+    /**
+     * Access URL=ApiUrl/firestation?stationNumber=station_number
+     * <p>
+     * Get a set of person covered by the corresponding fire station.
+     * So if station number = 1, it should return the inhabitants covered by
+     * station number 1. The set must include the following specific
+     * information : first name, last name, address, telephone number. What's
+     * more, it must provide a count of the number of adults and the number of
+     * children (any individual aged 18 or less) in the service area.
+     * </p>
+     *
+     * @param station a station number.
+     * @return a set of person with a count of the number of adults and children
+     * (JSON format).
+     */
     @GetMapping("firestation")
     public ResponseEntity<PersonFireStationDto>
     getPersonFromFireStation(@RequestParam("stationNumber") final int station) {
@@ -67,6 +98,15 @@ public class AlertsController {
 
     }
 
+    /**
+     * Access URL=ApiUrl/communityEmail?city=city
+     * <p>
+     * Get all email of all person living in a city.
+     * </p>
+     *
+     * @param city a city.
+     * @return a set of email (JSON format).
+     */
     @GetMapping("communityEmail")
     public ResponseEntity<Set<String>> getEmailFromCity(@RequestParam final String city) {
         if (!alertsCommunityEmailService.getEmailFromCity(city).isEmpty()) {
@@ -80,6 +120,17 @@ public class AlertsController {
 
     }
 
+    /**
+     * Access URL=ApiUrl/childAlert?address=address
+     * <p>
+     * Get a set of children (any individual aged 18 or younger) living at this
+     * address.The set should include each child's first and last name, age,
+     * and a set of other household members.
+     * </p>
+     *
+     * @param address a home address.
+     * @return a set of children and adults living at address (JSON format).
+     */
     @GetMapping("childAlert")
     public ResponseEntity<PersonChildAlertDto>
     getPersonFromAddress(@RequestParam final String address) {
@@ -94,6 +145,19 @@ public class AlertsController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    /**
+     * Access URL=ApiUrl/personInfo?firstName=firstName&lastName=lastName
+     * <p>
+     * Get name, address, age, email address and medical history (medications,
+     * dosage, allergies) of each inhabitant. If several people have the same
+     * name, they must all appear.
+     * </p>
+     *
+     * @param firstName first part of unique id.
+     * @param lastName  second part of unique id.
+     * @return information about a person (JSON format).
+     */
 
     @GetMapping("personInfo")
     public ResponseEntity<PersonInfoDto>
@@ -112,6 +176,17 @@ public class AlertsController {
 
     }
 
+    /**
+     * Access URL=ApiUrl/phoneAlert?firestation=firestation_number
+     * <p>
+     * Get a set of the phone numbers of the residents served by the
+     * fire station. We will use it to send emergency text messages to
+     * specific households.
+     * </p>
+     *
+     * @param fireStation a fire station number.
+     * @return a set of phone numbers (JSON format).
+     */
     @GetMapping("phoneAlert")
     public ResponseEntity<Set<String>>
     getPhoneNumberFromStation(@RequestParam("firestation") final int fireStation) {
@@ -126,6 +201,18 @@ public class AlertsController {
         }
     }
 
+    /**
+     * Access URL=ApiUrl/fire?address=address
+     * <p>
+     * Get a set of inhabitants living at the given address as well as the
+     * barracks number of firefighters serving it. The list should include name,
+     * phone number, age and background medical conditions (drugs, dosage and
+     * allergies) of each person.
+     * </p>
+     *
+     * @param address a home address.
+     * @return a set of person and a station number (JSON format).
+     */
     @GetMapping("fire")
     public ResponseEntity<PersonFireDto>
     getPersonFromAddressWithStation(@RequestParam final String address) {
@@ -141,6 +228,19 @@ public class AlertsController {
         }
     }
 
+    /**
+     * Access URL=ApiUrl/flood/stations?stations=a list of station_numbers
+     * <p>
+     * Get a set of all households served by the station. This list should
+     * include the person by address. It must also include the name, telephone
+     * number and age of the inhabitants, and include their medical history
+     * (medications, dosages and allergies) next to each name.
+     * </p>
+     *
+     * @param stations a list of station numbers
+     * @return a set of people served by the fire station, grouped by address
+     * (JSON format).
+     */
     @GetMapping("flood/stations")
     public ResponseEntity<PersonFloodDto>
     getFamilyByListOfStation(@RequestParam final Set<Integer> stations) {

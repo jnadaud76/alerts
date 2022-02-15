@@ -20,15 +20,32 @@ import java.util.Set;
 
 @Service
 public class AlertsFloodService implements IAlertsFloodService {
-
+    /**
+     * @see Calculator
+     */
     private final Calculator calculator = new Calculator();
+    /**
+     * @see IFireStationService
+     */
     @Autowired
     private IFireStationService fireStationService;
+    /**
+     * @see IPersonService
+     */
     @Autowired
     private IPersonService personService;
+    /**
+     * @see IMedicalRecordService
+     */
     @Autowired
     private IMedicalRecordService medicalRecordService;
 
+    /**
+     * Get a set of people by address.
+     *
+     * @param address a home address.
+     * @return a set of person.
+     */
     public Set<PersonLightFireDto> getFamilyFromAddress(final String address) {
         Set<PersonFullDto> personFullDtoSet
                 = personService.getPersonByAddress(address);
@@ -55,6 +72,12 @@ public class AlertsFloodService implements IAlertsFloodService {
         return personLightFireDtoSet;
     }
 
+    /**
+     * Get a set of people served by the fire station, grouped by address.
+     *
+     * @param stations a set of station number.
+     * @return a set of people served by the fire station, grouped by address.
+     */
     public PersonFloodDto getFamilyByListOfStation(final Set<Integer> stations) {
         PersonFloodDto personFloodDto = new PersonFloodDto();
         Iterator<Integer> i = stations.iterator();

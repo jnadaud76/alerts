@@ -21,6 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
+/**
+ * Endpoint : ApiUrl/person
+ * <p>
+ * This endpoint will perform the following actions via
+ * Post/Put/Delete with HTTP:
+ * <li>add a new person;</li>
+ * <li>update an existing person (for now, let's assume that the first and last name of
+ * family do not change, but that the other fields can be modified);</li>
+ * <li>delete a person (use a combination of first and last name as an identifier
+ * unique).</li>
+ * </p>
+ */
 @RestController
 public class PersonController {
     /**
@@ -34,7 +46,10 @@ public class PersonController {
     private IPersonService personService;
 
     /**
+     * Access URL=ApiUrl/persons
+     * <p>
      * Get all person.
+     * </p>
      *
      * @return all person (JSON format).
      */
@@ -45,14 +60,17 @@ public class PersonController {
     }
 
     /**
+     * Access URL=ApiUrl/person?firstName=firstName&lastName=lastName
+     * <p>
      * Get a person by unique id.
+     * </p>
      *
      * @param firstName first part of unique id.
      * @param lastName  second part of unique id.
      * @return the person sought if founded (JSON format) with HttpStatus ok or
      * null with HttpStatus not found otherwise.
      */
-    @GetMapping(value = "person/")
+    @GetMapping(value = "/person")
     public ResponseEntity<PersonFullDto>
     getPerson(@RequestParam("firstName") final String firstName,
               @RequestParam("lastName") final String lastName) {
@@ -118,7 +136,7 @@ public class PersonController {
      * @return HttpStatus ok if request is successful or HttpStatus bad
      * request otherwise.
      */
-    @DeleteMapping(value = "person/")
+    @DeleteMapping(value = "/person")
     public ResponseEntity<?>
     deletePerson(@RequestParam("firstName") final String firstName,
                  @RequestParam("lastName") final String lastName) {

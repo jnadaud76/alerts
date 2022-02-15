@@ -21,6 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
+/**
+ * Endpoint : ApiUrl/medicalrecord
+ * <p>
+ * This endpoint will perform the following actions via
+ * Post/Put/Delete with HTTP:
+ * <li>add a medical file;</li>
+ * <li>update an existing medical record (as mentioned previously, assume that the
+ * first name and last name do not change);</li>
+ * <li>Delete a medical record (use a combination of first and last name like
+ * unique identifier).</li>
+ * </p>
+ */
 @RestController
 public class MedicalRecordController {
     /**
@@ -34,7 +46,10 @@ public class MedicalRecordController {
     private IMedicalRecordService medicalRecordService;
 
     /**
+     * Access URL=ApiUrl/medicalrecords
+     * <p>
      * Get all medicalRecord.
+     * </p>
      *
      * @return all medicalRecord (JSON format).
      */
@@ -45,14 +60,17 @@ public class MedicalRecordController {
     }
 
     /**
+     * Access URL=ApiUrl/medicalrecord?firstName=firstName&lastName=lastName
+     * <p>
      * Get a medicalRecord by unique id.
+     * </p>
      *
      * @param firstName first part of unique id.
      * @param lastName  second part of unique id.
      * @return the medicalRecord sought if founded with HttpStatus ok (JSON format) or
      * null with HttpStatus not found otherwise.
      */
-    @GetMapping("medicalrecord/")
+    @GetMapping("/medicalrecord")
     public ResponseEntity<MedicalRecordFullDto>
     getPerson(@RequestParam("firstName") final String firstName,
               @RequestParam("lastName") final String lastName) {
@@ -121,7 +139,7 @@ public class MedicalRecordController {
      * @return HttpStatus ok if request is successful or HttpStatus bad
      * request otherwise.
      */
-    @DeleteMapping("medicalrecord/")
+    @DeleteMapping("/medicalrecord")
     public ResponseEntity<?>
     deletePerson(@RequestParam("firstName") final String firstName,
                  @RequestParam("lastName") final String lastName) {
