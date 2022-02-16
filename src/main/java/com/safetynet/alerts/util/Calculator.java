@@ -26,6 +26,7 @@ public class Calculator {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate start = null;
         LocalDate end = null;
+
         try {
             start = LocalDate.parse(birthDate, formatter);
             end = LocalDate.now(ZoneId.systemDefault());
@@ -40,7 +41,7 @@ public class Calculator {
         } else {
             LOGGER.error("Invalid start date", new IllegalArgumentException());
             throw new IllegalArgumentException();
-
         }
+
     }
 }

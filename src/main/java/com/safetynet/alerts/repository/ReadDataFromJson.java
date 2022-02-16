@@ -1,17 +1,22 @@
 package com.safetynet.alerts.repository;
 
+import static com.safetynet.alerts.constants.Constants.JSON_PATH;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.safetynet.alerts.controller.FireStationController;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
@@ -21,6 +26,10 @@ import javax.annotation.PostConstruct;
 
 @Repository
 public class ReadDataFromJson implements IReadData {
+    /**
+     * @see Logger
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadDataFromJson.class);
     /**
      * @see ObjectMapper
      */
@@ -50,10 +59,11 @@ public class ReadDataFromJson implements IReadData {
     public JsonNode loadData() {
         JsonNode jsonNode = null;
         try {
-            InputStream input = new FileInputStream("src/main/resources/data.json");
+            LOGGER.debug("JsonNode process successful");
+            InputStream input = getClass().getResourceAsStream(JSON_PATH);
             jsonNode = objectMapper.readValue(input, JsonNode.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("IO error", e);
         }
         return jsonNode;
     }
@@ -66,6 +76,7 @@ public class ReadDataFromJson implements IReadData {
     public void loadPerson() {
 
         try {
+            LOGGER.debug("Json process successful");
             JsonNode personsNode = loadData().get("persons");
             String personsAsString = personsNode.toString();
             Set<Person> persons = objectMapper.readValue(personsAsString,
@@ -74,7 +85,7 @@ public class ReadDataFromJson implements IReadData {
             personDao.setPersons(persons);
 
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOGGER.error("Error in Json Process", e);
         }
 
     }
@@ -86,6 +97,7 @@ public class ReadDataFromJson implements IReadData {
     @PostConstruct
     public void loadFireStation() {
         try {
+            LOGGER.debug("Json process successful");
             JsonNode fireStationsNode = loadData().get("firestations");
             String fireStationsAsString = fireStationsNode.toString();
             Set<FireStation> fireStations = objectMapper
@@ -95,7 +107,7 @@ public class ReadDataFromJson implements IReadData {
             fireStationDao.setFireStations(fireStations);
 
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOGGER.error("Error in Json Process", e);
         }
 
     }
@@ -107,6 +119,7 @@ public class ReadDataFromJson implements IReadData {
     @PostConstruct
     public void loadMedicalRecord() {
         try {
+            LOGGER.debug("Json process successful");
             JsonNode medicalRecordsNode = loadData().get("medicalrecords");
             String medicalRecordsAsString = medicalRecordsNode.toString();
             Set<MedicalRecord> medicalRecords = objectMapper
@@ -117,7 +130,7 @@ public class ReadDataFromJson implements IReadData {
 
 
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOGGER.error("Error in Json Process", e);
         }
 
     }

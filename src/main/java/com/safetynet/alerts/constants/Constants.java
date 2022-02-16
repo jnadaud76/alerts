@@ -7,4 +7,6 @@ public final class Constants {
     }
 
     public static final int MAJORITY = 18;
+
+    public static final String JSON_PATH = "/data.json";
 }
