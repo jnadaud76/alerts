@@ -28,7 +28,9 @@ https://maven.apache.org/install.html
 ### Default configuration
 
 Controller URL = http://localhost:8080
+
 Port can be change in application.properties
+
 Log file location : c:/temp/logs/alerts
 
 ### Endpoints and URLS
