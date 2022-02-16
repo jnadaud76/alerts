@@ -60,7 +60,7 @@ public class ReadDataFromJson implements IReadData {
 
     /**
      * Load persons from JsonNode selected when application is started.
-     * Add result to Set<Person> persons in personDao.
+     * Add result to Set persons in personDao.
      */
     @PostConstruct
     public void loadPerson() {
@@ -81,7 +81,7 @@ public class ReadDataFromJson implements IReadData {
 
     /**
      * Load fireStations from JsonNode selected when application is started.
-     * Add result to Set<FireStation> fireStations in fireStationDao.
+     * Add result to Set fireStations in fireStationDao.
      */
     @PostConstruct
     public void loadFireStation() {
@@ -102,7 +102,7 @@ public class ReadDataFromJson implements IReadData {
 
     /**
      * Load medicalRecords from JsonNode selected when application is started.
-     * Add result to Set<MedicalRecord> medicalRecords in medicalRecordDao.
+     * Add result to Set medicalRecords in medicalRecordDao.
      */
     @PostConstruct
     public void loadMedicalRecord() {

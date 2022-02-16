@@ -1,7 +1,13 @@
 package com.safetynet.alerts.dto;
 
 public class FireStationFullDto {
+    /**
+     * Person's home address.
+     */
     private String address;
+    /**
+     * Fire station's number.
+     */
     private int station;
 
     public String getAddress() {

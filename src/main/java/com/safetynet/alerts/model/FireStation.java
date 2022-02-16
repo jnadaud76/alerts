@@ -4,8 +4,13 @@ package com.safetynet.alerts.model;
 import java.util.Objects;
 
 public class FireStation {
-
+    /**
+     * Person's home address.
+     */
     private String address;
+    /**
+     * Fire station's number.
+     */
     private int station;
 
     public String getAddress() {

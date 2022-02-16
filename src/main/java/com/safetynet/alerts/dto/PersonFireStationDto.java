@@ -4,9 +4,19 @@ import java.util.Set;
 
 
 public class PersonFireStationDto {
-
+    /**
+     * A set of person.
+     *
+     * @see PersonLightFireStationDto
+     */
     private Set<PersonLightFireStationDto> personLightFireStationDtoSet;
+    /**
+     * Number of adult present in personLightFireStationDtoSet.
+     */
     private int numberAdult;
+    /**
+     * Number of child present in personLightFireStationDtoSet.
+     */
     private int numberChild;
 
     public Set<PersonLightFireStationDto> getPersonLightFireStationDtoSet() {

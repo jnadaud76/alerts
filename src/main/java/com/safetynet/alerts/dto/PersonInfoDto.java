@@ -4,11 +4,29 @@ import java.util.Set;
 
 
 public class PersonInfoDto {
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's home address.
+     */
     private String address;
+    /**
+     * Person's age.
+     */
     private long age;
+    /**
+     * Person's email address.
+     */
     private String email;
+    /**
+     * Person's medications (type of medication and posology).
+     */
     private Set<String> medications;
+    /**
+     * Person's allergies.
+     */
     private Set<String> allergies;
 
     public String getLastName() {

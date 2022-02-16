@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
+/**
+ * Many URLS to get information in different ways.
+ * See details inside.
+ */
 @RestController
 public class AlertsController {
     /**
@@ -83,8 +87,7 @@ public class AlertsController {
      * (JSON format).
      */
     @GetMapping("firestation")
-    public ResponseEntity<PersonFireStationDto>
-    getPersonFromFireStation(@RequestParam("stationNumber") final int station) {
+    public ResponseEntity<PersonFireStationDto> getPersonFromFireStation(@RequestParam("stationNumber") final int station) {
         PersonFireStationDto personFireStationDto = alertsFireStationService
                 .getPersonFromFireStation(station);
         if (!personFireStationDto.getPersonLightFireStationDtoSet().isEmpty()) {
@@ -132,8 +135,7 @@ public class AlertsController {
      * @return a set of children and adults living at address (JSON format).
      */
     @GetMapping("childAlert")
-    public ResponseEntity<PersonChildAlertDto>
-    getPersonFromAddress(@RequestParam final String address) {
+    public ResponseEntity<PersonChildAlertDto> getPersonFromAddress(@RequestParam final String address) {
         PersonChildAlertDto personChildAlertDto = alertsChildAlertService
                 .getPersonFromAddress(address);
         if (!personChildAlertDto.getChildren().isEmpty()) {
@@ -147,7 +149,7 @@ public class AlertsController {
     }
 
     /**
-     * Access URL=ApiUrl/personInfo?firstName=firstName&lastName=lastName
+     * Access URL=ApiUrl/personInfo?firstName=firstName&amp;lastName=lastName
      * <p>
      * Get name, address, age, email address and medical history (medications,
      * dosage, allergies) of each inhabitant. If several people have the same
@@ -160,9 +162,7 @@ public class AlertsController {
      */
 
     @GetMapping("personInfo")
-    public ResponseEntity<PersonInfoDto>
-    getAddressByCity(@RequestParam final String firstName,
-                     @RequestParam final String lastName) {
+    public ResponseEntity<PersonInfoDto> getAddressByCity(@RequestParam final String firstName, @RequestParam final String lastName) {
         PersonInfoDto personInfoDto = alertsPersonInfoService
                 .getPersonInfo(firstName, lastName);
         if (personInfoDto.getAddress() != null) {
@@ -188,8 +188,7 @@ public class AlertsController {
      * @return a set of phone numbers (JSON format).
      */
     @GetMapping("phoneAlert")
-    public ResponseEntity<Set<String>>
-    getPhoneNumberFromStation(@RequestParam("firestation") final int fireStation) {
+    public ResponseEntity<Set<String>> getPhoneNumberFromStation(@RequestParam("firestation") final int fireStation) {
         if (!alertPhoneAlertService.getPhoneNumberFromStation(fireStation)
                 .isEmpty()) {
             LOGGER.info("Phonenumbers successfully found - code : {}", HttpStatus.OK);
@@ -214,8 +213,7 @@ public class AlertsController {
      * @return a set of person and a station number (JSON format).
      */
     @GetMapping("fire")
-    public ResponseEntity<PersonFireDto>
-    getPersonFromAddressWithStation(@RequestParam final String address) {
+    public ResponseEntity<PersonFireDto> getPersonFromAddressWithStation(@RequestParam final String address) {
         PersonFireDto personFireDto = alertsFireService
                 .getPersonFromAddressWithStation(address);
         if (!personFireDto.getPersonLightFireDtoSet().isEmpty()) {
@@ -242,8 +240,7 @@ public class AlertsController {
      * (JSON format).
      */
     @GetMapping("flood/stations")
-    public ResponseEntity<PersonFloodDto>
-    getFamilyByListOfStation(@RequestParam final Set<Integer> stations) {
+    public ResponseEntity<PersonFloodDto> getFamilyByListOfStation(@RequestParam final Set<Integer> stations) {
         PersonFloodDto personFloodDto = alertsFloodService
                 .getFamilyByListOfStation(stations);
         if (!personFloodDto.getSetPersonLightFireDtoSet().isEmpty()) {

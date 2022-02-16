@@ -24,10 +24,12 @@ import java.util.Set;
  * <p>
  * This endpoint will perform the following actions via
  * Post/Put/Delete with HTTP:
+ * <ul>
  * <li>addition of a barracks/address mapping;</li>
  * <li>update the fire station number of an address;</li>
  * <li>delete the mapping of a barracks or an address.</li>
- * </p>
+ * </ul>
+ *
  */
 @RestController
 public class FireStationController {

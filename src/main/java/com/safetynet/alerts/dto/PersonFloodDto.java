@@ -3,6 +3,11 @@ package com.safetynet.alerts.dto;
 import java.util.Set;
 
 public class PersonFloodDto {
+    /**
+     * A set of set of person.
+     *
+     * @see PersonLightFireDto
+     */
     Set<Set<PersonLightFireDto>> setPersonLightFireDtoSet;
 
     public Set<Set<PersonLightFireDto>> getSetPersonLightFireDtoSet() {

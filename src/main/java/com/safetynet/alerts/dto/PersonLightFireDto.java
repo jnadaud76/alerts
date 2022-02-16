@@ -3,11 +3,25 @@ package com.safetynet.alerts.dto;
 import java.util.Set;
 
 public class PersonLightFireDto {
-
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's home phone number.
+     */
     private String phone;
+    /**
+     * Person's age.
+     */
     private long age;
+    /**
+     * Person's medications (type of medication and posology).
+     */
     private Set<String> medications;
+    /**
+     * Person's allergies.
+     */
     private Set<String> allergies;
 
     public String getLastName() {

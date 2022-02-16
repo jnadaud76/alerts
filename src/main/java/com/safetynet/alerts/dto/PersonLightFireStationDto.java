@@ -2,9 +2,21 @@ package com.safetynet.alerts.dto;
 
 
 public class PersonLightFireStationDto {
+    /**
+     * Person's first name.
+     */
     private String firstName;
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's home address.
+     */
     private String address;
+    /**
+     * Person's home phone number.
+     */
     private String phone;
 
     public String getFirstName() {

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.safetynet</groupId>
 	<artifactId>alerts</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.9.0-SNAPSHOT</version>
 	<name>alerts</name>
 	<description>SafetyNet Alerts application</description>
 	<properties>

@@ -26,12 +26,14 @@ import java.util.Set;
  * <p>
  * This endpoint will perform the following actions via
  * Post/Put/Delete with HTTP:
+ * <ul>
  * <li>add a new person;</li>
  * <li>update an existing person (for now, let's assume that the first and last name of
  * family do not change, but that the other fields can be modified);</li>
  * <li>delete a person (use a combination of first and last name as an identifier
  * unique).</li>
- * </p>
+ * </ul>
+ *
  */
 @RestController
 public class PersonController {
@@ -60,7 +62,7 @@ public class PersonController {
     }
 
     /**
-     * Access URL=ApiUrl/person?firstName=firstName&lastName=lastName
+     * Access URL=ApiUrl/person?firstName=firstName&amp;lastName=lastName
      * <p>
      * Get a person by unique id.
      * </p>

@@ -26,12 +26,14 @@ import java.util.Set;
  * <p>
  * This endpoint will perform the following actions via
  * Post/Put/Delete with HTTP:
+ * <ul>
  * <li>add a medical file;</li>
  * <li>update an existing medical record (as mentioned previously, assume that the
  * first name and last name do not change);</li>
  * <li>Delete a medical record (use a combination of first and last name like
  * unique identifier).</li>
- * </p>
+ * </ul>
+ *
  */
 @RestController
 public class MedicalRecordController {
@@ -60,7 +62,7 @@ public class MedicalRecordController {
     }
 
     /**
-     * Access URL=ApiUrl/medicalrecord?firstName=firstName&lastName=lastName
+     * Access URL=ApiUrl/medicalrecord?firstName=firstName&amp;lastName=lastName
      * <p>
      * Get a medicalRecord by unique id.
      * </p>

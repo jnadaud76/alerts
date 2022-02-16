@@ -4,10 +4,25 @@ import java.util.Set;
 
 
 public class MedicalRecordFullDto {
+    /**
+     * Person's first name.
+     */
     private String firstName;
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's birthdate.
+     */
     private String birthdate;
+    /**
+     * Person's medications (type of medication and posology).
+     */
     private Set<String> medications;
+    /**
+     * Person's allergies.
+     */
     private Set<String> allergies;
 
 

@@ -1,12 +1,33 @@
 package com.safetynet.alerts.dto;
 
 public class PersonFullDto {
+    /**
+     * Person's first name.
+     */
     private String firstName;
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's home address.
+     */
     private String address;
+    /**
+     * Person's home city.
+     */
     private String city;
+    /**
+     * Person's home zip code.
+     */
     private int zip;
+    /**
+     * Person's home phone number.
+     */
     private String phone;
+    /**
+     * Person's email address.
+     */
     private String email;
 
     public String getFirstName() {

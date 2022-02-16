@@ -5,6 +5,9 @@ import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Required class to activate HttpTrace actuator.
+ */
 @Configuration
 public class HttpTraceActuatorConfiguration {
 

@@ -2,8 +2,17 @@ package com.safetynet.alerts.dto;
 
 
 public class PersonLightChildAlertDto {
+    /**
+     * Person's first name.
+     */
     private String firstName;
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's age.
+     */
     private long age;
 
     public String getFirstName() {
