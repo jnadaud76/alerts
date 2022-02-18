@@ -6,7 +6,8 @@ import com.safetynet.alerts.dto.PersonFullDto;
 
 import com.safetynet.alerts.model.Person;
 
-import com.safetynet.alerts.repository.PersonDao;
+import com.safetynet.alerts.repository.IPersonDao;
+import com.safetynet.alerts.repository.impl.PersonDao;
 import com.safetynet.alerts.service.IPersonService;
 
 
@@ -23,7 +24,7 @@ public class PersonService implements IPersonService {
      * @see PersonDao
      */
     @Autowired
-    private PersonDao personDao;
+    private IPersonDao personDao;
 
     /**
      * Transform Person object in PersonFullDto.

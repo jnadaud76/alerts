@@ -1,6 +1,7 @@
-package com.safetynet.alerts.repository;
+package com.safetynet.alerts.repository.impl;
 
 import com.safetynet.alerts.model.FireStation;
+import com.safetynet.alerts.repository.IFireStationDao;
 
 
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @Repository
-public class FireStationDao {
+public class FireStationDao implements IFireStationDao {
     /**
      * Set of fireStation extract from data source.
      */

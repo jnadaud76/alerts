@@ -2,7 +2,8 @@ package com.safetynet.alerts.service.impl;
 
 import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.model.FireStation;
-import com.safetynet.alerts.repository.FireStationDao;
+import com.safetynet.alerts.repository.IFireStationDao;
+import com.safetynet.alerts.repository.impl.FireStationDao;
 import com.safetynet.alerts.service.IFireStationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class FireStationService implements IFireStationService {
      * @see FireStationDao
      */
     @Autowired
-    private FireStationDao fireStationDao;
+    private IFireStationDao fireStationDao;
 
     /**
      * Transform fireStation object in fireStationFullDto.

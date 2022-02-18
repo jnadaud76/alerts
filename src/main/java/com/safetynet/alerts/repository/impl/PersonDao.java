@@ -1,6 +1,7 @@
-package com.safetynet.alerts.repository;
+package com.safetynet.alerts.repository.impl;
 
 import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.repository.IPersonDao;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 
 
 @Repository
-public class PersonDao {
+public class PersonDao implements IPersonDao {
     /**
      * Set of person extract from data source.
      */

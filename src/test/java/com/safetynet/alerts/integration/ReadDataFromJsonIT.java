@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.repository.FireStationDao;
-import com.safetynet.alerts.repository.MedicalRecordDao;
-import com.safetynet.alerts.repository.PersonDao;
+import com.safetynet.alerts.repository.impl.FireStationDao;
+import com.safetynet.alerts.repository.impl.MedicalRecordDao;
+import com.safetynet.alerts.repository.impl.PersonDao;
 import com.safetynet.alerts.repository.IReadData;
 
 import org.junit.jupiter.api.Test;

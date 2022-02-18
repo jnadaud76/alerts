@@ -1,5 +1,5 @@
 ### SafetyNet Alerts
-This application is an API REST using Spring framework.
+This application is an API REST using Spring Boot framework.
 The purpose of this application is to send information to emergency service systems.
 
 ### Getting Started

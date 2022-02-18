@@ -3,7 +3,8 @@ package com.safetynet.alerts.service.impl;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 
-import com.safetynet.alerts.repository.MedicalRecordDao;
+import com.safetynet.alerts.repository.IMedicalRecordDao;
+import com.safetynet.alerts.repository.impl.MedicalRecordDao;
 import com.safetynet.alerts.service.IMedicalRecordService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class MedicalRecordService implements IMedicalRecordService {
      * @see MedicalRecordDao
      */
     @Autowired
-    private MedicalRecordDao medicalRecordDao;
+    private IMedicalRecordDao medicalRecordDao;
 
     /**
      * Transform medicalRecord object in medicalRecordFullDto.

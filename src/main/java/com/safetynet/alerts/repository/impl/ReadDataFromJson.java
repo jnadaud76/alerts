@@ -1,4 +1,4 @@
-package com.safetynet.alerts.repository;
+package com.safetynet.alerts.repository.impl;
 
 import static com.safetynet.alerts.constants.Constants.JSON_PATH;
 
@@ -6,15 +6,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safetynet.alerts.controller.FireStationController;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.repository.IFireStationDao;
+import com.safetynet.alerts.repository.IMedicalRecordDao;
+import com.safetynet.alerts.repository.IPersonDao;
+import com.safetynet.alerts.repository.IReadData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -38,17 +40,17 @@ public class ReadDataFromJson implements IReadData {
      * @see PersonDao
      */
     @Autowired
-    private PersonDao personDao;
+    private IPersonDao personDao;
     /**
      * @see FireStationDao
      */
     @Autowired
-    private FireStationDao fireStationDao;
+    private IFireStationDao fireStationDao;
     /**
      * @see MedicalRecordDao
      */
     @Autowired
-    private MedicalRecordDao medicalRecordDao;
+    private IMedicalRecordDao medicalRecordDao;
 
     /**
      * Load data from Json file.

@@ -1,7 +1,8 @@
-package com.safetynet.alerts.repository;
+package com.safetynet.alerts.repository.impl;
 
 
 import com.safetynet.alerts.model.MedicalRecord;
+import com.safetynet.alerts.repository.IMedicalRecordDao;
 
 
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 
 @Repository
-public class MedicalRecordDao {
+public class MedicalRecordDao implements IMedicalRecordDao {
     /**
      * Set of medicalRecord extract from data source.
      */
