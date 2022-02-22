@@ -23,20 +23,20 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PersonControllerIT {
+class PersonControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetPersons() throws Exception {
+    void testGetPersons() throws Exception {
         mockMvc.perform(get("/persons"))
                 .andExpect(status().isOk());
 
     }
 
     @Test
-    public void testGetPerson() throws Exception {
+    void testGetPerson() throws Exception {
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Allison")
                         .queryParam("lastName", "Boyd"))
@@ -45,7 +45,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testGetPersonWithGoodFirstNameAndBadLastName() throws Exception {
+    void testGetPersonWithGoodFirstNameAndBadLastName() throws Exception {
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lily")
                         .queryParam("lastName", "Crooper"))
@@ -53,7 +53,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testGetPersonWithBadFirstNameAnGoodLastName() throws Exception {
+    void testGetPersonWithBadFirstNameAnGoodLastName() throws Exception {
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lilo")
                         .queryParam("lastName", "Cooper"))
@@ -61,7 +61,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
+   void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lilo")
                         .queryParam("lastName", "Crooper"))
@@ -69,7 +69,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testCreatePerson() throws Exception {
+    void testCreatePerson() throws Exception {
         Person person = new Person();
         person.setFirstName("Test");
         person.setLastName("Test");
@@ -88,7 +88,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testCreatePersonWhichAlreadyExist() throws Exception {
+    void testCreatePersonWhichAlreadyExist() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Cooper");
@@ -107,7 +107,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testDeletePerson() throws Exception {
+    void testDeletePerson() throws Exception {
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Brian")
                         .queryParam("lastName", "Stelzer"))
@@ -115,7 +115,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
+    void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Brian")
                         .queryParam("lastName", "Stelzor"))
@@ -123,7 +123,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
+    void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Briun")
                         .queryParam("lastName", "Stelzer"))
@@ -131,7 +131,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
+    void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Briun")
                         .queryParam("lastName", "Stelzor"))
@@ -139,7 +139,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testUpdatePerson() throws Exception {
+    void testUpdatePerson() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Cooper");
@@ -159,7 +159,7 @@ public class PersonControllerIT {
     }
 
     @Test
-    public void testUpdatePersonGivingBadLastName() throws Exception {
+    void testUpdatePersonGivingBadLastName() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Crooper");

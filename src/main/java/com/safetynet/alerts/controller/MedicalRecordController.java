@@ -3,8 +3,6 @@ package com.safetynet.alerts.controller;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.service.IMedicalRecordService;
-import com.safetynet.alerts.service.IPersonService;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +31,6 @@ import java.util.Set;
  * <li>Delete a medical record (use a combination of first and last name like
  * unique identifier).</li>
  * </ul>
- *
  */
 @RestController
 public class MedicalRecordController {
@@ -96,7 +93,7 @@ public class MedicalRecordController {
      * request otherwise.
      */
     @PostMapping("/medicalrecord")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     createPerson(@RequestBody final MedicalRecord medicalRecord) {
         try {
             medicalRecordService.createMedicalRecord(medicalRecord);
@@ -118,7 +115,7 @@ public class MedicalRecordController {
      * request otherwise.
      */
     @PutMapping("/medicalrecord")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     updateMedicalRecord(@RequestBody final MedicalRecord medicalRecord) {
         try {
             medicalRecordService.updateMedicalRecord(medicalRecord);
@@ -142,7 +139,7 @@ public class MedicalRecordController {
      * request otherwise.
      */
     @DeleteMapping("/medicalrecord")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     deletePerson(@RequestParam("firstName") final String firstName,
                  @RequestParam("lastName") final String lastName) {
         try {

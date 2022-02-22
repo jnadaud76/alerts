@@ -7,7 +7,6 @@ import com.safetynet.alerts.dto.PersonFullDto;
 import com.safetynet.alerts.model.Person;
 
 import com.safetynet.alerts.repository.IPersonDao;
-import com.safetynet.alerts.repository.impl.PersonDao;
 import com.safetynet.alerts.service.IPersonService;
 
 
@@ -21,7 +20,7 @@ import java.util.Set;
 @Service
 public class PersonService implements IPersonService {
     /**
-     * @see PersonDao
+     * @see IPersonDao
      */
     @Autowired
     private IPersonDao personDao;

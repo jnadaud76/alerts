@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @WebMvcTest(controllers = PersonController.class)
-public class PersonControllerTest {
+class PersonControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,13 +34,13 @@ public class PersonControllerTest {
     private PersonService personService;
 
     @Test
-    public void testGetPersons() throws Exception {
+    void testGetPersons() throws Exception {
         mockMvc.perform(get("/persons"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testGetPerson() throws Exception {
+    void testGetPerson() throws Exception {
         PersonFullDto personFullDto = new PersonFullDto();
         personFullDto.setFirstName("Lily");
         personFullDto.setLastName("Cooper");
@@ -52,7 +52,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testGetPersonWithGoodFirstNameAndBadLastName() throws Exception {
+    void testGetPersonWithGoodFirstNameAndBadLastName() throws Exception {
         when(personService.getPerson("Lily", "Crooper")).thenReturn(null);
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lily")
@@ -62,7 +62,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testGetPersonWithBadFirstNameAnGoodLastName() throws Exception {
+    void testGetPersonWithBadFirstNameAnGoodLastName() throws Exception {
         when(personService.getPerson("Lilo", "Cooper")).thenReturn(null);
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lilo")
@@ -71,7 +71,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
+    void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
         when(personService.getPerson("Lilo", "Crooper")).thenReturn(null);
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lilo")
@@ -80,7 +80,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testCreatePerson() throws Exception {
+    void testCreatePerson() throws Exception {
         Person person = new Person();
         person.setFirstName("Test");
         person.setLastName("Test");
@@ -99,7 +99,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testCreatePersonWhichAlreadyExist() throws Exception {
+    void testCreatePersonWhichAlreadyExist() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Cooper");
@@ -119,7 +119,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testDeletePerson() throws Exception {
+    void testDeletePerson() throws Exception {
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Brian")
                         .queryParam("lastName", "Stelzer"))
@@ -127,7 +127,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
+    void testDeletePersonWithGoodFirstNameAndBadLastName() throws Exception {
         doThrow(new IllegalArgumentException()).when(personService).deletePerson("Brian", "Stelzor");
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Brian")
@@ -136,7 +136,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
+    void testDeletePersonWithBadFirstNameAnGoodLastName() throws Exception {
         doThrow(new IllegalArgumentException()).when(personService).deletePerson("Briun", "Stelzer");
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Briun")
@@ -145,7 +145,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
+    void testDeletePersonWithBadFirstNameAnBadLastName() throws Exception {
         doThrow(new IllegalArgumentException()).when(personService).deletePerson("Briun", "Stelzor");
         mockMvc.perform(delete("/person/")
                         .queryParam("firstName", "Briun")
@@ -155,7 +155,7 @@ public class PersonControllerTest {
 
 
     @Test
-    public void testUpdatePerson() throws Exception {
+    void testUpdatePerson() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Cooper");
@@ -176,7 +176,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testUpdatePersonGivingBadLastName() throws Exception {
+    void testUpdatePersonGivingBadLastName() throws Exception {
         Person person = new Person();
         person.setFirstName("Lily");
         person.setLastName("Crooper");

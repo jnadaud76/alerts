@@ -10,9 +10,6 @@ import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.IFireStationDao;
 import com.safetynet.alerts.repository.IMedicalRecordDao;
 import com.safetynet.alerts.repository.IPersonDao;
-import com.safetynet.alerts.repository.impl.FireStationDao;
-import com.safetynet.alerts.repository.impl.MedicalRecordDao;
-import com.safetynet.alerts.repository.impl.PersonDao;
 import com.safetynet.alerts.service.IReadData;
 
 import org.slf4j.Logger;
@@ -39,17 +36,17 @@ public class ReadDataFromJson implements IReadData {
      */
     private final ObjectMapper objectMapper = new ObjectMapper();
     /**
-     * @see PersonDao
+     * @see IPersonDao
      */
     @Autowired
     private IPersonDao personDao;
     /**
-     * @see FireStationDao
+     * @see IFireStationDao
      */
     @Autowired
     private IFireStationDao fireStationDao;
     /**
-     * @see MedicalRecordDao
+     * @see IMedicalRecordDao
      */
     @Autowired
     private IMedicalRecordDao medicalRecordDao;

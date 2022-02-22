@@ -66,7 +66,7 @@ public class MedicalRecord {
         this.allergies = allergiesParam;
     }
 
-   @Override
+    @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

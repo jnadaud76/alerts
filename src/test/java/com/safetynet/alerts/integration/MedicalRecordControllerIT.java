@@ -21,19 +21,19 @@ import java.util.Set;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MedicalRecordControllerIT {
+class MedicalRecordControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetMedicalRecords() throws Exception {
+    void testGetMedicalRecords() throws Exception {
         mockMvc.perform(get("/medicalrecords"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testGetMedicalRecord() throws Exception {
+   void testGetMedicalRecord() throws Exception {
         mockMvc.perform(get("/medicalrecord/")
                         .queryParam("firstName", "Lily")
                         .queryParam("lastName", "Cooper"))
@@ -41,7 +41,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testGetMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
+    void testGetMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
         mockMvc.perform(get("/medicalrecord/")
                         .queryParam("firstName", "Lily")
                         .queryParam("lastName", "Crooper"))
@@ -49,7 +49,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testGetMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
+    void testGetMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
         mockMvc.perform(get("/medicalrecord/")
                         .queryParam("firstName", "Lilo")
                         .queryParam("lastName", "Cooper"))
@@ -57,7 +57,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testGetMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
+    void testGetMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
         mockMvc.perform(get("/medicalrecord/")
                         .queryParam("firstName", "Lilo")
                         .queryParam("lastName", "Crooper"))
@@ -65,7 +65,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testCreateMedicalRecord() throws Exception {
+   void testCreateMedicalRecord() throws Exception {
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();
         String medication = "dodoxadin:30mg";
@@ -89,7 +89,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testCreateMedicalRecordnWhichAlreadyExist() throws Exception {
+    void testCreateMedicalRecordnWhichAlreadyExist() throws Exception {
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();
         Set<String> allergies = new HashSet<>();
@@ -110,7 +110,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testDeleteMedicalRecord() throws Exception {
+    void testDeleteMedicalRecord() throws Exception {
         mockMvc.perform(delete("/medicalrecord/")
                         .queryParam("firstName", "Brian")
                         .queryParam("lastName", "Stelzer"))
@@ -118,7 +118,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testDeleteMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
+    void testDeleteMedicalRecordWithGoodFirstNameAndBadLastName() throws Exception {
         mockMvc.perform(delete("/medicalrecord/")
                         .queryParam("firstName", "Brian")
                         .queryParam("lastName", "Stelzor"))
@@ -126,7 +126,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testDeleteMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
+    void testDeleteMedicalRecordWithBadFirstNameAnGoodLastName() throws Exception {
         mockMvc.perform(delete("/medicalrecord/")
                         .queryParam("firstName", "Briun")
                         .queryParam("lastName", "Stelzer"))
@@ -134,7 +134,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testDeleteMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
+    void testDeleteMedicalRecordWithBadFirstNameAnBadLastName() throws Exception {
         mockMvc.perform(delete("/medicalrecord/")
                         .queryParam("firstName", "Briun")
                         .queryParam("lastName", "Stelzor"))
@@ -142,7 +142,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testUpdateMedicalRecord() throws Exception {
+    void testUpdateMedicalRecord() throws Exception {
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();
         Set<String> allergies = new HashSet<>();
@@ -162,7 +162,7 @@ public class MedicalRecordControllerIT {
     }
 
     @Test
-    public void testUpdateMedicalRecordGivingBadLastName() throws Exception {
+    void testUpdateMedicalRecordGivingBadLastName() throws Exception {
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();
         Set<String> allergies = new HashSet<>();

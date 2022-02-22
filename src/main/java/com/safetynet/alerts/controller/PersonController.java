@@ -33,7 +33,6 @@ import java.util.Set;
  * <li>delete a person (use a combination of first and last name as an identifier
  * unique).</li>
  * </ul>
- *
  */
 @RestController
 public class PersonController {
@@ -95,7 +94,7 @@ public class PersonController {
      * request otherwise.
      */
     @PostMapping(value = "/person")
-    public ResponseEntity<?> createPerson(@RequestBody final Person person) {
+    public ResponseEntity<String> createPerson(@RequestBody final Person person) {
         try {
             personService.createPerson(person);
             LOGGER.info("Person successfully created - code : {}", HttpStatus.CREATED);
@@ -116,7 +115,7 @@ public class PersonController {
      * request otherwise.
      */
     @PutMapping(value = "/person")
-    public ResponseEntity<?> updatePerson(@RequestBody final Person person) {
+    public ResponseEntity<String> updatePerson(@RequestBody final Person person) {
         try {
             personService.updatePerson(person);
             LOGGER.info("Person successfully updated - code : {}", HttpStatus.OK);
@@ -139,7 +138,7 @@ public class PersonController {
      * request otherwise.
      */
     @DeleteMapping(value = "/person")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     deletePerson(@RequestParam("firstName") final String firstName,
                  @RequestParam("lastName") final String lastName) {
         try {

@@ -4,7 +4,6 @@ import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.model.MedicalRecord;
 
 import com.safetynet.alerts.repository.IMedicalRecordDao;
-import com.safetynet.alerts.repository.impl.MedicalRecordDao;
 import com.safetynet.alerts.service.IMedicalRecordService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.Set;
 @Service
 public class MedicalRecordService implements IMedicalRecordService {
     /**
-     * @see MedicalRecordDao
+     * @see IMedicalRecordDao
      */
     @Autowired
     private IMedicalRecordDao medicalRecordDao;

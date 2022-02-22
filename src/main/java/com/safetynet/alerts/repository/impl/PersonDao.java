@@ -3,6 +3,8 @@ package com.safetynet.alerts.repository.impl;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.IPersonDao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -12,6 +14,10 @@ import java.util.Set;
 
 @Repository
 public class PersonDao implements IPersonDao {
+    /**
+     * @see Logger
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonDao.class);
     /**
      * Set of person extract from data source.
      */
@@ -101,6 +107,7 @@ public class PersonDao implements IPersonDao {
         if (person == null) {
             persons.add(personParam);
         } else {
+            LOGGER.error("Person already exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
 
@@ -119,6 +126,7 @@ public class PersonDao implements IPersonDao {
         if (person != null) {
             persons.remove(person);
         } else {
+            LOGGER.error("Person doesn't exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
 

@@ -5,6 +5,8 @@ import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.repository.IMedicalRecordDao;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -13,6 +15,10 @@ import java.util.Set;
 
 @Repository
 public class MedicalRecordDao implements IMedicalRecordDao {
+    /**
+     * @see Logger
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MedicalRecordDao.class);
     /**
      * Set of medicalRecord extract from data source.
      */
@@ -65,6 +71,7 @@ public class MedicalRecordDao implements IMedicalRecordDao {
         if (medicalRecord == null) {
             medicalRecords.add(medicalRecordParam);
         } else {
+            LOGGER.error("Mediacalrecord already exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
     }
@@ -101,6 +108,7 @@ public class MedicalRecordDao implements IMedicalRecordDao {
         if (medicalRecord != null) {
             medicalRecords.remove(medicalRecord);
         } else {
+            LOGGER.error("Mediacalrecord doesn't exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
     }

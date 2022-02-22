@@ -8,11 +8,11 @@ public class PersonFireDto {
      *
      * @see PersonLightFireDto
      */
-    Set<PersonLightFireDto> personLightFireDtoSet;
+    private Set<PersonLightFireDto> personLightFireDtoSet;
     /**
      * Fire station's number.
      */
-    int station;
+    private Set<Integer> station;
 
     public Set<PersonLightFireDto> getPersonLightFireDtoSet() {
         return personLightFireDtoSet;
@@ -22,11 +22,11 @@ public class PersonFireDto {
         this.personLightFireDtoSet = personLightFireDtoSetParam;
     }
 
-    public int getStation() {
+    public Set<Integer> getStation() {
         return station;
     }
 
-    public void setStation(final int stationParam) {
+    public void setStation(final Set<Integer> stationParam) {
         this.station = stationParam;
     }
 

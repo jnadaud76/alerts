@@ -4,6 +4,8 @@ import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.IFireStationDao;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -14,6 +16,10 @@ import java.util.stream.Collectors;
 
 @Repository
 public class FireStationDao implements IFireStationDao {
+    /**
+     * @see Logger
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FireStationDao.class);
     /**
      * Set of fireStation extract from data source.
      */
@@ -98,6 +104,7 @@ public class FireStationDao implements IFireStationDao {
         if (fireStationResult == null) {
             fireStations.add(fireStationParam);
         } else {
+            LOGGER.error("Firestation already exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
 
@@ -116,6 +123,7 @@ public class FireStationDao implements IFireStationDao {
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
         } else {
+            LOGGER.error("Firestation doesn't exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
     }
@@ -132,6 +140,7 @@ public class FireStationDao implements IFireStationDao {
         if (!firestationsResult.isEmpty()) {
             fireStations.removeAll(firestationsResult);
         } else {
+            LOGGER.error("Firestation doesn't exist in Set", new IllegalArgumentException());
             throw new IllegalArgumentException();
         }
     }

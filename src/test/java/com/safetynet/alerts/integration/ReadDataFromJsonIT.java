@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootTest
-public class ReadDataFromJsonIT {
+class ReadDataFromJsonIT {
 
     @Autowired
     private IReadData readDataFromJson;
@@ -36,7 +36,7 @@ public class ReadDataFromJsonIT {
 
 
     @Test
-    public void loadDataTest() {
+    void loadDataTest() {
         //Given
 
         //When
@@ -47,7 +47,7 @@ public class ReadDataFromJsonIT {
     }
 
     @Test
-    public void loadPersonTest() {
+    void loadPersonTest() {
         //Given
         Person person = new Person();
         person.setFirstName("Lily");
@@ -66,7 +66,7 @@ public class ReadDataFromJsonIT {
     }
 
     @Test
-    public void loadFireStationTest() {
+    void loadFireStationTest() {
         //Given
         FireStation fireStation = new FireStation();
         fireStation.setStation(1);
@@ -80,7 +80,7 @@ public class ReadDataFromJsonIT {
     }
 
     @Test
-    public void loadMedicalRecordTest() {
+    void loadMedicalRecordTest() {
         //Given
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();

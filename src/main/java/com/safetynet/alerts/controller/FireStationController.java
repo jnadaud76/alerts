@@ -29,7 +29,6 @@ import java.util.Set;
  * <li>update the fire station number of an address;</li>
  * <li>delete the mapping of a barracks or an address.</li>
  * </ul>
- *
  */
 @RestController
 public class FireStationController {
@@ -102,7 +101,7 @@ public class FireStationController {
      * request otherwise.
      */
     @PostMapping("/firestation")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     createFireStation(@RequestBody final FireStation fireStation) {
         try {
             fireStationService.createFireStation(fireStation);
@@ -124,7 +123,7 @@ public class FireStationController {
      * request otherwise.
      */
     @PutMapping("/firestation")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     updateFireStation(@RequestBody final FireStation fireStation) {
         try {
             fireStationService.updateFirestation(fireStation);
@@ -147,7 +146,7 @@ public class FireStationController {
      * request otherwise.
      */
     @DeleteMapping("/firestation/station/")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     deleteFireStationByStation(@RequestParam("station") final int station) {
         try {
             fireStationService.deleteFireStationByStation(station);
@@ -170,7 +169,7 @@ public class FireStationController {
      * request otherwise.
      */
     @DeleteMapping("/firestation/address/")
-    public ResponseEntity<?>
+    public ResponseEntity<String>
     deleteFireStationByAddress(@RequestParam("address") final String address) {
         try {
             fireStationService.deleteFireStationByAddress(address);

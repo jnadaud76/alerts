@@ -23,72 +23,72 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FireStationControllerIT {
+class FireStationControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetFireStations() throws Exception {
+    void testGetFireStations() throws Exception {
         mockMvc.perform(get("/firestations"))
                 .andExpect(status().isOk());
 
     }
 
     @Test
-    public void testGetFireStationByStation() throws Exception {
+    void testGetFireStationByStation() throws Exception {
         mockMvc.perform(get("/firestation/station/").queryParam("station", "4"))
                 .andExpect(status().isOk());
 
     }
 
     @Test
-    public void testGetFireStationByAddress() throws Exception {
+    void testGetFireStationByAddress() throws Exception {
         mockMvc.perform(get("/firestation/address/").queryParam("address", "489 Manchester St"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].station", is(4)));
     }
 
     @Test
-    public void testGetFireStationByStationWithBadStation() throws Exception {
+    void testGetFireStationByStationWithBadStation() throws Exception {
         mockMvc.perform(get("/firestation/station/").queryParam("station", "15"))
                 .andExpect(status().isNotFound());
 
     }
 
     @Test
-    public void testGetFireStationByAddressWithBadAddress() throws Exception {
+    void testGetFireStationByAddressWithBadAddress() throws Exception {
         mockMvc.perform(get("/firestation/address/").queryParam("address", "47 rue du pommier"))
                 .andExpect(status().isNotFound());
 
     }
 
     @Test
-    public void testDeleteFireStationByStation() throws Exception {
+    void testDeleteFireStationByStation() throws Exception {
         mockMvc.perform(delete("/firestation/station/").queryParam("station", "1"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testDeleteFireStationByAddress() throws Exception {
+    void testDeleteFireStationByAddress() throws Exception {
         mockMvc.perform(delete("/firestation/address/").queryParam("address", "892 Downing Ct"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testDeleteFireStationWithBadStationNumber() throws Exception {
+    void testDeleteFireStationWithBadStationNumber() throws Exception {
         mockMvc.perform(delete("/firestation/station/").queryParam("station", "12"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void testDeleteFireStationWithBadAddress() throws Exception {
+    void testDeleteFireStationWithBadAddress() throws Exception {
         mockMvc.perform(delete("/firestation/address/").queryParam("address", "47 rue du pommier"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void testCreateFireStation() throws Exception {
+    void testCreateFireStation() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(2);
         fireStation.setAddress("Test");
@@ -102,7 +102,7 @@ public class FireStationControllerIT {
     }
 
     @Test
-    public void testCreateFireStationWhichAlreadyExist() throws Exception {
+    void testCreateFireStationWhichAlreadyExist() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(1);
         fireStation.setAddress("908 73rd St");
@@ -116,7 +116,7 @@ public class FireStationControllerIT {
     }
 
     @Test
-    public void testUpdateFireStation() throws Exception {
+    void testUpdateFireStation() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(1);
         fireStation.setAddress("1509 Culver St");
@@ -130,7 +130,7 @@ public class FireStationControllerIT {
     }
 
     @Test
-    public void testUpdateFireStationGivingBadAddress() throws Exception {
+    void testUpdateFireStationGivingBadAddress() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(4);
         fireStation.setAddress("47 rue du pommier");

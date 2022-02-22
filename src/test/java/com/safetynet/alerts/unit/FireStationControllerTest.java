@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @WebMvcTest(controllers = FireStationController.class)
-public class FireStationControllerTest {
+class FireStationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,14 +36,14 @@ public class FireStationControllerTest {
 
 
     @Test
-    public void testGetFireStations() throws Exception {
+    void testGetFireStations() throws Exception {
         mockMvc.perform(get("/firestations"))
                 .andExpect(status().isOk());
 
     }
 
     @Test
-    public void testGetFireStationByStation() throws Exception {
+    void testGetFireStationByStation() throws Exception {
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
         FireStationFullDto fireStationFullDto = new FireStationFullDto();
         fireStationFullDto.setStation(4);
@@ -56,7 +56,7 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testGetFireStationByAddress() throws Exception {
+    void testGetFireStationByAddress() throws Exception {
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
         FireStationFullDto fireStationFullDto = new FireStationFullDto();
         fireStationFullDto.setStation(4);
@@ -69,7 +69,7 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testGetFireStationByStationWithBadStation() throws Exception {
+    void testGetFireStationByStationWithBadStation() throws Exception {
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
         when(fireStationService.getFireStationsByStation(15)).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/station/").queryParam("station", "15"))
@@ -78,7 +78,7 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testGetFireStationByAddressWithBadAddress() throws Exception {
+    void testGetFireStationByAddressWithBadAddress() throws Exception {
         Set<FireStationFullDto> fireStationFullDtoSet = new HashSet<>();
         when(fireStationService.getFireStationsByAddress("47 rue du pommier")).thenReturn(fireStationFullDtoSet);
         mockMvc.perform(get("/firestation/address/").queryParam("address", "47 rue du pommier"))
@@ -87,33 +87,33 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testDeleteFireStationByStation() throws Exception {
+    void testDeleteFireStationByStation() throws Exception {
         mockMvc.perform(delete("/firestation/station/").queryParam("station", "1"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testDeleteFireStationByAddress() throws Exception {
+    void testDeleteFireStationByAddress() throws Exception {
         mockMvc.perform(delete("/firestation/address/").queryParam("address", "892 Downing Ct"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testDeleteFireStationWithBadStationNumber() throws Exception {
+    void testDeleteFireStationWithBadStationNumber() throws Exception {
         doThrow(new IllegalArgumentException()).when(fireStationService).deleteFireStationByStation(12);
         mockMvc.perform(delete("/firestation/station/").queryParam("station", "12"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void testDeleteFireStationWithBadAddress() throws Exception {
+    void testDeleteFireStationWithBadAddress() throws Exception {
         doThrow(new IllegalArgumentException()).when(fireStationService).deleteFireStationByAddress("47 rue du pommier");
         mockMvc.perform(delete("/firestation/address/").queryParam("address", "47 rue du pommier"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void testCreateFireStation() throws Exception {
+    void testCreateFireStation() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(4);
         fireStation.setAddress("Test");
@@ -127,7 +127,7 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testCreateFireStationWhichAlreadyExist() throws Exception {
+    void testCreateFireStationWhichAlreadyExist() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(1);
         fireStation.setAddress("908 73rd St");
@@ -142,7 +142,7 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testUpdateFireStation() throws Exception {
+    void testUpdateFireStation() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(4);
         fireStation.setAddress("1509 Culver St");
@@ -156,7 +156,7 @@ public class FireStationControllerTest {
     }
 
     @Test
-    public void testUpdateFireStationGivingBadAddress() throws Exception {
+    void testUpdateFireStationGivingBadAddress() throws Exception {
         FireStation fireStation = new FireStation();
         fireStation.setStation(4);
         fireStation.setAddress("47 rue du pommier");

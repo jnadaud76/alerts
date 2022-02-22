@@ -8,7 +8,7 @@ public class PersonFloodDto {
      *
      * @see PersonLightFireDto
      */
-    Set<Set<PersonLightFireDto>> setPersonLightFireDtoSet;
+    private Set<Set<PersonLightFireDto>> setPersonLightFireDtoSet;
 
     public Set<Set<PersonLightFireDto>> getSetPersonLightFireDtoSet() {
         return setPersonLightFireDtoSet;

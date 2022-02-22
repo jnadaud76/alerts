@@ -56,10 +56,10 @@ public class AlertsFireService implements IAlertsFireService {
                 = medicalRecordService.getMedicalRecords();
         PersonFireDto personFireDto = new PersonFireDto();
         Set<PersonLightFireDto> personLightFireDtoSet = new HashSet<>();
-        int station = 0;
+        Set<Integer> stationResult = new HashSet<>();
         for (FireStationFullDto f : fireStationFullDtoSet) {
-            station = f.getStation();
-            break;
+            int station = f.getStation();
+            stationResult.add(station);
         }
         for (PersonFullDto p : personFullDtoSet) {
             PersonLightFireDto personLightFireDto = new PersonLightFireDto();
@@ -79,7 +79,7 @@ public class AlertsFireService implements IAlertsFireService {
 
         }
         personFireDto.setPersonLightFireDtoSet(personLightFireDtoSet);
-        personFireDto.setStation(station);
+        personFireDto.setStation(stationResult);
         return personFireDto;
     }
 
