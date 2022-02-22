@@ -1,4 +1,4 @@
-package com.safetynet.alerts.repository;
+package com.safetynet.alerts.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

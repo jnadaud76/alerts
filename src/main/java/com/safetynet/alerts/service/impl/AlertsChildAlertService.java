@@ -1,7 +1,5 @@
 package com.safetynet.alerts.service.impl;
 
-import static com.safetynet.alerts.constants.Constants.MAJORITY;
-
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonChildAlertDto;
 import com.safetynet.alerts.dto.PersonFullDto;
@@ -13,6 +11,8 @@ import com.safetynet.alerts.util.Calculator;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -34,6 +34,9 @@ public class AlertsChildAlertService implements IAlertsChildAlertService {
      */
     @Autowired
     private IMedicalRecordService medicalRecordService;
+
+    @Value("${MAJORITY}")
+    private int MAJORITY;
 
     /**
      * Get children and adults living at address.

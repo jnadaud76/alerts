@@ -1,7 +1,5 @@
 package com.safetynet.alerts.service.impl;
 
-import static com.safetynet.alerts.constants.Constants.MAJORITY;
-
 import com.safetynet.alerts.dto.FireStationFullDto;
 import com.safetynet.alerts.dto.MedicalRecordFullDto;
 import com.safetynet.alerts.dto.PersonFireStationDto;
@@ -14,6 +12,8 @@ import com.safetynet.alerts.service.IPersonService;
 import com.safetynet.alerts.util.Calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -40,6 +40,9 @@ public class AlertsFireStationService implements IAlertsFireStationService {
      */
     @Autowired
     private IMedicalRecordService medicalRecordService;
+
+    @Value("${MAJORITY}")
+    private int MAJORITY;
 
     /**
      * Get all person who depend on the fire station provided.

@@ -1,6 +1,4 @@
-package com.safetynet.alerts.repository.impl;
-
-import static com.safetynet.alerts.constants.Constants.JSON_PATH;
+package com.safetynet.alerts.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,12 +10,16 @@ import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.IFireStationDao;
 import com.safetynet.alerts.repository.IMedicalRecordDao;
 import com.safetynet.alerts.repository.IPersonDao;
-import com.safetynet.alerts.repository.IReadData;
+import com.safetynet.alerts.repository.impl.FireStationDao;
+import com.safetynet.alerts.repository.impl.MedicalRecordDao;
+import com.safetynet.alerts.repository.impl.PersonDao;
+import com.safetynet.alerts.service.IReadData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +28,7 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
-@Repository
+@Service
 public class ReadDataFromJson implements IReadData {
     /**
      * @see Logger
@@ -52,6 +54,9 @@ public class ReadDataFromJson implements IReadData {
     @Autowired
     private IMedicalRecordDao medicalRecordDao;
 
+    @Value("${JSON_PATH}")
+    private String JSON_PATH;
+
     /**
      * Load data from Json file.
      *
@@ -59,6 +64,7 @@ public class ReadDataFromJson implements IReadData {
      */
     @PostConstruct
     public JsonNode loadData() {
+
         JsonNode jsonNode = null;
         try {
             LOGGER.debug("JsonNode process successful");

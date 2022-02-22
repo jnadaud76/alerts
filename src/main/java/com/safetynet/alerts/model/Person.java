@@ -89,6 +89,7 @@ public class Person {
         this.email = emailParam;
     }
 
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

@@ -162,7 +162,7 @@ public class AlertsController {
      */
 
     @GetMapping("personInfo")
-    public ResponseEntity<PersonInfoDto> getAddressByCity(@RequestParam final String firstName, @RequestParam final String lastName) {
+    public ResponseEntity<PersonInfoDto> getPersonInfo(@RequestParam final String firstName, @RequestParam final String lastName) {
         PersonInfoDto personInfoDto = alertsPersonInfoService
                 .getPersonInfo(firstName, lastName);
         if (personInfoDto.getAddress() != null) {
@@ -221,7 +221,7 @@ public class AlertsController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(personFireDto);
         } else {
-            LOGGER.info("Persons not found - code : {}", HttpStatus.OK);
+            LOGGER.info("Persons not found - code : {}", HttpStatus.NOT_FOUND);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
@@ -248,7 +248,7 @@ public class AlertsController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(personFloodDto);
         } else {
-            LOGGER.info("Households not found - code : {}", HttpStatus.OK);
+            LOGGER.info("Households not found - code : {}", HttpStatus.NOT_FOUND);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }

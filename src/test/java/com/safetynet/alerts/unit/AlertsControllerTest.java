@@ -95,6 +95,16 @@ public class AlertsControllerTest {
     }
 
     @Test
+    public void testGetPersonFromFireStationWithBadStationNumber() throws Exception {
+        PersonFireStationDto personFireStationDto = new PersonFireStationDto();
+        Set<PersonLightFireStationDto> personLightFireStationDtoSet = new HashSet<>();
+        personFireStationDto.setPersonLightFireStationDtoSet(personLightFireStationDtoSet);
+        when(alertsFireStationService.getPersonFromFireStation(9)).thenReturn(personFireStationDto);
+        mockMvc.perform(get("/firestation").queryParam("stationNumber","9"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void testGetPersonFromAddress() throws Exception {
         PersonChildAlertDto personChildAlertDto = new PersonChildAlertDto();
         Set<PersonLightChildAlertDto> children = new HashSet<>();
@@ -108,7 +118,17 @@ public class AlertsControllerTest {
     }
 
     @Test
-    public void testGetAddressByCity() throws Exception {
+    public void testGetPersonFromAddressWithBadAddress() throws Exception {
+        PersonChildAlertDto personChildAlertDto = new PersonChildAlertDto();
+        Set<PersonLightChildAlertDto> children = new HashSet<>();
+        personChildAlertDto.setChildren(children);
+        when(alertsChildAlertService.getPersonFromAddress("9999 Culver St")).thenReturn(personChildAlertDto);
+        mockMvc.perform(get("/childAlert").queryParam("address","9999 Culver St"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testGetPersonInfo() throws Exception {
         PersonInfoDto personInfoDto = new PersonInfoDto();
         Set<String> medications = new HashSet<>();
         Set<String> allergies = new HashSet<>();
@@ -120,6 +140,14 @@ public class AlertsControllerTest {
         when(alertsPersonInfoService.getPersonInfo("Lily","Cooper")).thenReturn(personInfoDto);
         mockMvc.perform(get("/personInfo").queryParam("firstName","Lily").queryParam("lastName","Cooper"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testGetPersonInfoWithUnknownPerson() throws Exception {
+        PersonInfoDto personInfoDto = new PersonInfoDto();
+        when(alertsPersonInfoService.getPersonInfo("Lilo","Crooper")).thenReturn(personInfoDto);
+        mockMvc.perform(get("/personInfo").queryParam("firstName","Lilo").queryParam("lastName","Crooper"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -135,6 +163,14 @@ public class AlertsControllerTest {
     }
 
     @Test
+    public void getPhoneNumberFromStationWithBadStationNumber() throws Exception {
+        Set<String> phoneNumbers = new HashSet<>();
+        when(alertPhoneAlertService.getPhoneNumberFromStation(9)).thenReturn(phoneNumbers);
+        mockMvc.perform(get("/phoneAlert").queryParam("firestation", "9"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void getPersonFromAddressWithStation() throws Exception {
         PersonFireDto personFireDto = new PersonFireDto();
         Set<PersonLightFireDto> personLightFireDtoSet = new HashSet<>();
@@ -145,6 +181,16 @@ public class AlertsControllerTest {
         when(alertsFireService.getPersonFromAddressWithStation("908 73rd St")).thenReturn(personFireDto);
         mockMvc.perform(get("/fire").queryParam("address", "908 73rd St"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPersonFromAddressWithStationWithBadAddress() throws Exception {
+        PersonFireDto personFireDto = new PersonFireDto();
+        Set<PersonLightFireDto> personLightFireDtoSet = new HashSet<>();
+        personFireDto.setPersonLightFireDtoSet(personLightFireDtoSet);
+        when(alertsFireService.getPersonFromAddressWithStation("999 73rd St")).thenReturn(personFireDto);
+        mockMvc.perform(get("/fire").queryParam("address", "999 73rd St"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -165,6 +211,19 @@ public class AlertsControllerTest {
         when(alertsFloodService.getFamilyByListOfStation(stationsNumber)).thenReturn(personFloodDto);
         mockMvc.perform(get("/flood/stations").queryParam("stations", "1,2"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getFamilyByListOfStationWithBadListOfStation() throws Exception {
+        PersonFloodDto personFloodDto = new PersonFloodDto();
+        Set<Integer> stationsNumber = new HashSet<>();
+        stationsNumber.add(7);
+        stationsNumber.add(8);
+        Set<Set<PersonLightFireDto>> result = new HashSet<>();
+        personFloodDto.setSetPersonLightFireDtoSet(result);
+        when(alertsFloodService.getFamilyByListOfStation(stationsNumber)).thenReturn(personFloodDto);
+        mockMvc.perform(get("/flood/stations").queryParam("stations", "7,8"))
+                .andExpect(status().isNotFound());
     }
 
 }
