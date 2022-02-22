@@ -41,9 +41,9 @@ For more information, consult JavaDoc (controllers part).
 
 Import the code into an IDE of your choice and run the AlertsApplication.java to launch the application.
 
-Or with "alerts-1.0.0-SNAPSHOT.jar" file, open a Terminal and execute the below command.
+Or with "alerts-1.0.0.jar" file, open a Terminal and execute the below command.
 
-`java -jar alerts-1.0.0-SNAPSHOT.jar`
+`java -jar alerts-1.0.0.jar`
 
 ### Testing
 
