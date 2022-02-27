@@ -183,5 +183,4 @@ public class FireStationController {
                     .body("Cant delete! Entity not exist");
         }
     }
-
 }

@@ -23,6 +23,7 @@ import java.util.Set;
 @AutoConfigureMockMvc
 class MedicalRecordControllerIT {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
 
@@ -33,7 +34,7 @@ class MedicalRecordControllerIT {
     }
 
     @Test
-   void testGetMedicalRecord() throws Exception {
+    void testGetMedicalRecord() throws Exception {
         mockMvc.perform(get("/medicalrecord/")
                         .queryParam("firstName", "Lily")
                         .queryParam("lastName", "Cooper"))
@@ -65,7 +66,7 @@ class MedicalRecordControllerIT {
     }
 
     @Test
-   void testCreateMedicalRecord() throws Exception {
+    void testCreateMedicalRecord() throws Exception {
         MedicalRecord medicalRecord = new MedicalRecord();
         Set<String> medications = new HashSet<>();
         String medication = "dodoxadin:30mg";
@@ -78,8 +79,6 @@ class MedicalRecordControllerIT {
         medicalRecord.setBirthdate("11/11/2011");
         medicalRecord.setMedications(medications);
         medicalRecord.setMedications(allergies);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(post("/medicalrecord")
@@ -98,9 +97,6 @@ class MedicalRecordControllerIT {
         medicalRecord.setBirthdate("03/06/1994");
         medicalRecord.setMedications(medications);
         medicalRecord.setMedications(allergies);
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(post("/medicalrecord")
@@ -151,8 +147,6 @@ class MedicalRecordControllerIT {
         medicalRecord.setBirthdate("03/06/2008");
         medicalRecord.setMedications(medications);
         medicalRecord.setMedications(allergies);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(put("/medicalrecord")
@@ -171,9 +165,6 @@ class MedicalRecordControllerIT {
         medicalRecord.setBirthdate("03/06/2008");
         medicalRecord.setMedications(medications);
         medicalRecord.setMedications(allergies);
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(put("/medicalrecord")
@@ -181,5 +172,4 @@ class MedicalRecordControllerIT {
                         .content(medicalRecordAsString))
                 .andExpect(status().isBadRequest());
     }
-
 }

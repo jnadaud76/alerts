@@ -7,7 +7,7 @@ import java.util.Set;
 public interface IPersonDao {
     Set<Person> getPersons();
 
-    void setPersons(final Set<Person> personsParam);
+    void setPersons(Set<Person> personsParam);
 
     /**
      * CRUD method which find all person.

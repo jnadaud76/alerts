@@ -1,6 +1,5 @@
 package com.safetynet.alerts.integration;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -13,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.FireStation;
 
-import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 class FireStationControllerIT {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
 
@@ -32,14 +31,12 @@ class FireStationControllerIT {
     void testGetFireStations() throws Exception {
         mockMvc.perform(get("/firestations"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     void testGetFireStationByStation() throws Exception {
         mockMvc.perform(get("/firestation/station/").queryParam("station", "4"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -53,14 +50,12 @@ class FireStationControllerIT {
     void testGetFireStationByStationWithBadStation() throws Exception {
         mockMvc.perform(get("/firestation/station/").queryParam("station", "15"))
                 .andExpect(status().isNotFound());
-
     }
 
     @Test
     void testGetFireStationByAddressWithBadAddress() throws Exception {
         mockMvc.perform(get("/firestation/address/").queryParam("address", "47 rue du pommier"))
                 .andExpect(status().isNotFound());
-
     }
 
     @Test
@@ -92,7 +87,6 @@ class FireStationControllerIT {
         FireStation fireStation = new FireStation();
         fireStation.setStation(2);
         fireStation.setAddress("Test");
-        ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
 
         mockMvc.perform(post("/firestation")
@@ -106,7 +100,6 @@ class FireStationControllerIT {
         FireStation fireStation = new FireStation();
         fireStation.setStation(1);
         fireStation.setAddress("908 73rd St");
-        ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
 
         mockMvc.perform(post("/firestation")
@@ -120,7 +113,6 @@ class FireStationControllerIT {
         FireStation fireStation = new FireStation();
         fireStation.setStation(1);
         fireStation.setAddress("1509 Culver St");
-        ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
 
         mockMvc.perform(put("/firestation")
@@ -134,7 +126,6 @@ class FireStationControllerIT {
         FireStation fireStation = new FireStation();
         fireStation.setStation(4);
         fireStation.setAddress("47 rue du pommier");
-        ObjectMapper objectMapper = new ObjectMapper();
         String fireStationAsString = objectMapper.writeValueAsString(fireStation);
 
         mockMvc.perform(put("/firestation")
@@ -142,5 +133,4 @@ class FireStationControllerIT {
                         .content(fireStationAsString))
                 .andExpect(status().isBadRequest());
     }
-
 }

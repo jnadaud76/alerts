@@ -23,7 +23,8 @@ public class AlertsFloodService implements IAlertsFloodService {
     /**
      * @see Calculator
      */
-    private final Calculator calculator = new Calculator();
+    @Autowired
+    private Calculator calculator;
     /**
      * @see IFireStationService
      */

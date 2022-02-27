@@ -34,7 +34,7 @@ public class ReadDataFromJson implements IReadData {
     /**
      * @see ObjectMapper
      */
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     /**
      * @see IPersonDao
      */
@@ -92,7 +92,6 @@ public class ReadDataFromJson implements IReadData {
         } catch (JsonProcessingException e) {
             LOGGER.error("Error in Json Process", e);
         }
-
     }
 
     /**
@@ -114,7 +113,6 @@ public class ReadDataFromJson implements IReadData {
         } catch (JsonProcessingException e) {
             LOGGER.error("Error in Json Process", e);
         }
-
     }
 
     /**
@@ -137,7 +135,5 @@ public class ReadDataFromJson implements IReadData {
         } catch (JsonProcessingException e) {
             LOGGER.error("Error in Json Process", e);
         }
-
     }
-
 }

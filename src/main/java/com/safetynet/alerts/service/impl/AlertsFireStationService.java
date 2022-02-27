@@ -23,7 +23,8 @@ public class AlertsFireStationService implements IAlertsFireStationService {
     /**
      * @see Calculator
      */
-    private final Calculator calculator = new Calculator();
+    @Autowired
+    private Calculator calculator;
     /**
      * @see IFireStationService
      */

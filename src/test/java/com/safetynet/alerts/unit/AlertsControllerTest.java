@@ -14,13 +14,13 @@ import com.safetynet.alerts.dto.PersonInfoDto;
 import com.safetynet.alerts.dto.PersonLightChildAlertDto;
 import com.safetynet.alerts.dto.PersonLightFireDto;
 import com.safetynet.alerts.dto.PersonLightFireStationDto;
-import com.safetynet.alerts.service.impl.AlertsFireService;
-import com.safetynet.alerts.service.impl.AlertsFloodService;
-import com.safetynet.alerts.service.impl.AlertsPhoneAlertService;
-import com.safetynet.alerts.service.impl.AlertsChildAlertService;
-import com.safetynet.alerts.service.impl.AlertsCommunityEmailService;
-import com.safetynet.alerts.service.impl.AlertsFireStationService;
-import com.safetynet.alerts.service.impl.AlertsPersonInfoService;
+import com.safetynet.alerts.service.IAlertsChildAlertService;
+import com.safetynet.alerts.service.IAlertsCommunityEmailService;
+import com.safetynet.alerts.service.IAlertsFireService;
+import com.safetynet.alerts.service.IAlertsFireStationService;
+import com.safetynet.alerts.service.IAlertsFloodService;
+import com.safetynet.alerts.service.IAlertsPersonInfoService;
+import com.safetynet.alerts.service.IAlertsPhoneAlertService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +35,19 @@ import java.util.Set;
 class AlertsControllerTest {
 
     @MockBean
-    AlertsFireStationService alertsFireStationService;
+    private IAlertsFireStationService alertsFireStationService;
     @MockBean
-    AlertsCommunityEmailService alertsCommunityEmailService;
+    private IAlertsCommunityEmailService alertsCommunityEmailService;
     @MockBean
-    AlertsChildAlertService alertsChildAlertService;
+    private IAlertsChildAlertService alertsChildAlertService;
     @MockBean
-    AlertsPersonInfoService alertsPersonInfoService;
+    private IAlertsPersonInfoService alertsPersonInfoService;
     @MockBean
-    AlertsPhoneAlertService alertPhoneAlertService;
+    private IAlertsPhoneAlertService alertPhoneAlertService;
     @MockBean
-    AlertsFireService alertsFireService;
+    private IAlertsFireService alertsFireService;
     @MockBean
-    AlertsFloodService alertsFloodService;
+    private IAlertsFloodService alertsFloodService;
     @Autowired
     private MockMvc mockMvc;
 
@@ -61,7 +61,6 @@ class AlertsControllerTest {
         when(alertsCommunityEmailService.getEmailFromCity("Culver")).thenReturn(emails);
         mockMvc.perform(get("/communityEmail").queryParam("city", "Culver"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -70,7 +69,6 @@ class AlertsControllerTest {
         when(alertsCommunityEmailService.getEmailFromCity("Paris")).thenReturn(emails);
         mockMvc.perform(get("/communityEmail").queryParam("city", "Paris"))
                 .andExpect(status().isNotFound());
-
     }
 
     @Test
@@ -84,7 +82,6 @@ class AlertsControllerTest {
         when(alertsFireStationService.getPersonFromFireStation(1)).thenReturn(personFireStationDto);
         mockMvc.perform(get("/firestation").queryParam("stationNumber", "1"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -218,5 +215,4 @@ class AlertsControllerTest {
         mockMvc.perform(get("/flood/stations").queryParam("stations", "7,8"))
                 .andExpect(status().isNotFound());
     }
-
 }

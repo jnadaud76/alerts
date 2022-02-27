@@ -16,7 +16,8 @@ public class AlertsPersonInfoService implements IAlertsPersonInfoService {
     /**
      * @see Calculator
      */
-    private final Calculator calculator = new Calculator();
+    @Autowired
+    private Calculator calculator;
     /**
      * @see IPersonService
      */
@@ -51,8 +52,6 @@ public class AlertsPersonInfoService implements IAlertsPersonInfoService {
             personInfoDto.setMedications(medicalRecord.getMedications());
             personInfoDto.setAllergies(medicalRecord.getAllergies());
         }
-
         return personInfoDto;
-
     }
 }

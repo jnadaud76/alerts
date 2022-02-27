@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 class PersonControllerIT {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
 
@@ -32,7 +33,6 @@ class PersonControllerIT {
     void testGetPersons() throws Exception {
         mockMvc.perform(get("/persons"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -61,7 +61,7 @@ class PersonControllerIT {
     }
 
     @Test
-   void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
+    void testGetPersonWithBadFirstNameAnBadLastName() throws Exception {
         mockMvc.perform(get("/person/")
                         .queryParam("firstName", "Lilo")
                         .queryParam("lastName", "Crooper"))
@@ -78,7 +78,6 @@ class PersonControllerIT {
         person.setZip(75008);
         person.setPhone("0807060504");
         person.setEmail("test@email.com");
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
 
         mockMvc.perform(post("/person")
@@ -97,7 +96,6 @@ class PersonControllerIT {
         person.setZip(97451);
         person.setPhone("841-874-9845");
         person.setEmail("lily@email.com");
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
 
         mockMvc.perform(post("/person")
@@ -148,8 +146,6 @@ class PersonControllerIT {
         person.setZip(97451);
         person.setPhone("841-874-9845");
         person.setEmail("lily@email.com");
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
 
         mockMvc.perform(put("/person")
@@ -168,8 +164,6 @@ class PersonControllerIT {
         person.setZip(97451);
         person.setPhone("841-874-9845");
         person.setEmail("lily@email.com");
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
 
         mockMvc.perform(put("/person")

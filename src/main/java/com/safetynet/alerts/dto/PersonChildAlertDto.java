@@ -22,7 +22,7 @@ public class PersonChildAlertDto {
         return children;
     }
 
-    public void setChildren(Set<PersonLightChildAlertDto> childrenParam) {
+    public void setChildren(final Set<PersonLightChildAlertDto> childrenParam) {
         this.children = childrenParam;
     }
 

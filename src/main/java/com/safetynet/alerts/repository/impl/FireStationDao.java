@@ -23,7 +23,7 @@ public class FireStationDao implements IFireStationDao {
     /**
      * Set of fireStation extract from data source.
      */
-    Set<FireStation> fireStations = new HashSet<>();
+    private Set<FireStation> fireStations = new HashSet<>();
 
     public Set<FireStation> getFireStations() {
         return fireStations;

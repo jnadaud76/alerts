@@ -27,9 +27,9 @@ import java.util.Set;
 @WebMvcTest(controllers = MedicalRecordController.class)
 class MedicalRecordControllerTest {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private MedicalRecordService medicalRecordService;
 
@@ -92,8 +92,6 @@ class MedicalRecordControllerTest {
         medicalRecord.setBirthdate("11/11/2011");
         medicalRecord.setMedications(medications);
         medicalRecord.setMedications(allergies);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(post("/medicalrecord")
@@ -113,8 +111,6 @@ class MedicalRecordControllerTest {
         medicalRecord.setMedications(medications);
         medicalRecord.setAllergies(allergies);
         doThrow(new IllegalArgumentException()).when(medicalRecordService).createMedicalRecord(medicalRecord);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(post("/medicalrecord")
@@ -172,8 +168,6 @@ class MedicalRecordControllerTest {
         medicalRecord.setBirthdate("03/06/2008");
         medicalRecord.setMedications(medications);
         medicalRecord.setAllergies(allergies);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(put("/medicalrecord")
@@ -193,8 +187,6 @@ class MedicalRecordControllerTest {
         medicalRecord.setMedications(medications);
         medicalRecord.setAllergies(allergies);
         doThrow(new IllegalArgumentException()).when(medicalRecordService).updateMedicalRecord(medicalRecord);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String medicalRecordAsString = objectMapper.writeValueAsString(medicalRecord);
 
         mockMvc.perform(put("/medicalrecord")
@@ -202,6 +194,4 @@ class MedicalRecordControllerTest {
                         .content(medicalRecordAsString))
                 .andExpect(status().isBadRequest());
     }
-
-
 }

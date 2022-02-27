@@ -56,7 +56,6 @@ public class PersonService implements IPersonService {
             personFullDtoSet.add(personToPersonFullDto(p));
         }
         return personFullDtoSet;
-
     }
 
     /**
@@ -89,7 +88,6 @@ public class PersonService implements IPersonService {
             personFullDtoSet.add(personToPersonFullDto(p));
         }
         return personFullDtoSet;
-
     }
 
     /**
@@ -119,6 +117,4 @@ public class PersonService implements IPersonService {
     public void deletePerson(final String firstName, final String lastName) {
         personDao.deleteById(firstName, lastName);
     }
-
-
 }

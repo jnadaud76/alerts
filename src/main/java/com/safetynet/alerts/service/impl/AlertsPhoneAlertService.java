@@ -46,5 +46,4 @@ public class AlertsPhoneAlertService implements IAlertsPhoneAlertService {
         }
         return phoneNumbers;
     }
-
 }

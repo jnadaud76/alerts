@@ -22,7 +22,7 @@ public class MedicalRecordDao implements IMedicalRecordDao {
     /**
      * Set of medicalRecord extract from data source.
      */
-    Set<MedicalRecord> medicalRecords = new HashSet<>();
+    private Set<MedicalRecord> medicalRecords = new HashSet<>();
 
     public Set<MedicalRecord> getMedicalRecords() {
         return medicalRecords;

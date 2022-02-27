@@ -23,7 +23,8 @@ public class AlertsFireService implements IAlertsFireService {
     /**
      * @see Calculator
      */
-    private final Calculator calculator = new Calculator();
+    @Autowired
+    private Calculator calculator;
     /**
      * @see IFireStationService
      */
@@ -82,6 +83,4 @@ public class AlertsFireService implements IAlertsFireService {
         personFireDto.setStation(stationResult);
         return personFireDto;
     }
-
-
 }

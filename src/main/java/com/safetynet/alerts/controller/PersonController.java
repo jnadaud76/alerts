@@ -83,7 +83,6 @@ public class PersonController {
             LOGGER.error("Person not found - code : {}", HttpStatus.NOT_FOUND);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-
     }
 
     /**

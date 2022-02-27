@@ -22,7 +22,8 @@ public class AlertsChildAlertService implements IAlertsChildAlertService {
     /**
      * @see Calculator
      */
-    private final Calculator calculator = new Calculator();
+    @Autowired
+    private Calculator calculator;
     /**
      * @see IPersonService
      */

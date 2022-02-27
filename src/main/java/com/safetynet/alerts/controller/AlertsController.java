@@ -160,7 +160,6 @@ public class AlertsController {
      * @param lastName  second part of unique id.
      * @return information about a person (JSON format).
      */
-
     @GetMapping("personInfo")
     public ResponseEntity<PersonInfoDto> getPersonInfo(@RequestParam final String firstName, @RequestParam final String lastName) {
         PersonInfoDto personInfoDto = alertsPersonInfoService
@@ -252,5 +251,4 @@ public class AlertsController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
 }

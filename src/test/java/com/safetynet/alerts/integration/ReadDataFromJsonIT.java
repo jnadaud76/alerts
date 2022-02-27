@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.repository.impl.FireStationDao;
-import com.safetynet.alerts.repository.impl.MedicalRecordDao;
-import com.safetynet.alerts.repository.impl.PersonDao;
+import com.safetynet.alerts.repository.IFireStationDao;
+import com.safetynet.alerts.repository.IMedicalRecordDao;
+import com.safetynet.alerts.repository.IPersonDao;
 import com.safetynet.alerts.service.IReadData;
 
 import org.junit.jupiter.api.Test;
@@ -26,13 +26,13 @@ class ReadDataFromJsonIT {
     private IReadData readDataFromJson;
 
     @Autowired
-    private PersonDao personDao;
+    private IPersonDao personDao;
 
     @Autowired
-    private FireStationDao fireStationDao;
+    private IFireStationDao fireStationDao;
 
     @Autowired
-    private MedicalRecordDao medicalRecordDao;
+    private IMedicalRecordDao medicalRecordDao;
 
 
     @Test
@@ -100,6 +100,4 @@ class ReadDataFromJsonIT {
         //Then
         assertTrue(medicalRecordDao.getMedicalRecords().contains(medicalRecord));
     }
-
-
 }

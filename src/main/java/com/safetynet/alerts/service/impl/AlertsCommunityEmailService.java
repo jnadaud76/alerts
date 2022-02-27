@@ -37,5 +37,4 @@ public class AlertsCommunityEmailService implements IAlertsCommunityEmailService
         }
         return personsEmail;
     }
-
 }

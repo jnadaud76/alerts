@@ -27,9 +27,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = PersonController.class)
 class PersonControllerTest {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private PersonService personService;
 
@@ -58,7 +58,6 @@ class PersonControllerTest {
                         .queryParam("firstName", "Lily")
                         .queryParam("lastName", "Crooper"))
                 .andExpect(status().isNotFound());
-
     }
 
     @Test
@@ -89,7 +88,6 @@ class PersonControllerTest {
         person.setZip(75008);
         person.setPhone("0807060504");
         person.setEmail("test@email.com");
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
 
         mockMvc.perform(post("/person")
@@ -108,7 +106,6 @@ class PersonControllerTest {
         person.setZip(97451);
         person.setPhone("841-874-9845");
         person.setEmail("lily@email.com");
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
         doThrow(new IllegalArgumentException()).when(personService).createPerson(person);
 
@@ -164,10 +161,7 @@ class PersonControllerTest {
         person.setZip(97451);
         person.setPhone("841-874-9845");
         person.setEmail("lily@email.com");
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
-
 
         mockMvc.perform(put("/person")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -185,10 +179,7 @@ class PersonControllerTest {
         person.setZip(97451);
         person.setPhone("841-874-9845");
         person.setEmail("lily@email.com");
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String personAsString = objectMapper.writeValueAsString(person);
-
         doThrow(new IllegalArgumentException()).when(personService).updatePerson(person);
 
         mockMvc.perform(put("/person")
@@ -196,6 +187,4 @@ class PersonControllerTest {
                         .content(personAsString))
                 .andExpect(status().isBadRequest());
     }
-
-
 }
